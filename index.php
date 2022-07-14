@@ -19,14 +19,28 @@
 
     <?php
     require 'vendor/autoload.php';
+
+    /* Test autoload */
     use App\Test;
     $apple = new Test();
     $apple->set_name('Apple');
     $apple->set_color('Red');
-    echo "Name: " . $apple->get_name();
-    echo "<br>";
-    echo "Color: " . $apple->get_color();
-    exit()
+    // echo "Name: " . $apple->get_name();
+    // echo "<br>";
+    // echo "Color: " . $apple->get_color();
+
+    /* Test Whoops */
+    $whoops = new \Whoops\Run;
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->register();
+    function add (int $a, int $b) {
+        return $a + $b;
+    }
+    //echo add(a:1, b: "Hello World");
+
+    /* Test var_dump */
+    $test = "Hello World";
+    //dump($test);
     ?>
 
     <body id="page-top">
