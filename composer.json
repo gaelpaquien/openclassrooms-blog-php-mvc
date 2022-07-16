@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "App\\": "class/"
+            "App\\": "src/class/"
         }
     },
     "require-dev": {
@@ -16,6 +16,7 @@
         "filp/whoops": "^2.14"
     },
     "require": {
-        "twig/twig": "^3.4"
+        "twig/twig": "^3.4",
+        "altorouter/altorouter": "^2.0"
     }
 }
