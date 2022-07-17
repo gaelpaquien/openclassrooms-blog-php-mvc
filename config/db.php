@@ -1,7 +1,7 @@
 <?php 
-$host = '127.0.0.1';
-$database = ('dbtest');
-$username = 'root';
+$host = 'host';
+$database = 'dbname';
+$username = 'username';
 $password = 'password';
 
 putenv("DB_HOST=$host");
