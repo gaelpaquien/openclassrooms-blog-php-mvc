@@ -10,6 +10,7 @@ $router = new AltoRouter();
 $router->map('GET', '/', 'home', 'home');
 $router->map('GET', '/contact', 'contact', 'contact');
 $router->map('GET', '/article/[*:slug]-[i:id]', 'article', 'article');
+$router->map('GET', '/user', 'user', 'user');
 
 $match = $router->match();
 
@@ -18,8 +19,8 @@ if(is_array($match)) {
         call_user_func_array($match['target'], $match['params']);
     } else {
         $params = $match['params'];
-        require "../src/templates/{$match['target']}.php";
+        require "../src/views/{$match['target']}.php";
     }
 } else {
-    require "../src/templates/error404.php";
+    require "../src/views/error404.php";
 }
