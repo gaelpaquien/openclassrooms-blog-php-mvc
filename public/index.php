@@ -8,7 +8,6 @@ $whoops->register();
 $router = new AltoRouter();
 
 $router->map('GET', '/', 'home', 'home');
-$router->map('GET', '/contact', 'contact', 'contact');
 $router->map('GET', '/article/[*:slug]-[i:id]', 'article', 'article');
 $router->map('GET', '/user', 'user', 'user');
 
