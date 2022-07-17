@@ -17,5 +17,3 @@ function getUsers() {
     }
     return $users;
 }
-
-?>
