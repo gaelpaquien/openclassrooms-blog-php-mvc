@@ -17,34 +17,6 @@
         <link href="../assets/css/styles.css" rel="stylesheet" />
     </head>
 
-    <?php
-    // /* Test autoload */
-    use App\Test;
-    $apple = new Test();
-    $apple->set_name('Apple');
-    $apple->set_color('Red');
-    // echo "Name: " . $apple->get_name();
-    // echo "<br>";
-    // echo "Color: " . $apple->get_color();
-
-    // /* Test Twig */
-    $loader = new \Twig\Loader\ArrayLoader([
-        'index' => 'Hello {{ name }}!',
-    ]);
-    $twig = new \Twig\Environment($loader);
-    //echo $twig->render('index', ['name' => 'World']);
-
-    // /* Test Whoops */
-    function add (int $a, int $b) {
-        return $a + $b;
-    }
-    //echo add(a:1, b: "Hello World");
-
-    /* Test var_dump */
-    $test = "Hello World";
-    //dump($test);
-    ?>
-
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
