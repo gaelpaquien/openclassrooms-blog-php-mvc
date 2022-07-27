@@ -7,4 +7,4 @@ $pdo = Database::getPDO();
 
 $postTable = new PostTable($pdo);
 
-$posts = $postTable->all();
+$postTable->update(['title' => $_POST['title']], $params['id']);
