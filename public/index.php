@@ -10,7 +10,7 @@ $router = new AltoRouter();
 $router->map('GET', '/', 'home', 'home');
 $router->map('GET', '/articles', 'post/index', 'articles');
 $router->map('GET', '/article/[i:id]', 'post/post', 'article');
-$router->map('GET', '/article/update', 'post/update', 'update_article');
+$router->map('POST', '/article/update/[i:id]', 'post/update', 'update_article');
 
 $match = $router->match();
 
