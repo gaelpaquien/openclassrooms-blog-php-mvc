@@ -1,7 +1,4 @@
 <?php
-
-require(dirname(__DIR__) . '/../controllers/post/post.php');
-
 dump($post);
 echo '<br>';
 echo 'Id : ' . $post->getId() . '<br>';

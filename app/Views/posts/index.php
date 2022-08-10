@@ -1,7 +1,4 @@
 <?php
-
-require(dirname(__DIR__) . '/../controllers/post/index.php');
-
 dump($posts);
 echo '<br>';
 
