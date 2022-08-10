@@ -1,7 +1,7 @@
 <?php 
-namespace App\Table\Exception;
+namespace App\Models\GlobalQuery\Exception;
 
-use Exception;
+use \Exception;
 
 class NotFoundException extends Exception {
 
