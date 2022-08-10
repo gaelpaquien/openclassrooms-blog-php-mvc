@@ -19,7 +19,6 @@ class Post {
 
     /**
      * Set the value of id
-     *
      * @return  self
      */ 
     public function setId($id)
@@ -40,7 +39,6 @@ class Post {
 
     /**
      * Set the value of title
-     *
      * @return  self
      */ 
     public function setTitle($title)
@@ -61,7 +59,6 @@ class Post {
 
     /**
      * Set the value of content
-     *
      * @return  self
      */ 
     public function setContent($content)

@@ -1,12 +1,8 @@
 <?php
+use App\Models\GlobalQuery\PostGlobalQuery;
 
-use App\Core\Database;
-use App\Table\PostTable;
+$postGlobalQuery = new PostGlobalQuery();
 
-$pdo = Database::getPDO();
-
-$postTable = new PostTable($pdo);
-
-$posts = $postTable->all();
+$posts = $postGlobalQuery->all();
 
 require(dirname(__DIR__) . '/../Views/posts/index.php');
