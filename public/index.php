@@ -5,22 +5,12 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
-$router = new AltoRouter();
-
-$router->map('GET', '/', 'home', 'home');
-$router->map('GET', '/articles', 'post/index', 'articles');
-$router->map('GET', '/article/[i:id]', 'post/post', 'article');
-$router->map('POST', '/article/update/[i:id]', 'post/update', 'update_article');
-
-$match = $router->match();
-
-if(is_array($match)) {
-    if (is_callable($match['target'])) {
-        call_user_func_array($match['target'], $match['params']);
-    } else {
-        $params = $match['params'];
-        require "../src/views/{$match['target']}.php";
-    }
-} else {
-    require "../src/views/error404.php";
-}
+$router = new App\Core\Router(dirname(__DIR__) . '/app/Controllers');
+$router
+    // Home
+    ->get('/', '/home', 'home')
+    // Posts
+    ->get('/articles', '/posts/index', 'articles')
+    ->get('/article/[i:id]', '/posts/post', 'article')
+    ->post('/article/update/[i:id]', 'posts/update', 'update_article')
+    ->run();

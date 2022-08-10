@@ -2,13 +2,13 @@
     "name": "gael/blog",
     "authors": [
         {
-            "name": "Galuss",
-            "email": "galuss@protonmail.com"
+            "name": "Gael",
+            "email": "gael.paquien.contact@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "App\\": "src/class/"
+            "App\\": "app/"
         }
     },
     "require-dev": {

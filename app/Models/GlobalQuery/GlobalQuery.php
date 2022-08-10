@@ -1,17 +1,18 @@
 <?php 
-namespace App\Table;
+namespace App\Models\GlobalQuery;
 
-use App\Table\Exception\NotFoundException;
+use App\Core\Database;
+use App\Models\GlobalQuery\Exception\NotFoundException;
 use \Exception;
 use \PDO;
 
-abstract class Table {
+abstract class GlobalQuery {
 
     protected $pdo;
     protected $table = null;
     protected $class = null;
 
-    public function __construct(\PDO $pdo)
+    public function __construct()
     {
         if ($this->table === null) {
             throw new Exception("La class " . get_class($this) . " n'a pas de propriété table.");
@@ -19,7 +20,7 @@ abstract class Table {
         if ($this->class === null) {
             throw new Exception("La class " . get_class($this) . " n'a pas de propriété class.");
         }
-        $this->pdo = $pdo;
+        $this->pdo = Database::getPDO();
     }
 
     public function find(int $id) 
