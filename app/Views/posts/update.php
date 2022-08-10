@@ -1,2 +1,2 @@
 <?php 
-header('Location: ' . $router->generate('articles'));
+header('Location: ' . $router->url('articles'));

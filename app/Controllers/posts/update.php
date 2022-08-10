@@ -1,12 +1,8 @@
 <?php
+use App\Models\GlobalQuery\PostGlobalQuery;
 
-use App\Core\Database;
-use App\Table\PostTable;
+$postGlobalQuery = new PostGlobalQuery();
 
-$pdo = Database::getPDO();
-
-$postTable = new PostTable($pdo);
-
-$postTable->update(['title' => $_POST['title']], $params['id']);
+$postGlobalQuery->update(['title' => $_POST['title']], $params['id']);
 
 require(dirname(__DIR__) . '/../Views/posts/update.php');
