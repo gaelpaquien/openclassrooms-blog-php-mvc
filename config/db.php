@@ -1,8 +1,8 @@
 <?php 
-$host = 'host';
-$database = 'dbname';
-$username = 'username';
-$password = 'password';
+$host = '127.0.0.1';
+$database = 'blog';
+$username = 'root';
+$password = 'root';
 
 putenv("DB_HOST=$host");
 putenv("DB_DATABASE=$database");

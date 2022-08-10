@@ -1,7 +1,7 @@
 <?php
 namespace App\Table;
 
-use App\Model\Post;
+use App\Models\Post;
 
 final class PostTable extends Table {
     
