@@ -1,0 +1,11 @@
+<!-- Block all common WordPress files -->
+<Location ~ "(wp-login\.php|wp-comments-post\.php)$">
+    Order allow,deny
+    Deny from all
+</Location>
+
+<!-- Block specific file extensions -->
+<FilesMatch "\.(bz2|gz|zip|xml|xlsx|pdf|docx|xlsx|pptx)$">
+   Order allow,deny
+   Deny from all
+</FilesMatch>

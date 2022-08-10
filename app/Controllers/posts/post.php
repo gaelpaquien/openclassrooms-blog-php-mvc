@@ -1,8 +1,8 @@
 <?php
-use App\Models\GlobalQuery\PostGlobalQuery;
+use App\Models\GlobalQueries\PostGlobalQueries;
 
-$postGlobalQuery = new PostGlobalQuery();
+$postsData = new PostGlobalQueries;
 
-$post = $postGlobalQuery->find($params['id']);
+$post = $postsData->find($params['id']);
 
-require(dirname(__DIR__) . '/../Views/posts/post.php');
+require(ROOT . '../app/Views/posts/post.php');

@@ -1,2 +1,2 @@
 <?php
-require(dirname(__DIR__) . '../Views/home.php');
+require(ROOT . '../app/Views/Home.php');
