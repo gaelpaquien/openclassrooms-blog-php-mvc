@@ -1,8 +1,8 @@
 <?php
-use App\Models\GlobalQuery\PostGlobalQuery;
+use App\Models\GlobalQueries\PostGlobalQueries;
 
-$postGlobalQuery = new PostGlobalQuery();
+$postsData = new PostGlobalQueries;
 
-$postGlobalQuery->update(['title' => $_POST['title']], $params['id']);
+$postsData->update(['title' => $_POST['title']], $params['id']);
 
-require(dirname(__DIR__) . '/../Views/posts/update.php');
+require(ROOT . '../app/Views/posts/update.php');

@@ -4,9 +4,7 @@ namespace App\Models;
 class Post {
 
     private $id;
-
     private $title;
-
     private $content;
 
     /**
@@ -28,7 +26,6 @@ class Post {
         return $this;
     }
     
-
     /**
      * Get the value of title
      */ 
@@ -47,7 +44,6 @@ class Post {
 
         return $this;
     }
-
 
     /**
      * Get the value of content

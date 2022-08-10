@@ -1,12 +1,11 @@
 <?php 
-namespace App\Models\GlobalQuery;
+namespace App\Models\GlobalQueries;
 
 use App\Core\Database;
-use App\Models\GlobalQuery\Exception\NotFoundException;
 use \Exception;
 use \PDO;
 
-abstract class GlobalQuery {
+abstract class GlobalQueries {
 
     protected $pdo;
     protected $table = null;
@@ -30,7 +29,7 @@ abstract class GlobalQuery {
         $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
         $result = $query->fetch();
         if ($result === false) {
-            throw new NotFoundException($this->table, $id);
+            throw new Exception("Aucun enregistrement ne correspond à $id dans la table '{$this->table}'.");
         }
         return  $result;
     }
