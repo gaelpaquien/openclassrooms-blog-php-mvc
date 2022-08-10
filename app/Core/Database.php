@@ -8,7 +8,7 @@ class Database {
 
     public static function getPDO(): PDO
     {
-        require(dirname(__DIR__) . '../../config/db.php');
+        require(ROOT . '../config/db.php');
         $host = getenv("DB_HOST");
         $database = getenv("DB_DATABASE");
         $username = getenv("DB_USERNAME");
