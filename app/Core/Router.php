@@ -5,12 +5,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 class Router {
-    
-    /**
-     * @var string
-     */
-    private $controllerPath;
-    
+       
     /**
      * @var AltoRouter
      */
@@ -26,9 +21,8 @@ class Router {
     */
     protected $twig;
 
-    public function __construct(string $controllerPath)
+    public function __construct()
     {
-        $this->controllerPath = $controllerPath;
         $this->router = new \AltoRouter();
         $this->loader = new FilesystemLoader(ROOT . '/templates');
         $this->twig = new Environment($this->loader);
@@ -50,6 +44,11 @@ class Router {
     {
         return $this->router->generate($name, $params);
     }
+    
+    public function template(string $name) 
+    {
+        return $this->twig->display($name);
+    }
 
     public function run ()
     {
@@ -62,8 +61,8 @@ class Router {
             $controller = 'Errors' . DIRECTORY_SEPARATOR . '404';
         }
         $router = $this;
-        //$this->twig->display($controller . '.html.twig');
-        require $this->controllerPath . DIRECTORY_SEPARATOR .  $controller . '.php';
+        $twig = $this;
+        require ROOT . '/app/Controllers/' . $controller . '.php';
            
         return $this;
     }
