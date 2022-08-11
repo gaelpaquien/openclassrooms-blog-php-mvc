@@ -5,4 +5,6 @@ $postsData = new PostGlobalQueries;
 
 $posts = $postsData->all();
 
-require(ROOT . '../app/Views/posts/index.php');
+$twig->template('posts/index.html.twig');
+
+require(ROOT . '/app/Views/posts/index.php');
