@@ -5,4 +5,4 @@ $postsData = new PostGlobalQueries;
 
 $post = $postsData->find($params['id']);
 
-require(ROOT . '../app/Views/posts/post.php');
+require(ROOT . '/app/Views/posts/post.php');

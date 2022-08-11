@@ -1,2 +1,2 @@
 <?php
-require(ROOT . '../app/Views/Home.php');
+require(ROOT . '/app/Views/Home.php');

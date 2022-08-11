@@ -7,7 +7,7 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
-$router = new App\Core\Router(ROOT . '../app/Controllers');
+$router = new App\Core\Router();
 $router
     // Home
     ->get('/', '/home', 'home')
