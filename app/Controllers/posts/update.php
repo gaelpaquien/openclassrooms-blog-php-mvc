@@ -5,4 +5,4 @@ $postsData = new PostGlobalQueries;
 
 $postsData->update(['title' => $_POST['title']], $params['id']);
 
-require(ROOT . '../app/Views/posts/update.php');
+require(ROOT . '/app/Views/posts/update.php');
