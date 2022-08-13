@@ -1,9 +1,6 @@
 <?php
 namespace App\Core;
 
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
-
 class Router {
        
     /**
@@ -11,21 +8,9 @@ class Router {
      */
     private $router;
 
-    /**
-    * @var Twig
-    */
-    private $loader;
-
-    /**
-    * @var Twig
-    */
-    protected $twig;
-
     public function __construct()
     {
         $this->router = new \AltoRouter();
-        $this->loader = new FilesystemLoader(ROOT . '/templates');
-        $this->twig = new Environment($this->loader);
     }
 
     public function get (string $url, string $controller, ?string $name = null): self
@@ -45,11 +30,6 @@ class Router {
         return $this->router->generate($name, $params);
     }
     
-    public function template(string $name) 
-    {
-        return $this->twig->display($name);
-    }
-
     public function run ()
     {
         $match = $this->router->match();
@@ -61,7 +41,6 @@ class Router {
             $controller = 'Errors' . DIRECTORY_SEPARATOR . '404';
         }
         $router = $this;
-        $twig = $this;
         require ROOT . '/app/Controllers/' . $controller . '.php';
            
         return $this;
