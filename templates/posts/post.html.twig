@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <!-- Article -->
+    <section class="page-section article" id="article">
+        <div class="container">
+            <h2 class="page-section-heading text-center text-uppercase mb-0">Titre de l'article</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <img src="../assets/img/posts/default.jpg" class="img-fluid rounded-start" alt="...">
+                        <h5 class="card-title text-center">Titre de l'article</h5>
+                        <div class="card-body">
+                            <p class="card-text">Et consequatur impedit est excepturi quas et dolores molestias ut ratione doloribus sit quis adipisci?</p>
+                            <p class="card-text">
+                                Lorem ipsum dolor sit amet. Et consequatur impedit est excepturi quas et dolores molestias ut ratione doloribus sit 
+                                quis adipisci? Ab cupiditate iste ab sapiente natus At explicabo tempora eos galisum ipsum. A fugiat iusto id voluptatem molestiae 
+                                et blanditiis unde assumenda cumque eos corrupti perspiciatis sed animi reprehenderit?
+                            </p>
+                            <div class="card-footer">
+                                <small class="text-muted">Publié le XX/XX/XXXX par Autheur</small><br>
+                                <small class="text-muted">Dernière modification faite le XX/XX/XXXX</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a class="btn" href="#">Modifier l'article</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
