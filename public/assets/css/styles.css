@@ -324,3 +324,31 @@ html {
   background-color: #d6ad60;
   color: #122620;
 }
+
+
+/*************************
+        POSTS/INDEX
+*************************/
+
+/* Articles */
+#articles {
+  margin-top: 50px;
+  background-color: #122620;
+  border-bottom: 2px solid #d6ad60;
+}
+#articles h2 {
+  color: #d6ad60;
+}
+#articles .divider-custom .divider-custom-icon {
+  color: #d6ad60;
+}
+#articles .divider-custom .divider-custom-line {
+  background-color: #d6ad60;
+}
+#articles .card {
+  border: solid 2px #d6ad60;
+}
+#articles .card-footer .btn {
+  background-color: #d6ad60;
+  color: #122620;
+}
