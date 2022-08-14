@@ -9,4 +9,4 @@ $posts = $postsData->all();
 $twig = new Templating;
 $twig->template('posts/index.html.twig');
 
-/*require(ROOT . '/app/Views/posts/index.php');*/
+require(ROOT . '/app/Views/posts/index.php');
