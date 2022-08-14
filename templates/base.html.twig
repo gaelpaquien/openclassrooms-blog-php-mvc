@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-esquiv="X-UA-Compatible" content="IE-Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{% block title %}Blog de John Doe{% endblock %}</title>
+        <title>{% block title %}Blog de Gaël Paquien{% endblock %}</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
         <!-- Font Awesome icons -->
@@ -19,10 +19,10 @@
     </head>
     <body>   
         <!-- Navigation-->
-        <nav class="nav navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav">
+        <nav class="nav navbar navbar-expand-lg text-uppercase fixed-top" id="navigation">
             <div class="container">
-                <a class="navbar-brand" href="#">Blog de John Doe</a>
-                <button class="navbar-toggler text-uppercase font-weight-bold text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="#">Blog de Gaël Paquien</a>
+                <button class="navbar-toggler text-uppercase rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
@@ -37,20 +37,6 @@
             </div>
         </nav>
 
-        <!-- Header-->
-        <header class="masthead text-white text-center">
-            <div class="container d-flex align-items-center flex-column">
-                <img class="masthead-avatar mb-5" src="../assets/img/avataaars.svg" alt="..." />
-                <h1 class="masthead-heading text-uppercase mb-0">John Doe</h1>
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <p class="masthead-subheading font-weight-light mb-0">Le développeur dont vous avez besoin !</p>
-            </div>
-        </header>
-
         <!-- Scroll to top -->
         <button onclick="topFunction()" id="scrollToTop"><i class="fa-solid fa-chevron-up"></i></button> 
 
@@ -58,15 +44,15 @@
         {% block main %}{% endblock %}
 
         <!-- Footer-->
-        <footer class="footer text-center">
+        <footer class="footer text-center" id="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Localisation</h4>
                         <p class="footer-localisation lead mb-0">
-                            250 Rue de Paris
+                            France
                             <br />
-                            Paris, 75000
+                            Grenoble, 38000
                         </p>
                     </div>
                     <div class="col-lg-4 mb-5 mb-lg-0">
@@ -77,10 +63,10 @@
                     </div>
                     <div class="col-lg-4">
                         <h4 class="text-uppercase mb-4">À propos</h4>
-                        <ul class="footer-list lead mb-0">
-                            <li><a href="#">Conditions générales d'utilisation</a></li>
-                            <li><a href="#">Politique de confidentialité</a></li>
-                        </ul>
+                        <div class="footer-about-items">
+                            <p><a href="#">Conditions générales d'utilisation</a></p>
+                            <p><a href="#">Politique de confidentialité</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,7 +74,7 @@
 
         <!-- Copyright -->
         <div class="copyright py-4 text-center text-white">
-            <div class="container"><span>Copyright 2022 &copy; Blog de John Doe</span></div>
+            <div class="container"><span>Copyright 2022 &copy; Blog de Gaël Paquien</span></div>
         </div>
 
         <!-- Bootstrap JS -->
