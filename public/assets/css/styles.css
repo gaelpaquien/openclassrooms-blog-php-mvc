@@ -264,6 +264,12 @@ html {
 #recent-articles .card-footer .btn {
   background-color: #122620;
   color: #d6ad60;
+  margin: 20px;
+}
+#recent-articles .all-articles .btn {
+  margin-top: 50px;
+  background-color: #d6ad60;
+  color: #122620;
 }
 
 /* CV */
@@ -327,28 +333,72 @@ html {
 
 
 /*************************
-        POSTS/INDEX
+ POSTS/INDEX & POSTS/POST
 *************************/
 
-/* Articles */
-#articles {
+/* All Articles & Single Article */
+#articles, #article {
   margin-top: 50px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
 }
-#articles h2 {
+#articles h2, #article h2 {
   color: #d6ad60;
 }
-#articles .divider-custom .divider-custom-icon {
+#articles .divider-custom .divider-custom-icon, 
+#article .divider-custom .divider-custom-icon {
   color: #d6ad60;
 }
-#articles .divider-custom .divider-custom-line {
+#articles .divider-custom .divider-custom-line,
+#article .divider-custom .divider-custom-line {
   background-color: #d6ad60;
 }
-#articles .card {
+#articles .card, #article .card {
   border: solid 2px #d6ad60;
+}
+#articles .card-body, #articles .card-footer, 
+#article .card-body, #article .card-footer {
+  background-color: #fff;
+}
+#articles .card-title, #articles .card-text,
+#article .card-title, #article .card-text{
+  color: #122620;
+}
+#articles .card-footer, #article .card-footer {
+  border-top: 1px solid #d6ad60;
+}
+
+/* Specific All Article */
+#articles .card-img-top {
+  border-bottom: 1px solid #d6ad60;
 }
 #articles .card-footer .btn {
   background-color: #d6ad60;
   color: #122620;
+  margin: 20px;
+}
+
+/* Specific Single Article */
+#article .card {
+  margin-left: auto;
+  margin-right: auto;
+}
+#article img {
+  border-bottom: 1px solid #d6ad60;
+}
+#article .card-title {
+  margin-top: 15px;
+}
+#article .card-body {
+  padding-left: 0;
+  padding-right: 0;
+}
+#article .card-body .card-text {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+#article .btn {
+  background-color: #d6ad60;
+  color: #122620;
+  margin-top: 30px;
 }
