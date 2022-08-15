@@ -7,6 +7,6 @@ $postsData = new PostGlobalQueries;
 $post = $postsData->find($params['id']);
 
 $twig = new Templating;
-$twig->template('posts/post.html.twig');
+$twig->template('pages/posts/post.html.twig');
 
 require(ROOT . '/app/Views/posts/post.php');

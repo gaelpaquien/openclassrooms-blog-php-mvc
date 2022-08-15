@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <!-- Update Article -->
+    <section class="page-section update-article" id="update-article">
+        <div class="container">
+            <h2 class="page-section-heading text-center text-uppercase mb-0">Modifier l'article</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <form id="contact-form">
+                <div class="mb-3">
+                    <label for="title">Titre :</label>
+                    <input class="form-control" id="title" type="text" placeholder="Titre de l'article" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="short-description">Description courte :</label>
+                    <input class="form-control" id="short-description" type="text" placeholder="Id dignissimos dolor non voluptatum ratione sed velit corporis." required/>
+                </div>
+                <div class="mb-3">
+                    <label for="author">Auteur :</label>
+                    <input class="form-control" id="author" type="text" placeholder="Auteur de l'article" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="message">Contenu :</label>
+                    <textarea class="form-control" id="message" type="text" placeholder="Lorem ipsum dolor sit amet. Id dignissimos dolor non voluptatum ratione sed velit corporis. Est provident aspernatur et facere quia sit ipsa corporis. Est odio vitae in rerum aliquam aut sunt mollitia non sint necessitatibus. Qui cumque provident pariatur aliquam a doloribus provident. " style="height: 10rem" required></textarea>
+                </div>
+                <div class="test">  
+                    <button class="btn" id="submit-btn" type="submit">
+                        Modifier l'article
+                    </button>
+                    <button class="btn" id="delete-article-btn">
+                        <a href="#">Supprimer l'article</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
