@@ -7,6 +7,6 @@ $postsData = new PostGlobalQueries;
 $postsData->update(['title' => $_POST['title']], $params['id']);
 
 $twig = new Templating;
-$twig->template('pages/posts/update.html.twig');
+$twig->view('pages/posts/update.html.twig', []);
 
 require(ROOT . '/app/Views/posts/update.php');
