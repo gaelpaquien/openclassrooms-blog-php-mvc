@@ -20,7 +20,7 @@ class Templating {
     {
         $this->loader = new FilesystemLoader(ROOT . '/templates');
         $this->twig = new Environment($this->loader, [
-            'cache' => false,
+            'cache' => false, // ROOT . '/tmp/cache'
         ]);
     }
 

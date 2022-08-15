@@ -16,7 +16,8 @@ class Database {
         
         try {
             return new PDO("mysql:host=$host;dbname=$database", "$username", "$password", [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
             ]); 
         } catch(Exception $e) {
             die('Error : '.$e->getMessage());
