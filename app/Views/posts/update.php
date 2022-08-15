@@ -1,2 +1,2 @@
 <?php 
-header('Location: ' . $router->url('articles'));
+echo "Hello World";

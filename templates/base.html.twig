@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{% block title %}Blog de Gaël Paquien{% endblock %}</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
         <!-- Font Awesome icons -->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -15,27 +15,11 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
         <!-- Custom CSS -->
-        <link href="../assets/css/styles.css" rel="stylesheet" />
+        <link href="/assets/css/styles.css" rel="stylesheet" />
     </head>
     <body>   
-        <!-- Navigation-->
-        <nav class="nav navbar navbar-expand-lg text-uppercase fixed-top" id="navigation">
-            <div class="container">
-                <a class="navbar-brand" href="#">Blog de Gaël Paquien</a>
-                <button class="navbar-toggler text-uppercase rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Accueil</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Articles</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Connexion</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Inscription</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <!-- Navigation -->
+        {% include "layout/navigation.html.twig" %}
 
         <!-- Scroll to top -->
         <button onclick="topFunction()" id="scrollToTop"><i class="fa-solid fa-chevron-up"></i></button> 
@@ -44,42 +28,14 @@
         {% block main %}{% endblock %}
 
         <!-- Footer-->
-        <footer class="footer text-center" id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Localisation</h4>
-                        <p class="footer-localisation lead mb-0">
-                            France
-                            <br />
-                            Grenoble, 38000
-                        </p>
-                    </div>
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Suivez-moi sur les réseaux</h4>
-                        <a class="btn btn-social mx-1" href="https://www.linkedin.com/in/pgael/" target="_blank"><i class="footer-icon fab fa-fw fa-linkedin-in"></i></a>
-                        <a class="btn btn-social mx-1" href="https://github.com/Galusss" target="_blank"><i class="footer-icon fab fa-fw fa-github"></i></a>
-                        <a class="btn btn-social mx-1" href="https://twitter.com/galuss_" target="_blank"><i class="footer-icon fab fa-fw fa-twitter"></i></a>
-                    </div>
-                    <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">À propos</h4>
-                        <div class="footer-about-items">
-                            <p><a href="#">Conditions générales d'utilisation</a></p>
-                            <p><a href="#">Politique de confidentialité</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        {% include "layout/footer.html.twig" %}
 
         <!-- Copyright -->
-        <div class="copyright py-4 text-center text-white">
-            <div class="container"><span>Copyright 2022 &copy; Blog de Gaël Paquien</span></div>
-        </div>
+        {% include "layout/copyright.html.twig" %}
 
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Custom JS -->
-        <script src="../assets/js/index.js"></script>
+        <script src="/assets/js/index.js"></script>
     </body>
 </html>
