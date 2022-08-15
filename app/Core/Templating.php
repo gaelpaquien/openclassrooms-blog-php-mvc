@@ -19,12 +19,14 @@ class Templating {
     public function __construct()
     {
         $this->loader = new FilesystemLoader(ROOT . '/templates');
-        $this->twig = new Environment($this->loader);
+        $this->twig = new Environment($this->loader, [
+            'cache' => false,
+        ]);
     }
 
-    public function template(string $name) 
+    public function view(string $path, $datas = []) 
     {
-        return $this->twig->display($name);
+        echo $this->twig->render($path, $datas);
     }
 
 }
