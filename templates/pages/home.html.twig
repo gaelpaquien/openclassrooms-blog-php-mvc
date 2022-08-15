@@ -2,18 +2,7 @@
 
 {% block main %}
     <!-- Header-->
-    <header class="header text-white text-center" id="header">
-        <div class="container d-flex align-items-center flex-column">
-            <img class="header-avatar mb-5" src="../assets/img/avatar.svg" alt="..." />
-            <h1 class="header-heading text-uppercase mb-0">Gaël Paquien</h1>
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <p class="header-subheading font-weight-light mb-0">Le développeur dont vous avez besoin !</p>
-        </div>
-    </header>
+    {% include "layout/header.html.twig" %}
 
     <!-- Recent articles -->
     <section class="page-section recent-articles" id="recent-articles">
@@ -33,7 +22,9 @@
                             <p class="card-text"><small class="text-muted">Publié le XX/XX/XXXX</small></p>
                         </div>
                         <div class="card-footer text-center">
-                            <a class="btn card-link" href="#">Voir l'article</a>
+                            <button class="btn">
+                                <a class="card-link" href="#">Voir l'article</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -45,7 +36,9 @@
                             <p class="card-text"><small class="text-muted">Publié le XX/XX/XXXX</small></p>
                         </div>
                         <div class="card-footer text-center">
-                            <a class="btn card-link" href="#">Voir l'article</a>
+                            <button class="btn">
+                                <a class="card-link" href="#">Voir l'article</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -57,49 +50,17 @@
                             <p class="card-text"><small class="text-muted">Publié le XX/XX/XXXX</small></p>
                         </div>
                         <div class="card-footer text-center">
-                            <a class="btn card-link" href="#">Voir l'article</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="../assets/img/posts/default.jpg" class="card-img-top" alt="Titre de l'article">
-                        <div class="card-body">
-                            <h5 class="card-title">Titre de l'article</h5>
-                            <p class="card-text"><small class="text-muted">Publié le XX/XX/XXXX</small></p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a class="btn card-link" href="#">Voir l'article</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="../assets/img/posts/default.jpg" class="card-img-top" alt="Titre de l'article">
-                        <div class="card-body">
-                            <h5 class="card-title">Titre de l'article</h5>
-                            <p class="card-text"><small class="text-muted">Publié le XX/XX/XXXX</small></p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a class="btn card-link" href="#">Voir l'article</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="../assets/img/posts/default.jpg" class="card-img-top" alt="Titre de l'article">
-                        <div class="card-body">
-                            <h5 class="card-title">Titre de l'article</h5>
-                            <p class="card-text"><small class="text-muted">Publié le XX/XX/XXXX</small></p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a class="btn card-link" href="#">Voir l'article</a>
+                            <button class="btn">
+                                <a class="card-link" href="#">Voir l'article</a>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="all-articles btn">
-                <a class="btn " href="#">Voir tous les articles</a>
+            <div class="all-articles">
+                <button class="btn">
+                    <a href="#">Voir tous les articles</a>
+                 </button>
             </div>
         </div>
     </section>
@@ -122,9 +83,9 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a class="btn" href="../assets/docs/cv.pdf" target="_blank">
-                    Voir le CV
-                </a>
+                <button class="btn">
+                    <a href="../assets/docs/cv.pdf" target="_blank">Voir le CV</a>
+                </button>
             </div>
         </div>
     </section>
@@ -140,7 +101,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-xl-7">
-                    <form id="contactForm">
+                    <form id="contact-form">
                         <div class="mb-3">
                             <label for="firstname">Prénom :</label>
                             <input class="form-control" id="firstname" type="text" placeholder="Entrer votre prénom..." required/>
@@ -157,7 +118,7 @@
                             <label for="message">Message :</label>
                             <textarea class="form-control" id="message" type="text" placeholder="Entrer votre message..." style="height: 10rem" required></textarea>
                         </div>
-                        <button class="btn" id="submitButton" type="submit">Envoyer</button>
+                        <button class="btn" id="submit-btn" type="submit">Envoyer</button>
                     </form>
                 </div>
             </div>

@@ -9,6 +9,12 @@ html {
   font-family: "Montserrat", "Lato", "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
 }
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
 .page-section {
   padding: 7rem 0;
 }
@@ -233,7 +239,7 @@ html {
   }
 }
 
-/* Articles récents */
+/* Recent Articles */
 #recent-articles {
   background-color: #122620;
 }
@@ -266,9 +272,18 @@ html {
   color: #d6ad60;
   margin: 20px;
 }
-#recent-articles .all-articles .btn {
+#recent-articles .card-footer .btn a {
+  color: #d6ad60;
+}
+#recent-articles .all-articles {
   margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+#recent-articles .all-articles .btn {
   background-color: #d6ad60;
+}
+#recent-articles .all-articles .btn a {
   color: #122620;
 }
 
@@ -291,6 +306,8 @@ html {
 }
 #cv .btn {
   background-color: #122620;
+}
+#cv .btn a {
   color: #d6ad60;
 }
 
@@ -326,7 +343,7 @@ html {
   margin-top: 2px;
 }
 #contact .btn {
-  margin-top: 5px;
+  margin-top: 15px;
   background-color: #d6ad60;
   color: #122620;
 }
@@ -374,8 +391,10 @@ html {
 }
 #articles .card-footer .btn {
   background-color: #d6ad60;
-  color: #122620;
   margin: 20px;
+}
+#articles .card-footer .btn a {
+  color: #122620;
 }
 
 /* Specific Single Article */
@@ -399,6 +418,63 @@ html {
 }
 #article .btn {
   background-color: #d6ad60;
-  color: #122620;
   margin-top: 30px;
+}
+#article .btn a {
+  color: #122620;
+}
+
+
+/*************************
+       POSTS/UPDATE
+*************************/
+
+/* Update Article */
+#update-article {
+  margin-top: 50px;
+  background-color: #122620;
+  border-bottom: 2px solid #d6ad60;
+}
+#update-article h2 {
+  color: #d6ad60;
+}
+#update-article .divider-custom .divider-custom-icon {
+  color: #d6ad60;
+}
+#update-article .divider-custom .divider-custom-line {
+  background-color: #d6ad60;
+}
+#update-article .form-control {
+  font-size: 1.5rem;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-radius: 8px;
+  border-width: 1px;
+}
+#update-article .form-control:focus {
+  box-shadow: 0 0 0 .25rem #d6ad60;
+}
+#update-article label {
+  font-size: 1.5rem;
+  color: #d6ad60;
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+#update-article .btn {
+  margin-top: 30px;
+  margin: 20px;
+  background-color: #d6ad60;
+  color: #122620;
+}
+#update-article .btn a {
+  color: #122620;
+}
+#update-article #delete-article-btn {
+  /*margin-left: 15px;*/
+}
+.test {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
