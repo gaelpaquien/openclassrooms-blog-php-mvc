@@ -14,6 +14,6 @@ $router
     // Posts
     ->get('/articles', '/posts/index', 'articles')
     ->get('/article/[i:id]', '/posts/post', 'article')
-    ->post('/article/update/[i:id]', 'posts/update', 'update_article')
+    ->post('/article/[i:id]/edition', 'posts/update', 'update_article')
     // Run
     ->run();
