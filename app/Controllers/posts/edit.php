@@ -8,4 +8,8 @@ $post = $postData->find($params['id']);
 $twig = new Templating;
 $twig->view('pages/posts/edit.html.twig', ['post' => $post]);
 
-require(ROOT . '/app/Views/posts/edit.php');
+if (isset($_POST)) {
+    dump($_POST);
+} else {
+    echo('test');
+}
