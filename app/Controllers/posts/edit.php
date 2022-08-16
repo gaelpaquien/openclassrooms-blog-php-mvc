@@ -1,5 +1,4 @@
 <?php
-
 use App\Core\Templating;
 use App\Models\Posts;
 
@@ -7,6 +6,6 @@ $postData = new Posts;
 $post = $postData->find($params['id']);
 
 $twig = new Templating;
-$twig->view('pages/posts/post.html.twig', ['post' => $post]);
+$twig->view('pages/posts/edit.html.twig', ['post' => $post]);
 
-require(ROOT . '/app/Views/posts/post.php');
+require(ROOT . '/app/Views/posts/edit.php');

@@ -12,8 +12,10 @@ $router
     // Home
     ->get('/', '/home', 'home')
     // Posts
-    ->get('/articles', '/posts/index', 'articles')
-    ->get('/article/[i:id]', '/posts/post', 'article')
-    ->post('/article/[i:id]/edition', 'posts/update', 'update_article')
+    ->get('/articles', '/posts/index', 'posts')
+    ->get('/article/[i:id]', '/posts/post', 'post')
+    ->get('/article/[i:id]/edition', 'posts/edit', 'post_edit')
+    ->get('/article/[i:id]/suppression', 'posts/delete', 'post_delete')
+    ->post('/article/[i:id]/modification', 'posts/update', 'post_update')
     // Run
     ->run();

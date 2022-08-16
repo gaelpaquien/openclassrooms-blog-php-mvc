@@ -4,7 +4,7 @@
     <!-- Article -->
     <section class="page-section article" id="article">
         <div class="container">
-            <h2 class="page-section-heading text-center text-uppercase mb-0">Titre de l'article</h2>
+            <h2 class="page-section-heading text-center text-uppercase mb-0">{{ post.title }}</h2>
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
@@ -14,17 +14,16 @@
                 <div class="row g-0">
                     <div class="col-md-12">
                         <img src="../assets/img/posts/default.jpg" class="img-fluid rounded-start" alt="...">
-                        <h5 class="card-title text-center">Titre de l'article</h5>
+                        <h5 class="card-title text-center">{{ post.title }}</h5>
                         <div class="card-body">
-                            <p class="card-text">Et consequatur impedit est excepturi quas et dolores molestias ut ratione doloribus sit quis adipisci?</p>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet. Et consequatur impedit est excepturi quas et dolores molestias ut ratione doloribus sit 
-                                quis adipisci? Ab cupiditate iste ab sapiente natus At explicabo tempora eos galisum ipsum. A fugiat iusto id voluptatem molestiae 
-                                et blanditiis unde assumenda cumque eos corrupti perspiciatis sed animi reprehenderit?
-                            </p>
+                            <p class="card-text">{{ post.shortDescription }}</p>
+                            <p class="card-text">{{ post.content }}</p>
                             <div class="card-footer">
-                                <small class="text-muted">Publié le XX/XX/XXXX par Auteur</small><br>
-                                <small class="text-muted">Dernière modification faite le XX/XX/XXXX</small>
+                                <small class="text-muted">
+                                    Publié le {{ post.createdAt | date('d/m/Y') }} 
+                                    par {{ post.firstnameAuthor}} {{ post.lastnameAuthor }}
+                                </small><br>
+                                <small class="text-muted">Dernière modification faite le {{ post.lastUpdate | date('d/m/Y') }}</small>
                             </div>
                         </div>
                     </div>

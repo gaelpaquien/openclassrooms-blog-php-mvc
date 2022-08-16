@@ -1,12 +1,11 @@
 <?php
-
 use App\Core\Templating;
-use App\Models\GlobalQueries\PostGlobalQueries;
+use App\Models\Posts;
 
-$postsData = new PostGlobalQueries;
-$posts = $postsData->all();
+$postsData = new Posts;
+$posts = $postsData->findAll();
 
 $twig = new Templating;
-$twig->view('pages/posts/index.html.twig', []);
+$twig->view('pages/posts/index.html.twig', ['posts' => $posts]);
 
 require(ROOT . '/app/Views/posts/index.php');

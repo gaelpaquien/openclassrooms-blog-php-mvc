@@ -4,7 +4,7 @@ namespace App\Core;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-class Templating {
+class Templating extends Router {
 
     /**
     * @var Twig
@@ -20,7 +20,7 @@ class Templating {
     {
         $this->loader = new FilesystemLoader(ROOT . '/templates');
         $this->twig = new Environment($this->loader, [
-            'cache' => false, // ROOT . '/tmp/cache'
+            'cache' => false // ROOT . '/tmp/cache',
         ]);
     }
 
