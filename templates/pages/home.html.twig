@@ -14,53 +14,27 @@
                 <div class="divider-custom-line"></div>
             </div>
             <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="../assets/img/posts/default.jpg" class="card-img-top" alt="Titre de l'article">
-                        <div class="card-body">
-                            <h5 class="card-title">Titre de l'article</h5>
-                            <p class="card-text"><small class="text-muted">Publié le XX/XX/XXXX</small></p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <button class="btn">
-                                <a class="card-link" href="#">Voir l'article</a>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="../assets/img/posts/default.jpg" class="card-img-top" alt="Titre de l'article">
-                        <div class="card-body">
-                            <h5 class="card-title">Titre de l'article</h5>
-                            <p class="card-text"><small class="text-muted">Publié le XX/XX/XXXX</small></p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <button class="btn">
-                                <a class="card-link" href="#">Voir l'article</a>
-                            </button>
+                {% for post in posts %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="../assets/img/posts/default.jpg" class="card-img-top" alt="Titre de l'article">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text"><small class="text-muted">Publié le {{ post.created_at | date('d/m/Y') }}</small></p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn">
+                                    <a class="card-link" href="#">Voir l'article</a>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="../assets/img/posts/default.jpg" class="card-img-top" alt="Titre de l'article">
-                        <div class="card-body">
-                            <h5 class="card-title">Titre de l'article</h5>
-                            <p class="card-text"><small class="text-muted">Publié le XX/XX/XXXX</small></p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <button class="btn">
-                                <a class="card-link" href="#">Voir l'article</a>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {% endfor %}
             <div class="all-articles">
                 <button class="btn">
-                    <a href="#">Voir tous les articles</a>
+                    <a href="{{ urlAllPosts }}">Voir tous les articles</a>
                  </button>
+                 
             </div>
         </div>
     </section>
