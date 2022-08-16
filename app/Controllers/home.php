@@ -10,5 +10,3 @@ $twig->view('pages/home.html.twig', [
     'posts' => $posts, 
     'urlAllPosts' => $router->url('posts')
 ]);
-
-require(ROOT . '/app/Views/Home.php');

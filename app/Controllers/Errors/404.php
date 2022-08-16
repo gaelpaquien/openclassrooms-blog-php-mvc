@@ -1,2 +1,5 @@
 <?php
-require(ROOT . '/app/Views/Errors/404.php');
+use App\Core\Templating;
+
+$twig = new Templating;
+$twig->view('pages/errors/404.html.twig');

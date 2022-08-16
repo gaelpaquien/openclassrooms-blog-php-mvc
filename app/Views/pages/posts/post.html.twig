@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% block title %}Blog de Gaël - {{ post.title }}{% endblock %}
+
 {% block content %}
     <!-- Article -->
     <section class="page-section article" id="article">
@@ -30,7 +32,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <button class="btn"><a href="#">Modifier l'article</a></button>
+                <button class="btn"><a href="/article/{{ post.id }}/edition">Modifier l'article</a></button>
             </div>
         </div>
     </section>
