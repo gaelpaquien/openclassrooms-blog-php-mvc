@@ -4,7 +4,7 @@ $database = 'blog';
 $username = 'root';
 $password = 'root';
 
-putenv("DB_HOST=$host");
-putenv("DB_DATABASE=$database");
-putenv("DB_USERNAME=$username");
-putenv("DB_PASSWORD=$password");
+putenv("DBHOST=$host");
+putenv("DBNAME=$database");
+putenv("DBUSER=$username");
+putenv("DBPASS=$password");
