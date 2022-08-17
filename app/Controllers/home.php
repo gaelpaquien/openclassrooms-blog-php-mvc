@@ -1,12 +1,9 @@
 <?php
 use App\Core\Templating;
-use App\Models\Posts;
+use App\Models\Post\PostManagement;
 
-$data = new Posts;
+$data = new PostManagement;
 $posts = $data->findAll(3);
 
 $twig = new Templating;
-$twig->view('pages/home.html.twig', [
-    'posts' => $posts, 
-    'urlAllPosts' => $router->url('posts')
-]);
+$twig->view('pages/home.html.twig', ['posts' => $posts]);

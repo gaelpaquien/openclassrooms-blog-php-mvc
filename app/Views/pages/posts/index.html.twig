@@ -3,7 +3,6 @@
 {% block title %}Blog de Gaël - Articles{% endblock %}
 
 {% block content %}
-    <!-- Articles -->
     <section class="page-section articles" id="articles">
         <div class="container">
             <h2 class="page-section-heading text-center text-uppercase mb-0">Articles</h2>
@@ -23,9 +22,7 @@
                                 <p class="card-text"><small class="text-muted">Dernière modification faite le {{ post.created_at | date('d/m/Y') }}</small></p>
                             </div>
                             <div class="card-footer text-center">
-                                <button class="btn">
-                                    <a class="card-link" href="/article/{{ post.id }}">Voir l'article</a>
-                                </button>
+                                <a class="card-link btn" href="/article/{{ post.slug }}-{{ post.id }}">Voir l'article</a>
                             </div>
                         </div>
                     </div>                    

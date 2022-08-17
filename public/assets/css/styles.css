@@ -272,18 +272,11 @@ ul {
   color: #d6ad60;
   margin: 20px;
 }
-#recent-articles .card-footer .btn a {
-  color: #d6ad60;
-}
 #recent-articles .all-articles {
   margin-top: 50px;
-  display: flex;
-  justify-content: center;
 }
 #recent-articles .all-articles .btn {
   background-color: #d6ad60;
-}
-#recent-articles .all-articles .btn a {
   color: #122620;
 }
 
@@ -306,8 +299,6 @@ ul {
 }
 #cv .btn {
   background-color: #122620;
-}
-#cv .btn a {
   color: #d6ad60;
 }
 
@@ -391,10 +382,8 @@ ul {
 }
 #articles .card-footer .btn {
   background-color: #d6ad60;
-  margin: 20px;
-}
-#articles .card-footer .btn a {
   color: #122620;
+  margin: 20px;
 }
 
 /* Specific Single Article */
@@ -418,33 +407,33 @@ ul {
 }
 #article .btn {
   background-color: #d6ad60;
-  margin-top: 30px;
-}
-#article .btn a {
   color: #122620;
+  margin-top: 30px;
 }
 
 
 /*************************
-       POSTS/UPDATE
+POSTS/UPDATE & POST/CREATE
 *************************/
 
 /* Update Article */
-#update-article {
+#update-article, #create-article {
   margin-top: 50px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
 }
-#update-article h2 {
+#update-article h2, #create-article h2 {
   color: #d6ad60;
 }
-#update-article .divider-custom .divider-custom-icon {
+#update-article .divider-custom .divider-custom-icon,
+#create-article .divider-custom .divider-custom-icon {
   color: #d6ad60;
 }
-#update-article .divider-custom .divider-custom-line {
+#update-article .divider-custom .divider-custom-line,
+#create-article .divider-custom .divider-custom-line {
   background-color: #d6ad60;
 }
-#update-article .form-control {
+#update-article .form-control, #create-article .form-control {
   font-size: 1.5rem;
   border-left: 0;
   border-right: 0;
@@ -452,29 +441,19 @@ ul {
   border-radius: 8px;
   border-width: 1px;
 }
-#update-article .form-control:focus {
+#update-article .form-control:focus, #create-article .form-control:focus {
   box-shadow: 0 0 0 .25rem #d6ad60;
 }
-#update-article label {
+#update-article label, #create-article label {
   font-size: 1.5rem;
   color: #d6ad60;
   margin-bottom: 2px;
   margin-top: 2px;
 }
-#update-article .btn {
+#update-article .btn, #create-article .btn {
   margin-top: 30px;
   margin: 20px;
   background-color: #d6ad60;
   color: #122620;
-}
-#update-article .btn a {
   color: #122620;
-}
-#update-article #delete-article-btn {
-  /*margin-left: 15px;*/
-}
-.test {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
 }

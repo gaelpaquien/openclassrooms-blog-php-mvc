@@ -1,12 +1,11 @@
 <?php
 namespace App\Core;
 
+use AltoRouter;
+
 class Router {
        
-    /**
-     * @var AltoRouter
-     */
-    private $router;
+    private AltoRouter $router;
 
     public function __construct()
     {
