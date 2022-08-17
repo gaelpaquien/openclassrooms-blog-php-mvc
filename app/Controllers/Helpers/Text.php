@@ -5,28 +5,29 @@ class Text {
 
     public static function slugify($text, string $divider = '-')
     {
-      // replace non letter or digits by divider
+      // Replace non letter or digits by divider
       $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
     
-      // transliterate
+      // Transliterate
       $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
     
-      // remove unwanted characters
+      // Remove unwanted characters
       $text = preg_replace('~[^-\w]+~', '', $text);
     
-      // trim
+      // Trim
       $text = trim($text, $divider);
     
-      // remove duplicate divider
+      // Remove duplicate divider
       $text = preg_replace('~-+~', $divider, $text);
     
-      // lowercase
+      // Lowercase
       $text = strtolower($text);
     
       if (empty($text)) {
         return 'n-a';
       }
     
+      // Return the string in slug
       return $text;
     }
 

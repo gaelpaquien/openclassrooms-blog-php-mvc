@@ -16,16 +16,16 @@
                 <div class="divider-custom-line"></div>
             </div>
             <div class="row row-cols-1 row-cols-md-3 g-4">
-                {% for post in posts %}
+                {% for article in articles %}
                     <div class="col">
                         <div class="card h-100">
-                            <img src="../assets/img/posts/default.jpg" class="card-img-top" alt="Titre de l'article">
+                            <img src="../assets/img/articles/default.jpg" class="card-img-top" alt="Titre de l'article">
                             <div class="card-body">
-                                <h5 class="card-title">{{ post.title }}</h5>
-                                <p class="card-text"><small class="text-muted">Publié le {{ post.created_at | date('d/m/Y') }}</small></p>
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="card-text"><small class="text-muted">Publié le {{ article.created_at | date('d/m/Y') }}</small></p>
                             </div>
                             <div class="card-footer text-center">
-                                <a class="card-link btn" href="/article/{{ post.slug }}-{{ post.id }}">Voir l'article</a>
+                                <a class="card-link btn" href="/article/{{ article.slug }}-{{ article.id }}">Voir l'article</a>
                             </div>
                         </div>
                     </div>

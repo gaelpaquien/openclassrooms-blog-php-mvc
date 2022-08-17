@@ -1,10 +1,10 @@
 <?php
-namespace App\Models\Post;
+namespace App\Models\Old;
 
 use App\Core\Database;
 use Exception;
 
-class PostManagement {
+class ArticleManagement {
 
     protected \PDO $pdo;
 

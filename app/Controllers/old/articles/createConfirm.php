@@ -1,15 +1,15 @@
 <?php
 use App\Controllers\Helpers\Date;
 use App\Controllers\Helpers\Text;
-use App\Models\Post\PostManagement;
+use App\Models\Old\ArticleManagement;
 
 $slug = new Text;
 
 $dateNow = new Date;
 $date = $dateNow->getDateNow();
 
-$post = new PostManagement;
-$post->create([
+$article = new ArticleManagement;
+$article->create([
     'id' => 4,
     'title' => $_POST['title'],
     'slug' => $slug->slugify($_POST['title']),
@@ -21,4 +21,4 @@ $post->create([
     'picture' => null
 ]);
 
-header('Location: ' . $router->url('posts'));
+header('Location: ' . $router->url('articles'));
