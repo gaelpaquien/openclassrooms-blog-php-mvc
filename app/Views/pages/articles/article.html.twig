@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Blog de Gaël - {{ post.title }}{% endblock %}
+{% block title %}Blog de Gaël - {{ article.title }}{% endblock %}
 
 {% block content %}
     <section class="page-section article" id="article">
         <div class="container">
-            <h2 class="page-section-heading text-center text-uppercase mb-0">{{ post.title }}</h2>
+            <h2 class="page-section-heading text-center text-uppercase mb-0">{{ article.title }}</h2>
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
@@ -14,24 +14,24 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-12">
-                        <img src="../assets/img/posts/default.jpg" class="img-fluid rounded-start" alt="...">
-                        <h5 class="card-title text-center">{{ post.title }}</h5>
+                        <img src="../assets/img/articles/default.jpg" class="img-fluid rounded-start" alt="...">
+                        <h5 class="card-title text-center">{{ article.title }}</h5>
                         <div class="card-body">
-                            <p class="card-text">{{ post.shortDescription }}</p>
-                            <p class="card-text">{{ post.content }}</p>
+                            <p class="card-text">{{ article.shortDescription }}</p>
+                            <p class="card-text">{{ article.content }}</p>
                             <div class="card-footer">
                                 <small class="text-muted">
-                                    Publié le {{ post.createdAt | date('d/m/Y') }} 
-                                    par {{ post.firstnameAuthor}} {{ post.lastnameAuthor }}
+                                    Publié le {{ article.createdAt | date('d/m/Y') }} 
+                                    par {{ article.firstnameAuthor}} {{ article.lastnameAuthor }}
                                 </small><br>
-                                <small class="text-muted">Dernière modification faite le {{ post.lastUpdate | date('d/m/Y') }}</small>
+                                <small class="text-muted">Dernière modification faite le {{ article.lastUpdate | date('d/m/Y') }}</small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                <a class="btn" href="/article/{{ post.slug }}-{{ post.id }}/edition">Modifier l'article</a>
+                <a class="btn" href="/article/{{ article.slug }}-{{ article.id }}/edition">Modifier l'article</a>
             </div>
         </div>
     </section>

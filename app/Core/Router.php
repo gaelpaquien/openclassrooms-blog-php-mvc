@@ -37,7 +37,7 @@ class Router {
 
             $params = $match['params'];
         } else {
-            $controller = 'Errors' . DIRECTORY_SEPARATOR . '404';
+            $controller = 'old/Errors' . DIRECTORY_SEPARATOR . '404';
         }
         $router = $this;
         require ROOT . '/app/Controllers/' . $controller . '.php';

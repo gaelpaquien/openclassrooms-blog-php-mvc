@@ -10,14 +10,14 @@ $whoops->register();
 $router = new App\Core\Router();
 $router
     // Home
-    ->get('/accueil', '/home', 'home')
-    // Posts
-    ->get('/articles', '/posts/index', 'posts')
-    ->get('/article/[*:slug]-[i:id]', '/posts/post', 'post')
-    ->get('/article/creation', 'posts/create', 'post_create')
-    ->post('/article/creation/confirmer', 'posts/createConfirm')
-    ->get('/article/[*:slug]-[i:id]/edition', 'posts/edit', 'post_edit')
-    ->post('/article/[*:slug]-[i:id]/edition/confirmer', 'posts/editConfirm', 'post_edit_confirm')
-    ->get('/article/[*:slug]-[i:id]/suppression', 'posts/delete', 'post_delete')
+    ->get('/', 'old/home', 'home')
+    // Articles
+    ->get('/articles', 'old/articles/index', 'articles')
+    ->get('/article/[*:slug]-[i:id]', 'old/articles/article', 'article')
+    ->get('/article/creation', 'old/articles/create', 'article_create')
+    ->post('/article/creation/confirmer', 'old/articles/createConfirm')
+    ->get('/article/[*:slug]-[i:id]/edition', 'old/articles/edit', 'article_edit')
+    ->post('/article/[*:slug]-[i:id]/edition/confirmer', 'old/articles/editConfirm', 'article_edit_confirm')
+    ->get('/article/[*:slug]-[i:id]/suppression', 'old/articles/delete', 'article_delete')
     // Run
     ->run();

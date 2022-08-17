@@ -1,5 +1,5 @@
 <!-- Block all common WordPress files -->
-<Location ~ "(wp-login\.php|wp-comments-post\.php)$">
+<Location ~ "(wp-login\.php|wp-comments-article\.php)$">
     Order allow,deny
     Deny from all
 </Location>

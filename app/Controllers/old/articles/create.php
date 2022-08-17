@@ -2,4 +2,4 @@
 use App\Core\Templating;
 
 $twig = new Templating;
-$twig->view('/pages/posts/create.html.twig');
+$twig->view('/pages/articles/create.html.twig');
