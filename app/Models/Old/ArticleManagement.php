@@ -10,7 +10,7 @@ class ArticleManagement {
 
     public function __construct()
     {
-        $this->pdo = Database::getPDO();
+        $this->pdo = Database::getInstance();
     }
 
     public function create(array $data) 

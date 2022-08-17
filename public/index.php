@@ -19,5 +19,7 @@ $router
     ->get('/article/[*:slug]-[i:id]/edition', 'old/articles/edit', 'article_edit')
     ->post('/article/[*:slug]-[i:id]/edition/confirmer', 'old/articles/editConfirm', 'article_edit_confirm')
     ->get('/article/[*:slug]-[i:id]/suppression', 'old/articles/delete', 'article_delete')
+
+    ->get('/test', 'test', 'test')
     // Run
     ->run();

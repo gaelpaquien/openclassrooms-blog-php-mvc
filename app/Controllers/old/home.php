@@ -1,5 +1,6 @@
 <?php
 use App\Core\Templating;
+use App\Models\ArticlesModel;
 use App\Models\Old\ArticleManagement;
 
 $data = new ArticleManagement;

@@ -1,27 +1,44 @@
 <?php
 namespace App\Core;
 
-use \PDO;
-use \Exception;
+use PDO;
+use PDOException;
 
-class Database {
+class Database extends PDO {
 
-    public static function getPDO(): PDO
+    // Unique instance of the class
+    private static $instance;
+
+    // Database information
+    private const DBHOST = '127.0.0.1';
+    private const DBNAME = 'blog';
+    private const DBUSER = 'root';
+    private const DBPASS = 'root';
+
+    private function __construct()
     {
-        require(ROOT . '/config/db.php');
-        $host = getenv("DB_HOST");
-        $database = getenv("DB_DATABASE");
-        $username = getenv("DB_USERNAME");
-        $password = getenv("DB_PASSWORD");
-        
+        // Connection DSN
+        $_dsn = 'mysql:dbname=' . self::DBNAME . ';host=' . self::DBHOST;
+
+        // Call the constructor of the PDO class
         try {
-            return new PDO("mysql:host=$host;dbname=$database", "$username", "$password", [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
-            ]); 
-        } catch(Exception $e) {
-            die('Error : '.$e->getMessage());
+            parent::__construct($_dsn, self::DBUSER, self::DBPASS);
+            // PDO Attribute
+            $this->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
+            $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die($e->getMessage());
         }
+    }
+
+    public static function getInstance():PDO
+    {
+        // Create an instance if there is none and return the current instance
+        if (self::$instance === null) {
+            self::$instance = new Database;
+        }
+        return self::$instance;
     }
 
 }
