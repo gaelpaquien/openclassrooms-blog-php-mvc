@@ -6,12 +6,9 @@ use Twig\Loader\FilesystemLoader;
 
 class Templating extends Router {
 
-    private $loader;
-
-    /**
-    * @var Twig
-    */
-    protected $twig;
+    private FilesystemLoader $loader;
+    
+    protected Environment $twig;
 
     public function __construct()
     {
@@ -25,7 +22,5 @@ class Templating extends Router {
     {
         echo $this->twig->render($path, $datas);
     }
-
-
-
+    
 }

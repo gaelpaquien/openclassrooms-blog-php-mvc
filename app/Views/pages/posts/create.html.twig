@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blog de Gaël - Créer un article{% endblock %}
+
+{% block content %}
+    <section class="page-section create-article" id="create-article">
+        <div class="container">
+            <h2 class="page-section-heading text-center text-uppercase mb-0">Créer un article</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <form id="contact-form" method="POST" action="/article/creation/confirmer">
+                <div class="mb-3">
+                    <label for="title">Titre :</label>
+                    <input class="form-control" id="title" name="title" type="text" placeholder="Entrer le titre de votre article..." required/>
+                </div>
+                <div class="mb-3">
+                    <label for="shortDescription">Description courte :</label>
+                    <input class="form-control" id="shortDescription" name="shortDescription" type="text" placeholder="Entrer la description courte de votre article..." required/>
+                </div>
+                <div class="mb-3">
+                    <label for="content">Contenu :</label>
+                    <textarea class="form-control" id="content" name="content" type="text" placeholder="Entrer le contenu de votre article..." style="height: 10rem" required></textarea>
+                </div>
+                <div class="create-btn">  
+                    <button class="btn" id="submit-btn" type="submit">
+                        Créer l'article
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

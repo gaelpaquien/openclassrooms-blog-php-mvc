@@ -1,8 +1,8 @@
 <?php
 use App\Core\Templating;
-use App\Models\Posts;
+use App\Models\Post\PostManagement;
 
-$postData = new Posts;
+$postData = new PostManagement;
 $post = $postData->find($params['id']);
 
 $twig = new Templating;

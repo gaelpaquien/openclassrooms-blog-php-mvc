@@ -10,12 +10,14 @@ $whoops->register();
 $router = new App\Core\Router();
 $router
     // Home
-    ->get('/', '/home', 'home')
+    ->get('/accueil', '/home', 'home')
     // Posts
     ->get('/articles', '/posts/index', 'posts')
-    ->get('/article/[i:id]', '/posts/post', 'post')
-    ->get('/article/[i:id]/edition', 'posts/edit', 'post_edit')
-    ->get('/article/[i:id]/suppression', 'posts/delete', 'post_delete')
-    ->post('/article/[i:id]/modification', 'posts/update', 'post_update')
+    ->get('/article/[*:slug]-[i:id]', '/posts/post', 'post')
+    ->get('/article/creation', 'posts/create', 'post_create')
+    ->post('/article/creation/confirmer', 'posts/createConfirm')
+    ->get('/article/[*:slug]-[i:id]/edition', 'posts/edit', 'post_edit')
+    ->post('/article/[*:slug]-[i:id]/edition/confirmer', 'posts/editConfirm', 'post_edit_confirm')
+    ->get('/article/[*:slug]-[i:id]/suppression', 'posts/delete', 'post_delete')
     // Run
     ->run();

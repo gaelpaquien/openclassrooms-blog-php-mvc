@@ -1,23 +1,39 @@
 <?php
-namespace App\Models;
+namespace App\Models\Post;
 
 use App\Core\Database;
 use Exception;
 
-class Posts {
+class PostManagement {
 
-    protected $pdo;
+    protected \PDO $pdo;
 
     public function __construct()
     {
         $this->pdo = Database::getPDO();
     }
 
-    public function find(int $id) {
+    public function create(array $data) 
+    {
+        $sqlFields = [];
+        foreach ($data as $key => $value) {
+            $sqlFields[] = "$key = :$key";
+        }
+        $query = $this->pdo->prepare("INSERT INTO article SET " . implode(', ', $sqlFields));
+        $result = $query->execute($data);
+        if ($result === false) {
+            throw new Exception("Enregistrement impossible dans la table 'article'.");
+        }
+        return (int)$this->pdo->lastInsertId();
+    }
+
+    public function find(int $id) 
+    {
         $sql = 
         "SELECT
             A.id as id,
             A.title as title,
+            A.slug as slug,
             A.short_description as shortDescription,
             A.content as content,
             A.created_at as createdAt,
@@ -36,7 +52,8 @@ class Posts {
         return $result;
     }
 
-    public function findAll(?int $limit = null) {
+    public function findAll(?int $limit = null) 
+    {
         $sql = "SELECT * FROM article ORDER BY created_at DESC";
         if ($limit !== null) {
             $sql .= " LIMIT $limit";
@@ -44,7 +61,8 @@ class Posts {
         return $this->pdo->query($sql);
     }
 
-    public function update(array $data, int $id) {
+    public function update(array $data, int $id) 
+    {
         $sqlFields = [];
         foreach ($data as $key => $value) {
             $sqlFields[] = "$key = :$key";
@@ -56,12 +74,13 @@ class Posts {
         }
     }
 
-    public function delete(int $id) {
-        $query = $this->pdo->prepare("DELETE article WHERE id = :id");
-        $result = $query->execute(['id' => $id]);
+    public function delete(int $id) 
+    {
+        $query = $this->pdo->prepare("DELETE FROM article WHERE id = :id");
+        $result = $query->execute([':id' => $id]);
         if ($result === false) {
             throw new Exception("Impossible de supprimer l'enregistrement $id dans la table 'article'.");
         }
     }
-    
+
 }

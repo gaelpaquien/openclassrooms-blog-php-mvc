@@ -3,7 +3,6 @@
 {% block title %}Blog de Gaël - {{ post.title }}{% endblock %}
 
 {% block content %}
-    <!-- Article -->
     <section class="page-section article" id="article">
         <div class="container">
             <h2 class="page-section-heading text-center text-uppercase mb-0">{{ post.title }}</h2>
@@ -32,7 +31,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <button class="btn"><a href="/article/{{ post.id }}/edition">Modifier l'article</a></button>
+                <a class="btn" href="/article/{{ post.slug }}-{{ post.id }}/edition">Modifier l'article</a>
             </div>
         </div>
     </section>
