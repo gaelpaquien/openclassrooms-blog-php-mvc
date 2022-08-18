@@ -13,10 +13,10 @@ $article = new ArticleManagement;
 $article->update([
     'title' => $_POST['title'], 
     'slug' => $slug->slugify($_POST['title']),
-    'short_description' => $_POST['shortDescription'],
-    // 'user_id' => $_POST['author'],
+    'caption' => $_POST['caption'],
+    // 'author_id' => $_POST['author'],
     'content' => $_POST['message'],
-    'last_update' => $date
+    'updated_at' => $date
 ], $params['id']);
 
 header('Location: ' . $router->url('articles'));
