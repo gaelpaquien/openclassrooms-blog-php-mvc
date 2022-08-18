@@ -1,12 +1,14 @@
 <?php
+
 namespace App\Core;
 
 use PDO;
 use PDOException;
 
-class Database extends PDO {
+class Database extends PDO
+{
 
-    // Unique instance of the class
+    // Unique instance of class
     private static $instance;
 
     // Database information
@@ -17,10 +19,10 @@ class Database extends PDO {
 
     private function __construct()
     {
-        // Connection DSN
+        // DNS connection
         $_dsn = 'mysql:dbname=' . self::DBNAME . ';host=' . self::DBHOST;
 
-        // Call the constructor of the PDO class
+        // Call the constructor of PDO class
         try {
             parent::__construct($_dsn, self::DBUSER, self::DBPASS);
             // PDO Attribute
@@ -32,7 +34,7 @@ class Database extends PDO {
         }
     }
 
-    public static function getInstance():PDO
+    public static function getInstance(): PDO
     {
         // Create an instance if there is none and return the current instance
         if (self::$instance === null) {
@@ -40,5 +42,4 @@ class Database extends PDO {
         }
         return self::$instance;
     }
-
 }

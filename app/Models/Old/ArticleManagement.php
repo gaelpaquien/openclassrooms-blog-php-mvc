@@ -34,14 +34,14 @@ class ArticleManagement {
             A.id as id,
             A.title as title,
             A.slug as slug,
-            A.short_description as shortDescription,
+            A.caption as caption,
             A.content as content,
             A.created_at as createdAt,
-            A.last_update as lastUpdate,
+            A.updated_at as lastUpdate,
             B.lastname as lastnameAuthor,
             B.firstname as firstnameAuthor
         FROM article as A
-        INNER JOIN user as B ON A.user_id = B.id
+        INNER JOIN user as B ON A.author_id = B.id
         WHERE A.id = :id";
         $query = $this->pdo->prepare($sql);
         $query->execute([':id' => $id]);

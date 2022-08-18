@@ -13,11 +13,11 @@ $article->create([
     'id' => 4,
     'title' => $_POST['title'],
     'slug' => $slug->slugify($_POST['title']),
-    'short_description' => $_POST['shortDescription'],
+    'caption' => $_POST['caption'],
     'content' => $_POST['content'],
-    'user_id' => 1,
+    'author_id' => 1,
     'created_at' => $date,
-    'last_update' => $date,
+    'updated_at' => $date,
     'picture' => null
 ]);
 
