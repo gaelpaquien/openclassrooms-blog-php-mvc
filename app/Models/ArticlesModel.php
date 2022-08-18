@@ -5,8 +5,8 @@ namespace App\Models;
 class ArticlesModel extends Model
 {
     protected int $id;
-    protected $title;
-    protected $slug;
+    protected string $title;
+    protected string $slug;
     protected string $content;
     protected string $caption;
     protected int $author_id;

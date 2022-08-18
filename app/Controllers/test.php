@@ -3,8 +3,11 @@
 use App\Controllers\Helpers\Date;
 use App\Controllers\Helpers\Text;
 use App\Models\ArticlesModel;
+use App\Models\UsersModel;
+
 $slug = new Text;
-$date = new Date;
+$dateClass = new Date;
+$date = $dateClass->getDateNow();
 
 $model = new ArticlesModel;
 
@@ -34,7 +37,34 @@ $test5 = $model
     ->setSlug($slug->slugify('L\'Article de test 123abc'))
     ->setContent('Contenu de test')
     ->setCaption('Description courte de test')
-    ->setAuthor_id(1)
-    ->setUpdated_at($date->getDateNow())
-    ->setCreated_at($date->getDateNow());
+    ->setAuthor_id(1);
 //$model->create($test5);
+
+// hydrate & create
+$dataTest6 = [
+    'title' => 'Article hydraté 3',
+    'slug' => $slug->slugify('Article hydraté 3'),
+    'content' => 'Contenu de test 3',
+    'caption' => 'Description courte de test 3',
+    'author_id' => 1
+];
+$test6 = $model->hydrate($dataTest6);
+//$model->create($test6);
+
+// hydrate & update
+$dataTest7 = [
+    'title' => 'Article hydraté et modifié',
+    'slug' => $slug->slugify('Article hydraté et modifié'),
+    'content' => 'Contenu de test modifiié',
+    'caption' => 'Description courte de test modifiée',
+    'author_id' => 1,
+    'updated_at' => $date
+];
+$test7 = $model->hydrate($dataTest7);
+//$model->update(2, $test7);
+
+// delete
+//$test8 = $model->delete(16);
+
+$user = new UsersModel;
+var_dump($user);

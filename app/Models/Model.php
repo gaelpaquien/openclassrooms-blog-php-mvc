@@ -50,7 +50,7 @@ class Model extends Database
 
         // Loop to get parameters and values
         foreach ($model as $key => $value) {
-            if ($key != null && $key != 'db' && $key != 'table') {
+            if ($value !== null && $key != 'db' && $key != 'table') {
                 $keys[] = $key;
                 $inter[] = "?";
                 $values[] = $value;
@@ -63,6 +63,47 @@ class Model extends Database
 
         // Execute request
         return $this->request('INSERT INTO ' . $this->table . ' (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
+    }
+
+    public function update(int $id, Model $model)
+    {
+        $keys = [];
+        $values = [];
+
+        // Loop to get parameters and values
+        foreach ($model as $key => $value) {
+            if ($value !== null && $key != 'db' && $key != 'table') {
+                $keys[] = "$key = ?";
+                $values[] = $value;
+            }
+        }
+        // Retrieves id from the values array
+        $values[] = $id;
+
+        // Transforms array "keys" into a string
+        $list_keys = implode(', ', $keys);
+
+        // Execute request
+        return $this->request('UPDATE ' . $this->table . ' SET ' . $list_keys . ' WHERE id = ?', $values);
+    }
+
+    public function delete(int $id) 
+    {
+        return $this->request("DELETE FROM " . $this->table . " WHERE id = ?", [$id]);
+    }
+ 
+    public function hydrate(array $data)
+    {
+        foreach ($data as $key => $value) {
+            // Retrieves the setter corresponding to the key
+            $setter = 'set' . ucfirst($key);
+            // Check if the setter exists
+            if (method_exists($this, $setter)) {
+                // Call the setter
+                $this->$setter($value);
+            }
+        }
+        return $this;
     }
 
     public function request(string $sql, array $params = null)
