@@ -1,10 +1,10 @@
 <?php 
 $host = '127.0.0.1';
-$database = 'blog';
-$username = 'root';
+$dbname = 'blog';
+$user = 'root';
 $password = 'root';
 
-putenv("DBHOST=$host");
-putenv("DBNAME=$database");
-putenv("DBUSER=$username");
-putenv("DBPASS=$password");
+putenv("DB_HOST=$host");
+putenv("DB_NAME=$dbname");
+putenv("DB_USER=$user");
+putenv("DB_PASS=$password");

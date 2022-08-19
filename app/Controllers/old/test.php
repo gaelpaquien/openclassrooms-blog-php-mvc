@@ -61,7 +61,7 @@ $dataTest7 = [
     'updated_at' => $date
 ];
 $test7 = $model->hydrate($dataTest7);
-//$model->update(2, $test7);
+$model->update(2, $test7);
 
 // delete
 //$test8 = $model->delete(16);

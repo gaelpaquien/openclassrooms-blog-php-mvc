@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Core;
 
 use PDO;
@@ -19,7 +18,7 @@ class Database extends PDO
 
     private function __construct()
     {
-        // DNS connection
+        // DSN connection
         $_dsn = 'mysql:dbname=' . self::DBNAME . ';host=' . self::DBHOST;
 
         // Call the constructor of PDO class
@@ -42,4 +41,5 @@ class Database extends PDO
         }
         return self::$instance;
     }
+
 }
