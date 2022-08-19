@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Core;
 
 use Twig\Environment;
@@ -24,4 +23,5 @@ class Templating extends Router
     {
         echo $this->twig->render($path, $datas);
     }
+    
 }
