@@ -4,9 +4,15 @@ namespace App\Controllers;
 class MainController extends Controller
 {
 
-    public function index()
+    public function home()
     {
-        echo 'Je suis la vue MainController/index';
+        $data = $this->articles->findAllWithLimit(3);
+        $this->view('pages/home.html.twig', ['articles' => $data]);
+    }
+
+    public function error()
+    {
+        $this->view('pages/errors/404.html.twig');
     }
 
 }
