@@ -1,18 +1,18 @@
-<?php 
+<?php
 namespace App\Controllers\Helpers;
 
 use DateTime;
 use DateTimeZone;
 
-class Date {
+class Date extends DateTime
+{
 
     public function getDateNow()
     {
-        $date = new DateTime();
-        $date->setTimezone(new DateTimeZone('Europe/Paris'));
+        $this->setTimezone(new DateTimeZone('Europe/Paris'));
 
         // Returns the current date in DateTime SQL format
-        return $date->format('Y-m-d H:i:s');
+        return $this->format('Y-m-d H:i:s');
     }
-    
+
 }
