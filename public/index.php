@@ -18,16 +18,21 @@ $whoops->run();
 $router = new App\Core\Router();
 $router
     // Home
-    ->get('/', 'old/home', 'home')
+    ->get('/', 'MainController@home', 'home')
     // Articles
-    ->get('/articles', 'old/articles/index', 'articles')
+    ->get('/articles/creation', 'ArticlesController@create', 'article_create')
+    ->post('/articles/creation/confirmation', 'ArticlesController@createConfirmation', 'article_create_confirm')
+    ->get('/articles', 'ArticlesController@index', 'articles')
+    ->get('/articles/[*:slug]-[i:id]', 'ArticlesController@show', 'article_show')
+
+/*     
     ->get('/article/[*:slug]-[i:id]', 'old/articles/article', 'article')
     ->get('/article/creation', 'old/articles/create', 'article_create')
     ->post('/article/creation/confirmer', 'old/articles/createConfirm')
     ->get('/article/[*:slug]-[i:id]/edition', 'old/articles/edit', 'article_edit')
     ->post('/article/[*:slug]-[i:id]/edition/confirmer', 'old/articles/editConfirm', 'article_edit_confirm')
-    ->get('/article/[*:slug]-[i:id]/suppression', 'old/articles/delete', 'article_delete')
+    ->get('/article/[*:slug]-[i:id]/suppression', 'old/articles/delete', 'article_delete') */
 
-    ->get('/test', 'old/test', 'test')
+    //->get('/test', 'old/test', 'test')
     // Run
     ->run();

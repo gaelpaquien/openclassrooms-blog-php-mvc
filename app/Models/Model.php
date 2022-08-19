@@ -18,6 +18,12 @@ class Model extends Database
         return $query->fetchAll();
     }
 
+    public function findAllWithLimit($limit)
+    {
+        $query = $this->request('SELECT * FROM ' . $this->table . ' ORDER BY created_at DESC LIMIT ' . $limit);
+        return $query->fetchAll();
+    }
+
     public function findBy(array $params)
     {
         $keys = [];

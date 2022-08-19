@@ -8,20 +8,22 @@ class Router
 
     private AltoRouter $router;
 
+    public string $method;
+
     public function __construct()
     {
         $this->router = new \AltoRouter();
     }
 
-    public function get(string $url, string $controller, ?string $name = null): self
+    public function get(string $url, string $path, ?string $name = null): self
     {
-        $this->router->map('GET', $url, $controller, $name);
+        $this->router->map('GET', $url, $path, $name);
         return $this;
     }
 
-    public function post(string $url, string $controller, ?string $name = null): self
+    public function post(string $url, string $path, ?string $name = null): self
     {
-        $this->router->map('POST', $url, $controller, $name);
+        $this->router->map('POST', $url, $path, $name);
         return $this;
     }
 
@@ -34,14 +36,24 @@ class Router
     {
         $match = $this->router->match();
         if (isset($match['target'])) {
-            $controller = $match['target'];
+            $path = $match['target'];
+
+        // Explore the array and get the controller and the method
+        $pathExplode = explode('@', $path);
+        $controller = 'App\Controllers\\' . $pathExplode[0];
+        $method = $pathExplode[1];
 
             $params = $match['params'];
+            define('PARAMS', $params);
         } else {
-            $controller = 'old/Errors' . DIRECTORY_SEPARATOR . '404';
+            $controller = 'App\Controllers\MainController';
+            $method = 'error';
         }
         $router = $this;
-        require ROOT . '/app/Controllers/' . $controller . '.php';
+
+        $class = new $controller;
+        $class->$method();
+
         return $this;
     }
     
