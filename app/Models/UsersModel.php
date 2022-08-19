@@ -1,8 +1,9 @@
 <?php
 namespace App\Models;
 
-class UsersModel extends Model {
-
+class UsersModel extends Model
+{
+    
     protected int $id;
     protected string $lastname;
     protected string $firstname;
@@ -10,15 +11,15 @@ class UsersModel extends Model {
     protected string $password;
     protected string $permission;
     protected $created_at;
-    
-    public function __construct() 
+
+    public function __construct()
     {
         $this->table = 'user';
     }
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -28,7 +29,7 @@ class UsersModel extends Model {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -38,7 +39,7 @@ class UsersModel extends Model {
 
     /**
      * Get the value of lastname
-     */ 
+     */
     public function getLastname()
     {
         return $this->lastname;
@@ -48,7 +49,7 @@ class UsersModel extends Model {
      * Set the value of lastname
      *
      * @return  self
-     */ 
+     */
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
@@ -58,7 +59,7 @@ class UsersModel extends Model {
 
     /**
      * Get the value of firstname
-     */ 
+     */
     public function getFirstname()
     {
         return $this->firstname;
@@ -68,7 +69,7 @@ class UsersModel extends Model {
      * Set the value of firstname
      *
      * @return  self
-     */ 
+     */
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
@@ -78,7 +79,7 @@ class UsersModel extends Model {
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -88,7 +89,7 @@ class UsersModel extends Model {
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -98,7 +99,7 @@ class UsersModel extends Model {
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -108,7 +109,7 @@ class UsersModel extends Model {
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -118,7 +119,7 @@ class UsersModel extends Model {
 
     /**
      * Get the value of permission
-     */ 
+     */
     public function getPermission()
     {
         return $this->permission;
@@ -128,7 +129,7 @@ class UsersModel extends Model {
      * Set the value of permission
      *
      * @return  self
-     */ 
+     */
     public function setPermission($permission)
     {
         $this->permission = $permission;
@@ -138,7 +139,7 @@ class UsersModel extends Model {
 
     /**
      * Get the value of created_at
-     */ 
+     */
     public function getCreated_at()
     {
         return $this->created_at;
@@ -148,12 +149,11 @@ class UsersModel extends Model {
      * Set the value of created_at
      *
      * @return  self
-     */ 
+     */
     public function setCreated_at($created_at)
     {
         $this->created_at = $created_at;
 
         return $this;
     }
-    
 }

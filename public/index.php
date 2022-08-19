@@ -1,12 +1,20 @@
 <?php
+
+use App\Controllers\Helpers\Whoops;
+use App\Core\Router;
+
+// Define 'ROOT' for the root path of the project
 define('ROOT', dirname(__DIR__));
 
-require '../vendor/autoload.php';
+// Require Autoloader to load the \App namespace
+require_once ROOT . '/vendor/autoload.php';
 
-$whoops = new \Whoops\Run;
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-$whoops->register();
+// Starts Whoops to display errors during development
+$whoops = new Whoops;
+$whoops->run();
 
+
+// Start router
 $router = new App\Core\Router();
 $router
     // Home
@@ -20,6 +28,6 @@ $router
     ->post('/article/[*:slug]-[i:id]/edition/confirmer', 'old/articles/editConfirm', 'article_edit_confirm')
     ->get('/article/[*:slug]-[i:id]/suppression', 'old/articles/delete', 'article_delete')
 
-    ->get('/test', 'test', 'test')
+    ->get('/test', 'old/test', 'test')
     // Run
     ->run();

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Core;
 
 use AltoRouter;
@@ -43,7 +42,7 @@ class Router
         }
         $router = $this;
         require ROOT . '/app/Controllers/' . $controller . '.php';
-
         return $this;
     }
+    
 }

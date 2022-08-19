@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Core\Database;
@@ -8,10 +7,10 @@ class Model extends Database
 {
 
     // Table of database
-    protected $table;
+    protected string $table;
 
     // Instance of Database class
-    private $db;
+    private Database $db;
 
     public function findAll()
     {
@@ -87,11 +86,11 @@ class Model extends Database
         return $this->request('UPDATE ' . $this->table . ' SET ' . $list_keys . ' WHERE id = ?', $values);
     }
 
-    public function delete(int $id) 
+    public function delete(int $id)
     {
         return $this->request("DELETE FROM " . $this->table . " WHERE id = ?", [$id]);
     }
- 
+
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
@@ -122,5 +121,5 @@ class Model extends Database
             return $this->db->query($sql);
         }
     }
-
+    
 }
