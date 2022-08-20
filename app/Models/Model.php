@@ -6,21 +6,44 @@ use App\Core\Database;
 class Model extends Database
 {
 
-    // Table of database
     protected string $table;
 
-    // Instance of Database class
     private Database $db;
 
-    public function findAll()
+    public function create(Model $model)
     {
-        $query = $this->request('SELECT * FROM ' . $this->table);
-        return $query->fetchAll();
-    }
+        $keys = [];
+        $inter = [];
+        $values = [];
 
-    public function findAllWithLimit($limit)
+        // Loop to get parameters and values and add inter("?")
+        foreach ($model as $key => $value) {
+            if ($value !== null && $key != 'db' && $key != 'table') {
+                $keys[] = $key;
+                $inter[] = "?";
+                $values[] = $value;
+            }
+        }
+
+        // Transforms array into a string
+        $list_keys = implode(', ', $keys);
+        $list_inter = implode(', ', $inter);
+
+        // Execute request
+        return $this->request('INSERT INTO ' . $this->table . ' (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
+    } 
+
+    public function findAll(int $limit = 0)
     {
-        $query = $this->request('SELECT * FROM ' . $this->table . ' ORDER BY created_at DESC LIMIT ' . $limit);
+        // Default query
+        $sql = 'SELECT * FROM ' . $this->table . ' ORDER BY updated_at DESC, created_at DESC';
+        // Add a limit if it is defined
+        if ($limit !== 0) {
+            $sql .= ' LIMIT ' . $limit;
+        }
+ 
+        // Execute request
+        $query = $this->request($sql);
         return $query->fetchAll();
     }
 
@@ -35,39 +58,16 @@ class Model extends Database
             $values[] = $value;
         }
 
-        // Transforms array "keys" into a string
+        // Transforms array into a string
         $list_keys = implode(' AND ', $keys);
 
-        // Exec request
+        // Execute request
         return $this->request('SELECT * FROM ' . $this->table . ' WHERE ' . $list_keys, $values)->fetchAll();
     }
 
     public function find(int $id)
     {
         return $this->request("SELECT * FROM " . $this->table . " WHERE id = $id")->fetch();
-    }
-
-    public function create(Model $model)
-    {
-        $keys = [];
-        $inter = [];
-        $values = [];
-
-        // Loop to get parameters and values
-        foreach ($model as $key => $value) {
-            if ($value !== null && $key != 'db' && $key != 'table') {
-                $keys[] = $key;
-                $inter[] = "?";
-                $values[] = $value;
-            }
-        }
-
-        // Transforms array "keys" into a string
-        $list_keys = implode(', ', $keys);
-        $list_inter = implode(', ', $inter);
-
-        // Execute request
-        return $this->request('INSERT INTO ' . $this->table . ' (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
     }
 
     public function update(int $id, Model $model)
@@ -85,7 +85,7 @@ class Model extends Database
         // Retrieves id from the values array
         $values[] = $id;
 
-        // Transforms array "keys" into a string
+        // Transforms array into a string
         $list_keys = implode(', ', $keys);
 
         // Execute request
@@ -127,5 +127,32 @@ class Model extends Database
             return $this->db->query($sql);
         }
     }
+
+    /*
+        JOINTURE
+    {
+        $sql = 
+        "SELECT
+            A.id as id,
+            A.title as title,
+            A.slug as slug,
+            A.caption as caption,
+            A.content as content,
+            A.created_at as createdAt,
+            A.updated_at as lastUpdate,
+            B.lastname as lastnameAuthor,
+            B.firstname as firstnameAuthor
+        FROM article as A
+        INNER JOIN user as B ON A.author_id = B.id
+        WHERE A.id = :id";
+        $query = $this->pdo->prepare($sql);
+        $query->execute([':id' => $id]);
+        $result = $query->fetch();
+        if ($result === false) {
+            throw new Exception("Aucun enregistrement ne correspond à '$id' dans la table 'article'.");
+        }
+        return $result;
+    }
+    */
     
 }
