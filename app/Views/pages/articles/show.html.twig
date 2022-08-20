@@ -14,7 +14,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-12">
-                        <img src="../assets/img/articles/default.jpg" class="img-fluid rounded-start" alt="...">
+                        <img src="../../assets/img/articles/default.jpg" class="img-fluid rounded-start" alt="...">
                         <h5 class="card-title text-center">{{ article.title }}</h5>
                         <div class="card-body">
                             <p class="card-text">{{ article.caption }}</p>
@@ -24,14 +24,14 @@
                                     Publié le {{ article.createdAt | date('d/m/Y') }} 
                                     par {{ article.firstnameAuthor}} {{ article.lastnameAuthor }}
                                 </small><br>
-                                <small class="text-muted">Dernière modification faite le {{ article.lastUpdate | date('d/m/Y') }}</small>
+                                <small class="text-muted">Dernière modification faite le {{ (article.updated_at ?: article.created_at) | date('d/m/Y') }}</small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                <a class="btn" href="/article/{{ article.slug }}-{{ article.id }}/edition">Modifier l'article</a>
+                <a class="btn" href="/article/{{ article.slug }}/{{ article.id }}/edition">Modifier l'article</a>
             </div>
         </div>
     </section>

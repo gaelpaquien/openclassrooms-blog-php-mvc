@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers\Helpers;
+namespace App\Helpers;
 
 class Text
 {
