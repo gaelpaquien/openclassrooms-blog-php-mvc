@@ -3,7 +3,7 @@ namespace App\Models;
 
 class UsersModel extends Model
 {
-    
+
     protected int $id;
     protected string $lastname;
     protected string $firstname;
