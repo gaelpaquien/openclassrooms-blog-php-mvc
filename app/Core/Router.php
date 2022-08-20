@@ -8,8 +8,6 @@ class Router
 
     private AltoRouter $router;
 
-    public string $method;
-
     public function __construct()
     {
         $this->router = new \AltoRouter();
@@ -32,28 +30,29 @@ class Router
         return $this->router->generate($name, $params);
     }
 
-    public function run()
+    public function start()
     {
         $match = $this->router->match();
+        // Checks if route match
         if (isset($match['target'])) {
+            // Explore array path and get controller->method
             $path = $match['target'];
+            $pathExplode = explode('@', $path);
+            $controller = 'App\Controllers\\' . $pathExplode[0];
+            $method = $pathExplode[1];
 
-        // Explore the array and get the controller and the method
-        $pathExplode = explode('@', $path);
-        $controller = 'App\Controllers\\' . $pathExplode[0];
-        $method = $pathExplode[1];
-
+            // Define constant with route parameters
             $params = $match['params'];
             define('PARAMS', $params);
         } else {
             $controller = 'App\Controllers\MainController';
             $method = 'error';
         }
-        $router = $this;
-
+        
         $class = new $controller;
         $class->$method();
 
+        $router = $this;
         return $this;
     }
     

@@ -71,7 +71,8 @@ ul {
 }
 #navigation .navbar-brand,
 #navigation .navbar-nav li.nav-item a.nav-link,
-#navigation .navbar-nav li.nav-item a.nav-link:active, #navigation .navbar-nav li.nav-item a.nav-link:focus {
+#navigation .navbar-nav li.nav-item a.nav-link:active, 
+#navigation .navbar-nav li.nav-item a.nav-link:focus {
   color: #f4ebd0;
 }
 #navigation .navbar-nav li.nav-item a.nav-link:hover,
@@ -109,7 +110,9 @@ ul {
     margin-top: 0;
   }
   #navigation .navbar-nav > li.nav-item > a.nav-link.active,
-  #navigation .navbar-nav > li.nav-item > a.nav-link.active:active, #navigation .navbar-nav > li.nav-item > a.nav-link.active:focus, #navigation .navbar-nav > li.nav-item > a.nav-link.active:hover {
+  #navigation .navbar-nav > li.nav-item > a.nav-link.active:active, 
+  #navigation .navbar-nav > li.nav-item > a.nav-link.active:focus, 
+  #navigation .navbar-nav > li.nav-item > a.nav-link.active:hover {
     color: #f4ebd0;
     background: #122620;
   }

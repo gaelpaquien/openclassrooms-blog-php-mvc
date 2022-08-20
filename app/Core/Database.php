@@ -18,13 +18,13 @@ class Database extends PDO
 
     private function __construct()
     {
-        // DSN connection
+        // Data Source Name
         $_dsn = 'mysql:dbname=' . self::DBNAME . ';host=' . self::DBHOST;
 
         // Call the constructor of PDO class
         try {
             parent::__construct($_dsn, self::DBUSER, self::DBPASS);
-            // PDO Attribute
+            // PDO attribute
             $this->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
             $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

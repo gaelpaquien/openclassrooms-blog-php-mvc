@@ -6,8 +6,18 @@ class MainController extends Controller
 
     public function home()
     {
-        $data = $this->articles->findAllWithLimit(3);
+        $data = $this->articles->findAll(3);
         $this->view('pages/home.html.twig', ['articles' => $data]);
+    }
+
+    public function termsOfUse()
+    {
+        $this->view('pages/others/termsOfUse.html.twig');
+    }
+
+    public function privacyPolicy()
+    {
+        $this->view('pages/others/privacyPolicy.html.twig');
     }
 
     public function error()

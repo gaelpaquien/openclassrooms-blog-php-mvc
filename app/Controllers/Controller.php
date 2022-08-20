@@ -1,7 +1,8 @@
 <?php
 namespace App\Controllers;
 
-use App\Core\Router;
+use App\Helpers\Date;
+use App\Helpers\Text;
 use App\Models\ArticlesModel;
 use App\Models\UsersModel;
 use Twig\Environment;
@@ -17,17 +18,25 @@ class Controller {
 
     protected UsersModel $users;
 
+    protected Text $text;
+
+    protected Date $date;
+
     public function __construct()
     {
-        // Initialize the Twig template engine
+        // Initialize Twig
         $this->loader = new FilesystemLoader(ROOT . '/app/Views');
         $this->twig = new Environment($this->loader, [
             'cache' => false // ROOT . '/tmp/cache',
         ]);
 
-        // Initialize models
+        // Initialize Models
         $this->articles = new ArticlesModel;
         $this->users = new UsersModel;
+
+        // Initialize Helpers class
+        $this->text = new Text;
+        $this->date = new Date;
     }
 
     public function view(string $path, $datas = [])
