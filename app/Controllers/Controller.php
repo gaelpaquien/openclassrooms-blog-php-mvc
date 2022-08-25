@@ -22,6 +22,8 @@ class Controller {
 
     protected Date $date;
 
+    protected array $params;
+
     public function __construct()
     {
         // Initialize Twig
@@ -39,9 +41,16 @@ class Controller {
         $this->date = new Date;
     }
 
-    public function view(string $path, $datas = [])
+    // Display the Twig renderer
+    public function view(string $path, $datas = []): void
     {
         echo $this->twig->render($path, $datas);
+    }
+
+    // Get the URL parameters from the router
+    public function setParams(array $params): void
+    {
+        $this->params = $params;
     }
 
 }

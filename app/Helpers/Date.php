@@ -7,7 +7,7 @@ use DateTimeZone;
 class Date extends DateTime
 {
 
-    public function getDateNow()
+    public function getDateNow(): string
     {
         $this->setTimezone(new DateTimeZone('Europe/Paris'));
 

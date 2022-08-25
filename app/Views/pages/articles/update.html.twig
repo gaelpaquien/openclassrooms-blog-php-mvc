@@ -5,34 +5,34 @@
 {% block content %}
     <section class="page-section update-article" id="update-article">
         <div class="container">
-            <h2 class="page-section-heading text-center text-uppercase mb-0">{{ article.title }}</h2>
+            <h2 class="page-section-heading text-center text-uppercase mb-0">{{ article.getTitle() }}</h2>
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            <form id="contact-form" method="POST" action="/article/{{ article.slug }}/{{ article.id }}/edition/confirmation">
+            <form id="contact-form" method="POST" action="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition/confirmation">
                 <div class="mb-3">
                     <label for="title">Titre :</label>
-                    <input class="form-control" id="title" name="title" type="text" value="{{ article.title }}" required/>
+                    <input class="form-control" id="title" name="title" type="text" value="{{ article.getTitle() }}" required/>
                 </div>
                 <div class="mb-3">
                     <label for="caption">Description courte :</label>
-                    <input class="form-control" id="caption" name="caption" type="text" value="{{ article.caption }}" required/>
+                    <input class="form-control" id="caption" name="caption" type="text" value="{{ article.getCaption() }}" required/>
                 </div>
                 <div class="mb-3">
                     <label for="author">Auteur :</label>
-                    <input class="form-control" id="author" name="author" type="text" value="{{ article.firstnameAuthor ~ ' ' ~ article.lastnameAuthor}}" required/>
+                    <input class="form-control" id="author" name="author" type="text" value="{{ user.getFirstname() ~ ' ' ~ user.getLastname}}" required/>
                 </div>
                 <div class="mb-3">
                     <label for="content">Contenu :</label>
-                    <textarea class="form-control" id="content" name="content" type="text" style="height: 10rem" required>{{ article.content }}</textarea>
+                    <textarea class="form-control" id="content" name="content" type="text" style="height: 10rem" required>{{ article.getContent }}</textarea>
                 </div>
                 <div class="edit-btn">  
                     <button class="btn" id="submit-btn" type="submit">
                         Modifier l'article
                     </button>
-                    <a class="btn" href="/article/{{ article.slug }}/{{ article.id }}/suppression">Supprimer l'article</a>
+                    <a class="btn" href="/article/{{ article.getSlug }}/{{ article.getId }}/suppression">Supprimer l'article</a>
                 </div>
             </form>
         </div>

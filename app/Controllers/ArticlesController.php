@@ -4,12 +4,31 @@ namespace App\Controllers;
 class ArticlesController extends Controller
 {
 
-    public function create()
+    public function index(): void
     {
-        $this->view('pages/articles/create.html.twig');
+        $data = $this->articles->findAll();
+        $this->view('pages/articles/index.html.twig', ['articles' => $data]);
     }
 
-    public function createConfirmation()
+    public function show(): void
+    {
+        $data = $this->articles->find($this->params['id']);
+        $this->view('pages/articles/show.html.twig', ['article' => $data[0], 'user' => $data[1]]);
+    }
+
+    public function create(): void
+    {
+        $this->view('pages/articles/create.html.twig');
+
+        if (isset($_POST) && !empty($_POST)) {
+            echo '$_POST contient des données' . '<br>';
+            var_dump($_POST);
+        } else {
+            echo '$_POST est vide';
+        }
+    }
+
+    /* public function createConfirmation(): void
     {
         $data = [
             'title' => $_POST['title'],
@@ -24,43 +43,29 @@ class ArticlesController extends Controller
         header('Location: ' . '/articles');
     }
 
-    public function index() 
+    public function update(): void
     {
-        $data = $this->articles->findAll();
-        $this->view('pages/articles/index.html.twig', ['articles' => $data]);
+        $data = $this->articles->find($this->params['id']);
+        $this->view('pages/articles/update.html.twig', ['article' => $data[0], 'user' => $data[1]]);     
     }
 
-    public function show()
+    public function updateConfirmation(): void
     {
+        $this->articles->setId($this->params['id'])
+                       ->setTitle($_POST['title'])
+                       ->setSlug($this->text->slugify($_POST['title']))
+                       ->setContent($_POST['content'])
+                       ->setCaption($_POST['caption'])
+                       ->setAuthor_id(1)
+                       ->setUpdated_at($this->date->getDateNow())
+                       ->update($this->params['id']);
         
-        $data = $this->articles->find(PARAMS['id']);
-        $this->view('pages/articles/show.html.twig', ['article' => $data]);
-    }
+        header('Location: /article/' . $this->articles->getSlug() . '/' . $this->articles->getId());
+    } */
 
-    public function update()
+    public function delete(): void
     {
-        $data = $this->articles->find(PARAMS['id']);
-        $this->view('pages/articles/update.html.twig', ['article' => $data]);     
-    }
-
-    public function updateConfirmation()
-    {
-        $data = [
-            'title' => $_POST['title'],
-            'slug' => $this->text->slugify($_POST['title']),
-            'content' => $_POST['content'],
-            'caption' => $_POST['caption'],
-            'author_id' => 1,
-            'updated_at' => $this->date->getDateNow()
-        ];
-        $hydratedData = $this->articles->hydrate($data);
-        $this->articles->update(PARAMS['id'], $hydratedData);
-        header('Location: ' . '/articles');
-    }
-
-    public function delete()
-    {
-        $this->articles->delete(PARAMS['id']);
+        $this->articles->delete($this->params['id']);
         header('Location: ' . '/articles');
     }
 

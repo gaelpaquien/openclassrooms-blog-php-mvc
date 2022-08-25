@@ -20,7 +20,7 @@ $router
     ->get('/', 'MainController@home', 'home')
     // Articles
     ->get('/article/creation', 'ArticlesController@create', 'article_create')
-    ->post('/article/creation/confirmation', 'ArticlesController@createConfirmation', 'article_create_confirm')
+    ->post('/article/creation/confirmation', 'ArticlesController@create', 'article_create_confirm')
     ->get('/articles', 'ArticlesController@index', 'articles')
     ->get('/article/[*:slug]/[i:id]', 'ArticlesController@show', 'article_show')
     ->get('/article/[*:slug]/[i:id]/edition', 'ArticlesController@update', 'article_update')

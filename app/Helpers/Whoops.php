@@ -14,9 +14,10 @@ class Whoops
         $this->whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
     }
 
-    public function run()
+    public function run(): self
     {
-        return $this->whoops->register();
+        $this->whoops->register();
+        return $this;
     }
     
 }
