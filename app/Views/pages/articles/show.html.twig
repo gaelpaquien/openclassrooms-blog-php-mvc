@@ -5,7 +5,7 @@
 {% block content %}
     <section class="page-section article" id="article">
         <div class="container">
-            <h2 class="page-section-heading text-center text-uppercase mb-0">{{ article.title }}</h2>
+            <h2 class="page-section-heading text-center text-uppercase mb-0">{{ article.getTitle() }}</h2>
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
@@ -15,23 +15,25 @@
                 <div class="row g-0">
                     <div class="col-md-12">
                         <img src="../../assets/img/articles/default.jpg" class="img-fluid rounded-start" alt="...">
-                        <h5 class="card-title text-center">{{ article.title }}</h5>
+                        <h5 class="card-title text-center">{{ article.getTitle() }}</h5>
                         <div class="card-body">
-                            <p class="card-text">{{ article.caption }}</p>
-                            <p class="card-text">{{ article.content }}</p>
+                            <p class="card-text">{{ article.getCaption() }}</p>
+                            <p class="card-text">{{ article.getContent() }}</p>
                             <div class="card-footer">
                                 <small class="text-muted">
-                                    Publié le {{ article.createdAt | date('d/m/Y') }} 
-                                    par {{ article.firstnameAuthor}} {{ article.lastnameAuthor }}
+                                    Publié le {{ article.getCreatedAt() | date('d/m/Y') }} 
+                                    par {{ user.getFirstname() ~ ' ' ~ user.getLastname() }}
                                 </small><br>
-                                <small class="text-muted">Dernière modification faite le {{ (article.updated_at ?: article.created_at) | date('d/m/Y') }}</small>
+                                <small class="text-muted">
+                                    Dernière modification faite le {{ (article.getUpdated_at() ?: article.getCreated_at()) | date('d/m/Y') }}
+                                </small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                <a class="btn" href="/article/{{ article.slug }}/{{ article.id }}/edition">Modifier l'article</a>
+                <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition">Modifier l'article</a>
             </div>
         </div>
     </section>

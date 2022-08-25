@@ -19,21 +19,21 @@ class Database extends PDO
     private function __construct()
     {
         // Data Source Name
-        $_dsn = 'mysql:dbname=' . self::DBNAME . ';host=' . self::DBHOST;
+        $dsn = 'mysql:dbname=' . self::DBNAME . ';host=' . self::DBHOST;
 
         // Call the constructor of PDO class
         try {
-            parent::__construct($_dsn, self::DBUSER, self::DBPASS);
+            parent::__construct($dsn, self::DBUSER, self::DBPASS);
             // PDO attribute
             $this->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
-            $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
 
-    public static function getInstance(): PDO
+    public static function getInstance(): self
     {
         // Create an instance if there is none and return the current instance
         if (self::$instance === null) {

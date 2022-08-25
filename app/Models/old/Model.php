@@ -10,29 +10,6 @@ class Model extends Database
 
     private Database $db;
 
-    public function create(Model $model)
-    {
-        $keys = [];
-        $inter = [];
-        $values = [];
-
-        // Loop to get parameters and values and add inter("?")
-        foreach ($model as $key => $value) {
-            if ($value !== null && $key != 'db' && $key != 'table') {
-                $keys[] = $key;
-                $inter[] = "?";
-                $values[] = $value;
-            }
-        }
-
-        // Transforms array into a string
-        $list_keys = implode(', ', $keys);
-        $list_inter = implode(', ', $inter);
-
-        // Execute request
-        return $this->request('INSERT INTO ' . $this->table . ' (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
-    } 
-
     public function findAll(int $limit = 0)
     {
         // Default query
@@ -41,7 +18,7 @@ class Model extends Database
         if ($limit !== 0) {
             $sql .= ' LIMIT ' . $limit;
         }
- 
+
         // Execute request
         $query = $this->request($sql);
         return $query->fetchAll();
@@ -70,20 +47,43 @@ class Model extends Database
         return $this->request("SELECT * FROM " . $this->table . " WHERE id = $id")->fetch();
     }
 
-    public function update(int $id, Model $model)
+    public function create()
+    {
+        $keys = [];
+        $inter = [];
+        $values = [];
+
+        // Loop to get parameters and values and add inter("?")
+        foreach ($this as $key => $value) {
+            if ($value !== null && $key != 'db' && $key != 'table') {
+                $keys[] = $key;
+                $inter[] = "?";
+                $values[] = $value;
+            }
+        }
+
+        // Transforms array into a string
+        $list_keys = implode(', ', $keys);
+        $list_inter = implode(', ', $inter);
+
+        // Execute request
+        return $this->request('INSERT INTO ' . $this->table . ' (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
+    } 
+
+    public function update()
     {
         $keys = [];
         $values = [];
 
         // Loop to get parameters and values
-        foreach ($model as $key => $value) {
+        foreach ($this as $key => $value) {
             if ($value !== null && $key != 'db' && $key != 'table') {
                 $keys[] = "$key = ?";
                 $values[] = $value;
             }
         }
         // Retrieves id from the values array
-        $values[] = $id;
+        $values[] = $this->id;
 
         // Transforms array into a string
         $list_keys = implode(', ', $keys);
@@ -97,7 +97,7 @@ class Model extends Database
         return $this->request("DELETE FROM " . $this->table . " WHERE id = ?", [$id]);
     }
 
-    public function hydrate(array $data)
+    public function hydrate($data)
     {
         foreach ($data as $key => $value) {
             // Retrieves the setter corresponding to the key

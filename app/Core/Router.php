@@ -25,12 +25,12 @@ class Router
         return $this;
     }
 
-    public function url(string $name, array $params = [])
+    public function url(string $name, array $params = []): string
     {
         return $this->router->generate($name, $params);
     }
 
-    public function start()
+    public function start(): self
     {
         $match = $this->router->match();
         // Checks if route match
@@ -40,16 +40,14 @@ class Router
             $pathExplode = explode('@', $path);
             $controller = 'App\Controllers\\' . $pathExplode[0];
             $method = $pathExplode[1];
-
-            // Define constant with route parameters
-            $params = $match['params'];
-            define('PARAMS', $params);
         } else {
             $controller = 'App\Controllers\MainController';
             $method = 'error';
         }
         
+        // Calling the class->method with the parameters of the URL
         $class = new $controller;
+        $class->setParams($match['params']);
         $class->$method();
 
         $router = $this;

@@ -4,7 +4,7 @@ namespace App\Helpers;
 class Text
 {
 
-  public static function slugify($text, string $divider = '-')
+  public static function slugify($text, string $divider = '-'): string
   {
     // Replace non letter or digits by divider
     $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
