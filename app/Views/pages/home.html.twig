@@ -19,13 +19,13 @@
                 {% for article in articles %}
                     <div class="col">
                         <div class="card h-100">
-                            <img src="../assets/img/articles/{{ article.getImage() }}" class="card-img-top" alt="Titre de l'article">
+                            <img src="../assets/img/articles/default.jpg" class="card-img-top" alt="Titre de l'article">
                             <div class="card-body">
-                                <h5 class="card-title">{{ article.getTitle() }}</h5>
-                                <p class="card-text"><small class="text-muted">Dernière modification faite le {{ (article.getUpdatedAt() ?: article.getCreatedAt()) | date('d/m/Y') }}</small></p>
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="card-text"><small class="text-muted">Dernière modification faite le {{ (article.updated_at ?: article.created_at) | date('d/m/Y') }}</small></p>
                             </div>
                             <div class="card-footer text-center">
-                                <a class="card-link btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}">Voir l'article</a>
+                                <a class="card-link btn" href="/article/{{ article.slug }}/{{ article.id }}">Voir l'article</a>
                             </div>
                         </div>
                     </div>
