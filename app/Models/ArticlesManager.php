@@ -86,14 +86,49 @@ class ArticlesManager extends Database
         return $data;
     }
 
-    public function create()
+    public function create(): PDOStatement | false
     {
+        $keys = [];
+        $inter = [];
+        $values = [];
 
+        // Loop to get parameters and values and add inter("?")
+        foreach ($this as $key => $value) {
+            if ($value !== null && $key != 'db' && $key != 'table') {
+                $keys[] = $key;
+                $inter[] = "?";
+                $values[] = $value;
+            }
+        }
+
+        // Transforms array into a string
+        $list_keys = implode(', ', $keys);
+        $list_inter = implode(', ', $inter);
+
+        // Execute request
+        return $this->request('INSERT INTO article (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
     }
 
-    public function update()
+    public function update(): PDOStatement | false
     {
+        $keys = [];
+        $values = [];
 
+        // Loop to get parameters and values
+        foreach ($this as $key => $value) {
+            if ($value !== null && $key != 'db' && $key != 'table') {
+                $keys[] = "$key = ?";
+                $values[] = $value;
+            }
+        }
+        // Retrieves id from the values array
+        $values[] = $this->id;
+
+        // Transforms array into a string
+        $list_keys = implode(', ', $keys);
+
+        // Execute request
+        return $this->request('UPDATE article SET ' . $list_keys . ' WHERE id = ?', $values);
     }
 
     public function delete(int $id) 
