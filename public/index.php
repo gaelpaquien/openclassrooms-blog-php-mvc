@@ -18,13 +18,14 @@ $router = new Router;
 $router
     // Home
     ->get('/', 'MainController@home', 'home')
+    ->post('/contact', 'MainController@homeContact', 'home_contact')
     // Articles
     ->get('/article/creation', 'ArticlesController@create', 'article_create')
     ->post('/article/creation/confirmation', 'ArticlesController@create', 'article_create_confirm')
     ->get('/articles', 'ArticlesController@index', 'articles')
     ->get('/article/[*:slug]/[i:id]', 'ArticlesController@show', 'article_show')
     ->get('/article/[*:slug]/[i:id]/edition', 'ArticlesController@update', 'article_update')
-    ->post('/article/[*:slug]/[i:id]/edition/confirmation', 'ArticlesController@updateConfirmation', 'article_update_confirm')
+    ->post('/article/[*:slug]/[i:id]/edition/confirmation', 'ArticlesController@update', 'article_update_confirm')
     ->get('/article/[*:slug]/[:id]/suppression', 'ArticlesController@delete', 'article_delete')
     // Auth
     ->get('/inscription', 'UsersController@signup', 'signup')
