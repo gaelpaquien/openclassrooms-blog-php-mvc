@@ -12,7 +12,7 @@ class ArticlesModel extends ArticlesManager
     protected int $author_id;
     protected $created_at;
     protected $updated_at;
-    protected $image;
+    protected $picture;
 
     public function __construct()
     {
@@ -164,19 +164,19 @@ class ArticlesModel extends ArticlesManager
     }
 
     /**
-     * Get the value of image
+     * Get the value of picture
      */
-    public function getImage():? string
+    public function getPicture():? string
     {
-        return $this->image;
+        return $this->picture;
     }
 
     /**
-     * Set the value of image
+     * Set the value of picture
      */
-    public function setImage($image):? self
+    public function setPicture($picture):? self
     {
-        $this->image = $image;
+        $this->picture = $picture;
 
         return $this;
     }

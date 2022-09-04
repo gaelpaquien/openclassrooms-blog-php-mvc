@@ -48,7 +48,7 @@ class ArticlesController extends Controller
                 'caption' => $_POST['caption'],
                 'content' => $_POST['content'],
                 'author_id' => 1,
-                'image' => $file
+                'picture' => $file
             ];
     
             // Hydrate data, create article and redirection
