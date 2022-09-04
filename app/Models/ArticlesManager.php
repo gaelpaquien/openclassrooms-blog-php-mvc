@@ -34,7 +34,7 @@ class ArticlesManager extends Database
                   ->setAuthor_id($item->author_id)
                   ->setCreated_at($item->created_at)
                   ->setUpdated_at($item->updated_at)
-                  ->setPicture($item->picture);
+                  ->setImage($item->image);
 
             array_push($data, $model);
         }
@@ -53,7 +53,7 @@ class ArticlesManager extends Database
                     A.created_at as created_at,
                     A.updated_at as updated_at,
                     A.author_id as author_id,
-                    A.picture as picture,
+                    A.image as image,
                     B.lastname as author_lastname,
                     B.firstname as author_firstname
                 FROM article as A 
@@ -75,7 +75,7 @@ class ArticlesManager extends Database
                       ->setAuthor_id($result->author_id)
                       ->setCreated_at($result->created_at)
                       ->setUpdated_at($result->updated_at)
-                      ->setPicture($result->picture);
+                      ->setImage($result->image);
 
         $usersModel = new UsersModel;
         $usersModel->setId($result->author_id)
