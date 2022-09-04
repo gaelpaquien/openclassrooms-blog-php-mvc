@@ -71,22 +71,26 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-xl-7">
-                    <form id="contact-form">
+                    <form id="contact-form" method="POST" action="/contact">
                         <div class="mb-3">
                             <label for="firstname">Prénom :</label>
-                            <input class="form-control" id="firstname" type="text" placeholder="Entrer votre prénom..." required/>
+                            <input class="form-control" name="firstname" id="firstname" type="text" placeholder="Entrer votre prénom..." required/>
                         </div>
                         <div class="mb-3">
-                            <label for="name">Nom :</label>
-                            <input class="form-control" id="name" type="text" placeholder="Entrer votre nom..." required/>
+                            <label for="lastname">Nom :</label>
+                            <input class="form-control" name="lastname" id="lastname" type="text" placeholder="Entrer votre nom..." required/>
                         </div>
                         <div class="mb-3">
                             <label for="email">Email :</label>
-                            <input class="form-control" id="email" type="email" placeholder="exemple@email.fr" required/>
+                            <input class="form-control" name="email" id="email" type="email" placeholder="exemple@email.fr" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject">Sujet du message :</label>
+                            <input class="form-control" name="subject" id="subject" type="text" placeholder="Entrer le sujet de votre message..." required/>
                         </div>
                         <div class="mb-3">
                             <label for="message">Message :</label>
-                            <textarea class="form-control" id="message" type="text" placeholder="Entrer votre message..." style="height: 10rem" required></textarea>
+                            <textarea class="form-control" name="message" id="message" type="text" placeholder="Entrer votre message..." style="height: 10rem" required></textarea>
                         </div>
                         <button class="btn" id="submit-btn" type="submit">Envoyer</button>
                     </form>
