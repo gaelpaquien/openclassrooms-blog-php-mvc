@@ -23,7 +23,7 @@ class ArticlesController extends Controller
             $slug = $this->text->slugify($_POST['title']);
 
             // Default image of the article
-            $file = 'default.jpg';
+            $file = '01default.jpg';
 
             if (isset($_FILES)) {
                 // Get the file extension
@@ -36,8 +36,6 @@ class ArticlesController extends Controller
                     // Saves file
                     $file = $slug . '.' . $extension;
                     move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/assets/img/articles/' . $file);
-                } else {
-                    echo 'Enregistrement impossible';
                 }
             }
 
@@ -80,6 +78,12 @@ class ArticlesController extends Controller
 
     public function delete(): void
     {
+        $data = $this->articles->find($this->params['id']);
+        $image = $data[0]->getImage();
+        if ($image !== '01default.jpg') {
+            unlink(ROOT . '/public/assets/img/articles/' . $image);
+        }
+
         $this->articles->delete($this->params['id']);
         header('Location: ' . '/articles');
     }
