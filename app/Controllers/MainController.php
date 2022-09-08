@@ -7,7 +7,7 @@ class MainController extends Controller
     public function home(): void
     {
         $data = $this->articles->findAll(3);
-        $this->view('pages/home.html.twig', ['articles' => $data]);
+        $this->view('pages/global/home.html.twig', ['articles' => $data]);
     }
 
     public function homeContact(): void 
@@ -28,17 +28,17 @@ class MainController extends Controller
             }
             */
         }
-        header('Location: ' . '/#contact');
+        header('Location: /#contact');
     }
 
     public function termsOfUse(): void
     {
-        $this->view('pages/others/termsOfUse.html.twig');
+        $this->view('pages/global/termsOfUse.html.twig');
     }
 
     public function privacyPolicy(): void
     {
-        $this->view('pages/others/privacyPolicy.html.twig');
+        $this->view('pages/global/privacyPolicy.html.twig');
     }
 
     public function error(): void
