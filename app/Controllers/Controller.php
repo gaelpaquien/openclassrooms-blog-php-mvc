@@ -26,6 +26,11 @@ class Controller {
 
     public function __construct()
     {
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         // Initialize Twig
         $this->loader = new FilesystemLoader(ROOT . '/app/Views');
         $this->twig = new Environment($this->loader, [

@@ -3,9 +3,41 @@
 {% block title %}Blog de Gaël - Inscription{% endblock %}
 
 {% block content %}
-    <section class="page-section signup" id="signup">
+    <section class="page-section create-article" id="create-article">
         <div class="container">
-            <h2>Inscription</h2>
+            <h2 class="page-section-heading text-center text-uppercase mb-0">Inscription</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <form id="contact-form" method="POST" action="/inscription/enregistrement">
+                <div class="mb-3">
+                    <label for="email">Email : </label>
+                    <input class="form-control" id="email" name="email" type="email" placeholder="exemple@email.fr" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="password">Mot de passe :</label>
+                    <input class="form-control" id="password" name="password" type="password" placeholder="Entrer votre mot de passe..." required/>
+                </div>
+                <div class="mb-3">
+                    <label for="password-confirm">Confirmer votre mot de passe :</label>
+                    <input class="form-control" id="password-confirm" name="password-confirm" type="password" placeholder="Confirmer votre mot de passe..." required/>
+                </div>
+                <div class="mb-3">
+                    <label for="firstname">Prénom :</label>
+                    <input class="form-control" id="firstname" name="firstname" type="text" placeholder="Entrer votre prénom..." required>
+                </div>
+                <div class="mb-3">
+                    <label for="lastname">Nom :</label>
+                    <input class="form-control" id="lastname" name="lastname" type="text" placeholder="Entrer votre nom..." required>
+                </div>
+                <div class="create-btn">  
+                    <button class="btn" id="submit-btn" type="submit">
+                        Je m'inscris
+                    </button>
+                </div>
+            </form>
         </div>
     </section>
 {% endblock %}

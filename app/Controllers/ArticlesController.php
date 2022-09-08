@@ -85,7 +85,7 @@ class ArticlesController extends Controller
         }
 
         $this->articles->delete($this->params['id']);
-        header('Location: ' . '/articles');
+        header('Location: /articles');
     }
 
 }

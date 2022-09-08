@@ -12,7 +12,7 @@ class ArticlesManager extends Database
     public function findAll(int $limit = 0): array
     {
         // Default query
-        $sql = 'SELECT * FROM article ORDER BY updated_at DESC, created_at DESC';
+        $sql = 'SELECT * FROM articles ORDER BY updated_at DESC, created_at DESC';
         // Add a limit if it is defined
         if ($limit !== 0) {
             $sql .= ' LIMIT ' . $limit;
@@ -56,8 +56,8 @@ class ArticlesManager extends Database
                     A.image as image,
                     B.lastname as author_lastname,
                     B.firstname as author_firstname
-                FROM article as A 
-                INNER JOIN user as B ON A.author_id = B.id
+                FROM articles as A 
+                INNER JOIN users as B ON A.author_id = B.id
                 WHERE A.id = :id";
 
         // Execute request
@@ -106,7 +106,7 @@ class ArticlesManager extends Database
         $list_inter = implode(', ', $inter);
 
         // Execute request
-        return $this->request('INSERT INTO article (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
+        return $this->request('INSERT INTO articles (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
     }
 
     public function update(): PDOStatement | false
@@ -128,12 +128,12 @@ class ArticlesManager extends Database
         $list_keys = implode(', ', $keys);
 
         // Execute request
-        return $this->request('UPDATE article SET ' . $list_keys . ' WHERE id = ?', $values);
+        return $this->request('UPDATE articles SET ' . $list_keys . ' WHERE id = ?', $values);
     }
 
     public function delete(int $id) 
     {
-        return $this->request("DELETE FROM article WHERE id = ?", [$id]);
+        return $this->request("DELETE FROM articles WHERE id = ?", [$id]);
     }
 
     public function hydrate($data): self

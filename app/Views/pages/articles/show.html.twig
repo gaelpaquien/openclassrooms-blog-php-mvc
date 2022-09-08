@@ -21,7 +21,7 @@
                             <p class="card-text">{{ article.getContent() }}</p>
                             <div class="card-footer">
                                 <small class="text-muted">
-                                    Publié le {{ article.getCreatedAt() | date('d/m/Y') }} 
+                                    Publié le {{ article.getCreated_at() | date('d/m/Y') }} 
                                     par {{ user.getFirstname() ~ ' ' ~ user.getLastname() }}
                                 </small><br>
                                 <small class="text-muted">

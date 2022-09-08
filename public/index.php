@@ -18,23 +18,25 @@ $router = new Router;
 $router
     // Home
     ->get('/', 'MainController@home', 'home')
-    ->post('/contact', 'MainController@homeContact', 'home_contact')
-    // Articles
-    ->get('/article/creation', 'ArticlesController@create', 'article_create')
-    ->post('/article/creation/confirmation', 'ArticlesController@create', 'article_create_confirm')
-    ->get('/articles', 'ArticlesController@index', 'articles')
-    ->get('/article/[*:slug]/[i:id]', 'ArticlesController@show', 'article_show')
-    ->get('/article/[*:slug]/[i:id]/edition', 'ArticlesController@update', 'article_update')
-    ->post('/article/[*:slug]/[i:id]/edition/confirmation', 'ArticlesController@update', 'article_update_confirm')
-    ->get('/article/[*:slug]/[:id]/suppression', 'ArticlesController@delete', 'article_delete')
-    // Auth
-    ->get('/inscription', 'UsersController@signup', 'signup')
-    ->get('/connexion', 'UsersController@login', 'login')
-    // Administration
-    ->get('/administration', 'UsersController@indexAdmin', 'admin_index')
+    ->post('/contact/enregistrement', 'MainController@homeContact', 'home_contact_post')
     // Terms of Use & Privacy Policy
     ->get('/cgu', 'MainController@termsOfUse', 'terms_of_use')
     ->get('/politique-de-confidentialite', 'MainController@privacyPolicy', 'privacy_policy')
-
+    // Authentication
+    ->get('/inscription', 'UsersController@signup', 'signup')
+    ->post('/inscription/enregistrement', 'UsersController@signup', 'signup_post')
+    ->get('/connexion', 'UsersController@login', 'login')
+    ->post('/connexion/enregistrement', 'UsersController@login', 'login_post')
+    ->get('/deconnexion', 'UsersController@logout', 'logout')
+    // Administration
+    ->get('/administration', 'UsersController@indexAdmin', 'admin_index')
+    // Articles
+    ->get('/articles', 'ArticlesController@index', 'articles')
+    ->get('/article/[*:slug]/[i:id]', 'ArticlesController@show', 'article_show')
+    ->get('/article/creation', 'ArticlesController@create', 'article_create')
+    ->post('/article/creation/enregistrement', 'ArticlesController@create', 'article_create_post')
+    ->get('/article/[*:slug]/[i:id]/edition', 'ArticlesController@update', 'article_update')
+    ->post('/article/[*:slug]/[i:id]/edition/enregistrement', 'ArticlesController@update', 'article_update_post')
+    ->get('/article/[*:slug]/[:id]/suppression', 'ArticlesController@delete', 'article_delete')
     // Start Router
     ->start();

@@ -16,7 +16,7 @@ class ArticlesModel extends ArticlesManager
 
     public function __construct()
     {
-        $this->table = 'article';
+        $this->table = 'articles';
     }
 
     /**
