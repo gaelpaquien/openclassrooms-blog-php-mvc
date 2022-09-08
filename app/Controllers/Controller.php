@@ -26,7 +26,7 @@ class Controller {
 
     public function __construct()
     {
-
+        // Checks the status of the session and starts if necessary
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -46,9 +46,29 @@ class Controller {
         $this->date = new Date;
     }
 
+    // Check if user is logged in
+    public function isLogged()
+    {
+        $auth = [
+            'isLogged' => false,
+            'isAdmin' => false
+        ];
+        if (isset($_SESSION['auth'])) {
+            $auth['isLogged'] = true;
+            $test = $this->users->isAdmin($_SESSION['auth']['user_id']);
+            dump($_SESSION);
+            dump($test);
+        }   
+    }
+
     // Display the Twig renderer
     public function view(string $path, $datas = []): void
     {
+        // Defines a global variable containing the authentication status
+        $auth = $this->isLogged();
+        $this->twig->addGlobal('auth', $auth);
+
+        // Display Twig render
         echo $this->twig->render($path, $datas);
     }
 
