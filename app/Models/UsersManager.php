@@ -24,6 +24,12 @@ class UsersManager extends Database
         return $user;
     }
 
+    public function isAdmin(int $id) 
+    {
+        $sql = "SELECT admin FROM users WHERE $id = :id";
+        return $this->request($sql, ['id' => $id])->fetch();
+    }
+
     public function hydrate($data): self
     {
         foreach ($data as $key => $value) {
