@@ -24,6 +24,12 @@ class UsersManager extends Database
         return $user;
     }
 
+    public function find(int $id)
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        return $this->request($sql, ['id' => $id])->fetch();
+    }
+
     public function hydrate($data): self
     {
         foreach ($data as $key => $value) {

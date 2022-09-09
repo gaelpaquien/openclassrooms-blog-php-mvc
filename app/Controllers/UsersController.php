@@ -19,7 +19,7 @@ class UsersController extends Controller
             if (password_verify($_POST['password'], $user->getPassword())) {
                 $_SESSION['auth'] = [
                     'user_id' => $user->getId(),
-                    'user_admin' =>$user->getAdmin()
+                    'user_admin' => $user->getAdmin()
                 ];
                 header('Location: /');
             } else {
@@ -38,7 +38,12 @@ class UsersController extends Controller
 
     public function indexAdmin(): void
     {
-        $this->view('pages/admin/index.html.twig');
+        if (isset($_SESSION['auth']['user_admin']) && $_SESSION['auth']['user_admin'] === 1) {
+            $this->view('pages/admin/index.html.twig');
+        } else {
+            $this->view('pages/errors/forbidden.html.twig');
+        }
+        
     }
     
 }
