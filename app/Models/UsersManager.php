@@ -24,9 +24,9 @@ class UsersManager extends Database
         return $user;
     }
 
-    public function isAdmin(int $id) 
+    public function find(int $id)
     {
-        $sql = "SELECT admin FROM users WHERE $id = :id";
+        $sql = "SELECT * FROM users WHERE id = :id";
         return $this->request($sql, ['id' => $id])->fetch();
     }
 

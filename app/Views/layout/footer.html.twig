@@ -18,7 +18,9 @@
             <div class="col-lg-4">
                 <h4 class="text-uppercase mb-4">À propos</h4>
                 <div class="footer-about-items">
-                    <p><a href="/administration">Administration</a></p>
+                    {% if auth.isAdmin == true %}
+                        <p><a href="/administration">Administration</a></p>
+                    {% endif %}
                     <p><a href="/cgu">Conditions générales d'utilisation</a></p>
                     <p><a href="/politique-de-confidentialite">Politique de confidentialité</a></p>
                 </div>

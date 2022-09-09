@@ -18,43 +18,48 @@ class ArticlesController extends Controller
 
     public function create(): void
     {
-        if (isset($_POST) && !empty($_POST)) {
-            // Variable containing the slug of the article
-            $slug = $this->text->slugify($_POST['title']);
+        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_admin'] === 1) {
+            if (isset($_POST) && !empty($_POST)) {
 
-            // Default image of the article
-            $file = '01default.jpg';
-
-            if (isset($_FILES)) {
-                // Get the file extension
-                $fileExtension = explode('.', $_FILES['image']['name']);
-                $extension = strtolower(end($fileExtension));
-
-                // Checks the file extension
-                $permittedExtension = ['jpg', 'png', 'jpeg'];
-                if (in_array($extension, $permittedExtension)) {
-                    // Saves file
-                    $file = $slug . '.' . $extension;
-                    move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/assets/img/articles/' . $file);
-                }
-            }
-
-            // Retrieve data from an array
-            $data = [
-                'title' => $_POST['title'],
-                'slug' => $slug,
-                'caption' => $_POST['caption'],
-                'content' => $_POST['content'],
-                'author_id' => 1,
-                'image' => $file
-            ];
+                // Variable containing the slug of the article
+                $slug = $this->text->slugify($_POST['title']);
     
-            // Hydrate data, create article and redirection
-            $hydratedData = $this->articles->hydrate($data);
-            $this->articles->create($hydratedData); 
-            header('Location: ' . '/articles');   
+                // Default image of the article
+                $file = '01default.jpg';
+    
+                if (isset($_FILES)) {
+                    // Get the file extension
+                    $fileExtension = explode('.', $_FILES['image']['name']);
+                    $extension = strtolower(end($fileExtension));
+    
+                    // Checks the file extension
+                    $permittedExtension = ['jpg', 'png', 'jpeg'];
+                    if (in_array($extension, $permittedExtension)) {
+                        // Saves file
+                        $file = $slug . '.' . $extension;
+                        move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/assets/img/articles/' . $file);
+                    }
+                }
+    
+                // Retrieve data from an array
+                $data = [
+                    'title' => $_POST['title'],
+                    'slug' => $slug,
+                    'caption' => $_POST['caption'],
+                    'content' => $_POST['content'],
+                    'author_id' => 1,
+                    'image' => $file
+                ];
+        
+                // Hydrate data, create article and redirection
+                $hydratedData = $this->articles->hydrate($data);
+                $this->articles->create($hydratedData); 
+                header('Location: ' . '/articles');   
+            } else {
+                $this->view('pages/articles/create.html.twig');
+            } 
         } else {
-            $this->view('pages/articles/create.html.twig');
+            $this->view('pages/errors/forbidden.html.twig');
         }
     }
 

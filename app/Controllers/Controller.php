@@ -46,26 +46,30 @@ class Controller {
         $this->date = new Date;
     }
 
-    // Check if user is logged in
-    public function isLogged()
+    public function checkAuth()
     {
         $auth = [
             'isLogged' => false,
             'isAdmin' => false
         ];
+        
+        // Check if user is logged in
         if (isset($_SESSION['auth'])) {
             $auth['isLogged'] = true;
-            $test = $this->users->isAdmin($_SESSION['auth']['user_id']);
-            dump($_SESSION);
-            dump($test);
+            // Check if user is admin
+            if ($_SESSION['auth']['user_id'] === 1) {
+                $auth['isAdmin'] = true;
+            }
         }   
+        
+        return $auth;
     }
 
     // Display the Twig renderer
     public function view(string $path, $datas = []): void
     {
         // Defines a global variable containing the authentication status
-        $auth = $this->isLogged();
+        $auth = $this->checkAuth();
         $this->twig->addGlobal('auth', $auth);
 
         // Display Twig render
