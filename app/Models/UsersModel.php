@@ -9,7 +9,7 @@ class UsersModel extends UsersManager
     protected string $firstname;
     protected string $email;
     protected string $password;
-    protected string $admin;
+    protected int $admin;
     protected $created_at;
 
     public function __construct()
