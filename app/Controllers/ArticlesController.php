@@ -65,32 +65,48 @@ class ArticlesController extends Controller
 
     public function update(): void
     {
-        if (isset($_POST) && !empty($_POST)) {
-            $this->articles->setId($this->params['id'])
-                           ->setTitle($_POST['title'])
-                           ->setSlug($this->text->slugify($_POST['title']))
-                           ->setContent($_POST['content'])
-                           ->setCaption($_POST['caption'])
-                           ->setAuthor_id(1)
-                           ->setUpdated_at($this->date->getDateNow())
-                           ->update($this->params['id']);
-            header('Location: /article/' . $this->articles->getSlug() . '/' . $this->articles->getId()); 
+        // Retrieves the data of the current article
+        $data = $this->articles->find($this->params['id']);
+
+        // Checks if the user is logged in and if he is the author of the article
+        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
+            // Checks if the update form has been sent
+            if (isset($_POST) && !empty($_POST)) {
+                $this->articles->setId($this->params['id'])
+                               ->setTitle($_POST['title'])
+                               ->setSlug($this->text->slugify($_POST['title']))
+                               ->setContent($_POST['content'])
+                               ->setCaption($_POST['caption'])
+                               ->setAuthor_id(1)
+                               ->setUpdated_at($this->date->getDateNow())
+                               ->update($this->params['id']);
+                header('Location: /article/' . $this->articles->getSlug() . '/' . $this->articles->getId()); 
+            } else {
+                $this->view('pages/articles/update.html.twig', ['article' => $data[0], 'user' => $data[1]]);  
+            }
         } else {
-            $data = $this->articles->find($this->params['id']);
-            $this->view('pages/articles/update.html.twig', ['article' => $data[0], 'user' => $data[1]]);  
+            $this->view('pages/errors/forbidden.html.twig');
         }
     }
 
     public function delete(): void
     {
+        // Retrieves the data of the current articles
         $data = $this->articles->find($this->params['id']);
-        $image = $data[0]->getImage();
-        if ($image !== '01default.jpg') {
-            unlink(ROOT . '/public/assets/img/articles/' . $image);
-        }
 
-        $this->articles->delete($this->params['id']);
-        header('Location: /articles');
+        // Checks if the user is logged in and if he is the author of the article
+        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
+            // Remove the image from the article
+            $image = $data[0]->getImage();
+            if ($image !== '01default.jpg') {
+                unlink(ROOT . '/public/assets/img/articles/' . $image);
+            }
+            // Remove article and redirection
+            $this->articles->delete($this->params['id']);
+            header('Location: /articles');
+        } else {
+            $this->view('pages/errors/forbidden.html.twig');
+        }
     }
 
 }
