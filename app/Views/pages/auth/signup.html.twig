@@ -11,6 +11,10 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
+            <div class="errors" style="color: white;">
+                {{ errors.email }}
+                {{ errors.confirmPassword }}
+            </div>
             <form id="contact-form" method="POST" action="/inscription/enregistrement">
                 <div class="mb-3">
                     <label for="email">Email : </label>

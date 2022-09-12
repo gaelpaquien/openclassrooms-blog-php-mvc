@@ -8,7 +8,33 @@ class UsersController extends Controller
 
     public function signup(): void
     {
-        $this->view('pages/auth/signup.html.twig');
+        $errors = [];
+
+        if (isset($_POST) && !empty($_POST)) {
+            // Check if email exist
+            $checkEmailExist = $this->users->checkExist('email', $_POST['email']);
+            if ($checkEmailExist === false) {
+                // Check if the password and password confirmation match
+                if ($_POST['password'] === $_POST['password-confirm']) {
+                    // Retrieve data from an array
+                    $data = [
+                        'email' => $_POST['email'],
+                        'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                        'firstname' => $_POST['firstname'],
+                        'lastname' => $_POST['lastname']
+                    ];
+                    $hydratedData = $this->users->hydrate($data);
+                    $this->users->create($hydratedData); 
+                    header('Location: ' . '/'); 
+                } else {
+                    $errors += ['confirmPassword' => 'Les champs mot de passe et confirmation du mot de passe ne correspondent pas'];
+                }
+            } else {
+                $errors += ['email' => 'Cet email est déjà utilisé'];
+            }
+        }
+
+        $this->view('pages/auth/signup.html.twig', ['errors' => $errors]);
     }
 
     public function login(): void
