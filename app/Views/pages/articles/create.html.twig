@@ -11,7 +11,7 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            <form id="contact-form" method="POST" action="/article/creation/confirmation" enctype="multipart/form-data">
+            <form id="contact-form" method="POST" action="/article/creation/enregistrement" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title">Titre :</label>
                     <input class="form-control" id="title" name="title" type="text" placeholder="Entrer le titre de votre article..." required/>
@@ -27,7 +27,7 @@
                 <div class="mb-3">
                     <label for="image">Image (facultatif) :</label>
                     <input class="form-control" type="file" name="image" id="image">
-                    <small class="text-muted">*Format souhaité : png, jpeg, jpg</small>
+                    <small class="text-muted">Formats acceptés : png, jpeg, jpg</small>
                 </div>
                 <div class="create-btn">  
                     <button class="btn" id="submit-btn" type="submit">

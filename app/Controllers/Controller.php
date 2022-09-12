@@ -26,6 +26,11 @@ class Controller {
 
     public function __construct()
     {
+        // Checks the status of the session and starts if necessary
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         // Initialize Twig
         $this->loader = new FilesystemLoader(ROOT . '/app/Views');
         $this->twig = new Environment($this->loader, [
@@ -41,9 +46,33 @@ class Controller {
         $this->date = new Date;
     }
 
+    public function checkAuth()
+    {
+        $auth = [
+            'isLogged' => false,
+            'isAdmin' => false
+        ];
+        
+        // Check if user is logged in
+        if (isset($_SESSION['auth'])) {
+            $auth['isLogged'] = true;
+            // Check if user is admin
+            if ($_SESSION['auth']['user_admin'] === 1) {
+                $auth['isAdmin'] = true;
+            }
+        }   
+        
+        return $auth;
+    }
+
     // Display the Twig renderer
     public function view(string $path, $datas = []): void
     {
+        // Defines a global variable containing the authentication status
+        $auth = $this->checkAuth();
+        $this->twig->addGlobal('auth', $auth);
+
+        // Display Twig render
         echo $this->twig->render($path, $datas);
     }
 
