@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class UsersModel
+class UsersModel extends UsersManager
 {
 
     protected int $id;
@@ -9,12 +9,12 @@ class UsersModel
     protected string $firstname;
     protected string $email;
     protected string $password;
-    protected string $permission;
+    protected int $admin;
     protected $created_at;
 
     public function __construct()
     {
-        $this->table = 'user';
+        $this->table = 'users';
     }
 
     /**
@@ -118,21 +118,21 @@ class UsersModel
     }
 
     /**
-     * Get the value of permission
+     * Get the value of admin
      */
-    public function getPermission()
+    public function getAdmin()
     {
-        return $this->permission;
+        return $this->admin;
     }
 
     /**
-     * Set the value of permission
+     * Set the value of admin
      *
      * @return  self
      */
-    public function setPermission($permission)
+    public function setAdmin($admin)
     {
-        $this->permission = $permission;
+        $this->admin = $admin;
 
         return $this;
     }
