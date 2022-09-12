@@ -12,15 +12,24 @@ class ArticlesController extends Controller
 
     public function show(): void
     {
+        // Retrieves the data of the current article
         $data = $this->articles->find($this->params['id']);
-        $this->view('pages/articles/show.html.twig', ['article' => $data[0], 'user' => $data[1]]);
+
+        // Checks if the user is logged in and if he is the author of the article
+        $checkAuth = false;
+        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
+            $checkAuth = true;
+        } else {
+            $checkAuth = false;
+        }
+
+        $this->view('pages/articles/show.html.twig', ['article' => $data[0], 'user' => $data[1], 'checkAuth' => $checkAuth]);
     }
 
     public function create(): void
     {
         if (isset($_SESSION['auth']) && $_SESSION['auth']['user_admin'] === 1) {
             if (isset($_POST) && !empty($_POST)) {
-
                 // Variable containing the slug of the article
                 $slug = $this->text->slugify($_POST['title']);
     
@@ -47,7 +56,7 @@ class ArticlesController extends Controller
                     'slug' => $slug,
                     'caption' => $_POST['caption'],
                     'content' => $_POST['content'],
-                    'author_id' => 1,
+                    'author_id' => $_SESSION['auth']['user_id'],
                     'image' => $file
                 ];
         

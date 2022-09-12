@@ -57,7 +57,7 @@ class Controller {
         if (isset($_SESSION['auth'])) {
             $auth['isLogged'] = true;
             // Check if user is admin
-            if ($_SESSION['auth']['user_id'] === 1) {
+            if ($_SESSION['auth']['user_admin'] === 1) {
                 $auth['isAdmin'] = true;
             }
         }   

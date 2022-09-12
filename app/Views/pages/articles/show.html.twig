@@ -32,9 +32,11 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center">
-                <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition">Modifier l'article</a>
-            </div>
+            {% if checkAuth == true %}
+                <div class="text-center">
+                    <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition">Modifier l'article</a>
+                </div>
+            {% endif %}          
         </div>
     </section>
 {% endblock %}

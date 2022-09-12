@@ -30,6 +30,40 @@ class UsersManager extends Database
         return $this->request($sql, ['id' => $id])->fetch();
     }
 
+    public function checkExist(string $params, string $value)
+    {
+        $sql = "SELECT * FROM users WHERE $params = :value";
+        $result = $this->request($sql, ['value' => $value])->fetch();
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function create(): PDOStatement | false
+    {
+        $keys = [];
+        $inter = [];
+        $values = [];
+
+        // Loop to get parameters and values and add inter("?")
+        foreach ($this as $key => $value) {
+            if ($value !== null && $key != 'db' && $key != 'table') {
+                $keys[] = $key;
+                $inter[] = "?";
+                $values[] = $value;
+            }
+        }
+
+        // Transforms array into a string
+        $list_keys = implode(', ', $keys);
+        $list_inter = implode(', ', $inter);
+
+        // Execute request
+        return $this->request('INSERT INTO users (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
+    }
+
     public function hydrate($data): self
     {
         foreach ($data as $key => $value) {
