@@ -11,6 +11,11 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
+            {% if errors != null %}
+                <div class="error" style="color: red">
+                    {{ errors.auth }}
+                </div>     
+            {% endif %}
             <form id="contact-form" method="POST" action="/connexion/enregistrement">
                 <div class="mb-3">
                     <label for="email">Email : </label>
