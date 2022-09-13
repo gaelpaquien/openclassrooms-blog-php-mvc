@@ -7,33 +7,50 @@ use PDOStatement;
 class UsersManager extends Database
 {
 
-    public function findBy(string $params, string $value) 
+    public function findBy(string $params, string $value) : UsersModel | null
     {
+        $user = null;
+
+        // Query 
         $sql = "SELECT * FROM users WHERE $params = :value";
+
+        // Execute request
         $result = $this->request($sql, ['value' => $value])->fetch();
 
-        $user = new UsersModel;
-        $user->setId($result->id)
-             ->setEmail($result->email)
-             ->setPassword($result->password)
-             ->setFirstname($result->firstname)
-             ->setLastname($result->lastname)
-             ->setAdmin($result->admin)
-             ->setCreated_at($result->created_at);
+        // Check result and create UsersModel
+        if ($result) {
+            $user = new UsersModel;
+            $user->setId($result->id)
+                 ->setEmail($result->email)
+                 ->setPassword($result->password)
+                 ->setFirstname($result->firstname)
+                 ->setLastname($result->lastname)
+                 ->setAdmin($result->admin)
+                 ->setCreated_at($result->created_at);
+        }
 
+        // Return $user
         return $user;
     }
 
-    public function find(int $id)
+    public function find(int $id): PDOStatement | false
     {
+        // Query 
         $sql = "SELECT * FROM users WHERE id = :id";
+
+        // Execute request
         return $this->request($sql, ['id' => $id])->fetch();
     }
 
-    public function checkExist(string $params, string $value)
+    public function checkExists(string $params, string $value): bool
     {
+        // Query
         $sql = "SELECT * FROM users WHERE $params = :value";
+
+        // Execute request
         $result = $this->request($sql, ['value' => $value])->fetch();
+
+        // Check result and return bool
         if ($result) {
             return true;
         } else {
@@ -67,11 +84,11 @@ class UsersManager extends Database
     public function hydrate($data): self
     {
         foreach ($data as $key => $value) {
-            // Retrieves the setter corresponding to the key
+            // Retrieves setter corresponding to key
             $setter = 'set' . ucfirst($key);
-            // Check if the setter exists
+            // Check if setter exists
             if (method_exists($this, $setter)) {
-                // Call the setter
+                // Call setter
                 $this->$setter($value);
             }
         }

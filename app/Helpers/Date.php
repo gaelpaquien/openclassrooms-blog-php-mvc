@@ -11,7 +11,7 @@ class Date extends DateTime
     {
         $this->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        // Returns the current date in DateTime SQL format
+        // Return current date in DateTime SQL format
         return $this->format('Y-m-d H:i:s');
     }
 

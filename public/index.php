@@ -3,10 +3,10 @@
 use App\Helpers\Whoops;
 use App\Core\Router;
 
-// Define constant for the root path of the project
+// Define constant for root path of project
 define('ROOT', dirname(__DIR__));
 
-// Require Autoloader to load the \App namespace
+// Require Autoloader to load \App namespace
 require_once ROOT . '/vendor/autoload.php';
 
 // Starts Whoops to display errors during development

@@ -8,7 +8,8 @@ use App\Models\UsersModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-class Controller {
+class Controller 
+{
 
     private FilesystemLoader $loader;
 
@@ -26,27 +27,27 @@ class Controller {
 
     public function __construct()
     {
-        // Checks the status of the session and starts if necessary
+        // Start session if is not
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // Initialize Twig
+        // Twig
         $this->loader = new FilesystemLoader(ROOT . '/app/Views');
         $this->twig = new Environment($this->loader, [
             'cache' => false // ROOT . '/tmp/cache',
         ]);
 
-        // Initialize Models
+        // Models
         $this->articles = new ArticlesModel;
         $this->users = new UsersModel;
 
-        // Initialize Helpers class
+        // Helpers class
         $this->text = new Text;
         $this->date = new Date;
     }
 
-    public function checkAuth()
+    public function checkAuth(): array
     {
         $auth = [
             'isLogged' => false,
@@ -65,10 +66,10 @@ class Controller {
         return $auth;
     }
 
-    // Display the Twig renderer
+    // Display Twig renderer
     public function view(string $path, $datas = []): void
     {
-        // Defines a global variable containing the authentication status
+        // Defines Twig global variable containing authentication status
         $auth = $this->checkAuth();
         $this->twig->addGlobal('auth', $auth);
 
@@ -76,7 +77,7 @@ class Controller {
         echo $this->twig->render($path, $datas);
     }
 
-    // Get the URL parameters from the router
+    // Get URL parameters from router
     public function setParams(array $params): void
     {
         $this->params = $params;
