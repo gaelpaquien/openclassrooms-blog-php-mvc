@@ -12,6 +12,11 @@
                 <div class="divider-custom-line"></div>
             </div>
             <form id="contact-form" method="POST" action="/article/creation/enregistrement" enctype="multipart/form-data">
+                {% if errors != null %}
+                    <div class="error" style="color: red">
+                        {{ errors.title }}
+                    </div>     
+                {% endif %}
                 <div class="mb-3">
                     <label for="title">Titre :</label>
                     <input class="form-control" id="title" name="title" type="text" placeholder="Entrer le titre de votre article..." required/>
