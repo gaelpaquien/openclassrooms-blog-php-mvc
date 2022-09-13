@@ -22,7 +22,7 @@ class ArticlesManager extends Database
         $query = $this->request($sql);
         $items = $query->fetchAll();
 
-        // Transforms and returns data
+        // Transforms and return data
         $data = array();
         foreach ($items as $item) {
             $model = new ArticlesModel;
@@ -63,9 +63,8 @@ class ArticlesManager extends Database
         // Execute request
         $result = $this->request($sql, ['id' => $id])->fetch();
 
-        // Transforms and returns data
+        // Transforms data
         $data = array();
-        
         $articlesModel = new ArticlesModel;
         $articlesModel->setId($result->id)
                       ->setTitle($result->title)
@@ -76,14 +75,30 @@ class ArticlesManager extends Database
                       ->setCreated_at($result->created_at)
                       ->setUpdated_at($result->updated_at)
                       ->setImage($result->image);
-
         $usersModel = new UsersModel;
         $usersModel->setId($result->author_id)
                    ->setLastname($result->author_lastname)
                    ->setFirstname($result->author_firstname);
-
         array_push($data, $articlesModel, $usersModel);
+
+        // Return data
         return $data;
+    }
+
+    public function checkExists(string $params, string $value): bool
+    {
+        // Query
+        $sql = "SELECT * FROM articles WHERE $params = :value";
+        
+        // Execute request
+        $result = $this->request($sql, ['value' => $value])->fetch();
+
+        // Check and return result
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function create(): PDOStatement | false
@@ -121,7 +136,7 @@ class ArticlesManager extends Database
                 $values[] = $value;
             }
         }
-        // Retrieves id from the values array
+        // Retrieves id from values array
         $values[] = $this->id;
 
         // Transforms array into a string
@@ -131,7 +146,7 @@ class ArticlesManager extends Database
         return $this->request('UPDATE articles SET ' . $list_keys . ' WHERE id = ?', $values);
     }
 
-    public function delete(int $id) 
+    public function delete(int $id): PDOStatement | false 
     {
         return $this->request("DELETE FROM articles WHERE id = ?", [$id]);
     }
@@ -139,20 +154,20 @@ class ArticlesManager extends Database
     public function hydrate($data): self
     {
         foreach ($data as $key => $value) {
-            // Retrieves the setter corresponding to the key
+            // Retrieves setter corresponding to key
             $setter = 'set' . ucfirst($key);
-            // Check if the setter exists
+            // Check if setter exists
             if (method_exists($this, $setter)) {
-                // Call the setter
+                // Call setter
                 $this->$setter($value);
             }
         }
         return $this;
     }
 
-    public function request(string $sql, array $params = null): PDOStatement|false
+    public function request(string $sql, array $params = null): PDOStatement | false
     {
-        // Get instance of Database
+        // Get instance of database
         $this->db = Database::getInstance();
 
         // Check if there are any parameters

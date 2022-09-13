@@ -16,6 +16,7 @@ class Whoops
 
     public function run(): self
     {
+        // Register and return
         $this->whoops->register();
         return $this;
     }
