@@ -57,4 +57,10 @@ class MainController extends Controller
         $this->view('pages/errors/404.html.twig');
     }
 
+    public function errorForbidden(): void
+    {
+        // Render
+        $this->view('pages/errors/forbidden.html.twig');
+    }
+
 }
