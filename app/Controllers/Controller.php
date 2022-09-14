@@ -2,6 +2,8 @@
 namespace App\Controllers;
 
 use App\Helpers\Date;
+use App\Helpers\ErrorsHandling;
+use App\Helpers\FormValidator;
 use App\Helpers\Text;
 use App\Models\ArticlesModel;
 use App\Models\UsersModel;
@@ -18,6 +20,10 @@ class Controller
     protected ArticlesModel $articles;
 
     protected UsersModel $users;
+
+    protected FormValidator $formValidator;
+
+    protected ErrorsHandling $errorsHandling;
 
     protected Text $text;
 
@@ -43,6 +49,8 @@ class Controller
         $this->users = new UsersModel;
 
         // Helpers class
+        $this->formValidator = new FormValidator;
+        $this->errorsHandling = new ErrorsHandling;
         $this->text = new Text;
         $this->date = new Date;
     }

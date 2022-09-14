@@ -40,7 +40,6 @@ class ArticlesController extends Controller
 
             // Check if form as sent
             if (isset($_POST) && !empty($_POST)) {
-                $errors = [];
 
                 // Slug of article
                 $slug = $this->text->slugify($_POST['title']);
@@ -76,22 +75,28 @@ class ArticlesController extends Controller
                         'author_id' => $_SESSION['auth']['user_id'],
                         'image' => $file
                     ];
+
+                    // Check form data 
+                    $errors = $this->formValidator->checkArticleForm($data);
             
-                    // Creation of article and redirection
-                    $hydratedData = $this->articles->hydrate($data);
-                    $this->articles->create($hydratedData); 
-                    header('Location: ' . '/articles'); 
+                    // If check form data is ok
+                    if ($errors === null) {
+                        // Creation of article and redirection
+                        $hydratedData = $this->articles->hydrate($data);
+                        $this->articles->create($hydratedData); 
+                        header('Location: ' . '/articles'); 
+                    }
 
                 } else {
-                    // Title error
-                    $errors += ['title' => 'Ce titre est déjà utilisé'];
+                    // Error : Title already exist
+                    $errors = $this->errorsHandling->newError('Ce titre existe déjà.');
                 }  
             }
             // Render
             $this->view('pages/articles/create.html.twig', ['errors' => $errors]);  
         } else {
-            // Render Forbidden
-            $this->view('pages/errors/forbidden.html.twig');
+            // Error : Forbidden
+            header('Location: /erreur/acces-interdit');
         }
     }
 
@@ -107,33 +112,42 @@ class ArticlesController extends Controller
 
             // Check if form as sent
             if (isset($_POST) && !empty($_POST)) {
-                $errors = [];
 
                 // Checks if title exist and title is not equal to this title
                 $checkTitle = $this->articles->checkExists('title', $_POST['title']);
                 if ($checkTitle === false || $_POST['title'] === $data[0]->getTitle()) {
 
-                    // Update of article and redirection
-                    $this->articles->setId($this->params['id'])
-                                ->setTitle($_POST['title'])
-                                ->setSlug($this->text->slugify($_POST['title']))
-                                ->setContent($_POST['content'])
-                                ->setCaption($_POST['caption'])
-                                ->setAuthor_id(1)
-                                ->setUpdated_at($this->date->getDateNow())
-                                ->update($this->params['id']);
-                    header('Location: /article/' . $this->articles->getSlug() . '/' . $this->articles->getId()); 
+                    // Check form data
+                    $errors = $this->formValidator->checkArticleForm([
+                        'title' => $_POST['title'],
+                        'caption' => $_POST['caption'],
+                        'content' => $_POST['content']
+                    ]);
+
+                    // If check form data is ok
+                    if ($errors === null) {
+                        // Update of article and redirection
+                        $this->articles->setId($this->params['id'])
+                                    ->setTitle($_POST['title'])
+                                    ->setSlug($this->text->slugify($_POST['title']))
+                                    ->setContent($_POST['content'])
+                                    ->setCaption($_POST['caption'])
+                                    ->setAuthor_id(1)
+                                    ->setUpdated_at($this->date->getDateNow())
+                                    ->update($this->params['id']);
+                        header('Location: /article/' . $this->articles->getSlug() . '/' . $this->articles->getId()); 
+                    }
 
                 } else {
-                    // Title error
-                    $errors += ['title' => 'Ce titre est déjà utilisé'];
+                    // Error : Title already exist
+                    $errors = $this->errorsHandling->newError('Ce titre existe déjà.');
                 }
             } 
             // Render
             $this->view('pages/articles/update.html.twig', ['article' => $data[0], 'user' => $data[1], 'errors' => $errors]);  
         } else {
-            // Render Forbidden
-            $this->view('pages/errors/forbidden.html.twig');
+            // Error : Forbidden
+            header('Location: /erreur/acces-interdit');
         }
     }
 
@@ -144,6 +158,7 @@ class ArticlesController extends Controller
 
         // Checks if user is logged in and if he is author of article
         if (isset($_SESSION['auth']) && $_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
+            
             // Delete image from article
             $image = $data[0]->getImage();
             if ($image !== '01default.jpg') {
@@ -155,8 +170,8 @@ class ArticlesController extends Controller
             header('Location: /articles');
 
         } else {
-            // Render Forbidden
-            $this->view('pages/errors/forbidden.html.twig');
+            // Error : Forbidden
+            header('Location: /erreur/acces-interdit');
         }
     }
 
