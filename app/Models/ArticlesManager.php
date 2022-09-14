@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Controllers\MainController;
 use App\Core\Database;
 use PDOStatement;
 
@@ -62,6 +63,11 @@ class ArticlesManager extends Database
 
         // Execute request
         $result = $this->request($sql, ['id' => $id])->fetch();
+        
+        if ($result === false) {
+            header('Location: /erreur/page-introuvable');
+            die();
+        }
 
         // Transforms data
         $data = array();
