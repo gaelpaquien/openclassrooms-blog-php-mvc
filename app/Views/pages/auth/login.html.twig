@@ -12,8 +12,8 @@
                 <div class="divider-custom-line"></div>
             </div>
             {% if errors != null %}
-                <div class="error" style="color: red">
-                    {{ errors.auth }}
+                <div class="error">
+                    {{ 'Erreur : ' ~ errors }}
                 </div>     
             {% endif %}
             <form id="contact-form" method="POST" action="/connexion/enregistrement">

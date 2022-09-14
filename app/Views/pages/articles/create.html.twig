@@ -13,8 +13,8 @@
             </div>
             <form id="contact-form" method="POST" action="/article/creation/enregistrement" enctype="multipart/form-data">
                 {% if errors != null %}
-                    <div class="error" style="color: red">
-                        {{ errors.title }}
+                    <div class="error">
+                        {{ 'Erreur : ' ~ errors }}
                     </div>     
                 {% endif %}
                 <div class="mb-3">

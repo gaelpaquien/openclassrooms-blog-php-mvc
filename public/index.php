@@ -38,5 +38,8 @@ $router
     ->get('/article/[*:slug]/[i:id]/edition', 'ArticlesController@update', 'article_update')
     ->post('/article/[*:slug]/[i:id]/edition/enregistrement', 'ArticlesController@update', 'article_update_post')
     ->get('/article/[*:slug]/[:id]/suppression', 'ArticlesController@delete', 'article_delete')
+    // Errors 
+    ->get('/erreur/page-introuvable', 'MainController@errorNotFound', 'error_404')
+    ->get('/erreur/acces-interdit', 'MainController@errorForbidden', 'error_forbidden')
     // Start Router
     ->start();

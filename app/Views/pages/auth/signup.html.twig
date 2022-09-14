@@ -11,10 +11,11 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            <div class="errors" style="color: white;">
-                {{ errors.email }}
-                {{ errors.confirmPassword }}
-            </div>
+            {% if errors != null %}
+                <div class="error">
+                    {{ 'Erreur : ' ~ errors }}
+                </div>     
+            {% endif %}
             <form id="contact-form" method="POST" action="/inscription/enregistrement">
                 <div class="mb-3">
                     <label for="email">Email : </label>
@@ -30,11 +31,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="firstname">Prénom :</label>
-                    <input class="form-control" id="firstname" name="firstname" type="text" placeholder="Entrer votre prénom..." required>
+                    <input class="form-control" id="firstname" name="firstname" type="text" placeholder="Entrer votre prénom..." required/>
                 </div>
                 <div class="mb-3">
                     <label for="lastname">Nom :</label>
-                    <input class="form-control" id="lastname" name="lastname" type="text" placeholder="Entrer votre nom..." required>
+                    <input class="form-control" id="lastname" name="lastname" type="text" placeholder="Entrer votre nom..." required/>
                 </div>
                 <div class="create-btn">  
                     <button class="btn" id="submit-btn" type="submit">
