@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blog de Gaël - Administration des commentaires{% endblock %}
+
+{% block content %}
+    <section class="page-section mb-0" id="admin">
+        <div class="container">
+            <h2 class="page-section-heading text-center text-uppercase">Administration des commentaires</h2>
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div class="admin-comments">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center">#ID</th>
+                        <th scope="col" class="text-center">Auteur</th>
+                        <th scope="col">Contenu</th>
+                        <th scope="col" class="text-center">Publié le</th>
+                        <th scope="col" class="text-center">Validation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="text-center">1</th>
+                        <td>John Doe</td>
+                        <td>C'est un super article, j'ai adoré !</td>
+                        <td class="text-center">15.09.2022</td>
+                        <td>
+                            <div class="td-btn text-center">
+                                <a class="btn" href="/commentaire/{{ comment.id }}/validation">Validé</a>
+                                <a class="btn" href="/commentaire/{{ comment.id }}/suppression">Refuser</a>
+                            </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div class="admin-btn text-center">
+                <a class="btn" href="/administration">Retour</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
