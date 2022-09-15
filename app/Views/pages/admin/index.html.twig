@@ -3,9 +3,24 @@
 {% block title %}Blog de Gaël - Administration{% endblock %}
 
 {% block content %}
-    <section class="page-section signup" id="signup">
+    <section class="page-section mb-0" id="admin">
         <div class="container">
-            <h2>Administration</h2>
+            <h2 class="page-section-heading text-center text-uppercase">Administration</h2>
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div class="admin-stats text-center">
+                <p>32 utilisateurs inscrits</p>
+                <p>13 articles publiés</p>
+                <p>8 commentaires publiés</p>
+            </div>
+            <div class="admin-btn text-center">
+                <a class="btn" href="/administration/commentaires">Gestion des commentaires</a>
+                <a class="btn" href="/">Gestion des utilisateurs</a>
+                <a class="btn" href="/">Gestion des articles</a>
+            </div>
         </div>
     </section>
 {% endblock %}

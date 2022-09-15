@@ -11,32 +11,69 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
+            <!-- Article -->
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-12">
                         <img src="../../assets/img/articles/{{ article.getImage() }}" class="img-fluid rounded-start" alt="...">
-                        <h5 class="card-title text-center">{{ article.getTitle() }}</h5>
+                        <h3 class="card-title text-center">{{ article.getTitle() }}</h3>
                         <div class="card-body">
                             <p class="card-text">{{ article.getCaption() }}</p>
                             <p class="card-text">{{ article.getContent() }}</p>
                             <div class="card-footer">
                                 <small class="text-muted">
                                     Publié le {{ article.getCreated_at() | date('d/m/Y') }} 
-                                    par {{ user.getFirstname() ~ ' ' ~ user.getLastname() }}
+                                    par {{ userArticle.getFirstname() ~ ' ' ~ userArticle.getLastname() }}
                                 </small><br>
                                 <small class="text-muted">
                                     Dernière modification faite le {{ (article.getUpdated_at() ?: article.getCreated_at()) | date('d/m/Y') }}
                                 </small>
                             </div>
+                            {% if articlePermission == true or checkAdmin == true %}
+                                <div class="article-admin card-footer text-center">
+                                    <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition">Modifier l'article</a>
+                                    <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition">Supprimer l'article</a>
+                                </div>                   
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-            {% if checkAuth == true %}
-                <div class="text-center">
-                    <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition">Modifier l'article</a>
+            <!-- Comments -->
+            <div class="row comments" >
+                <div class="col-md-12">
+                    {% if comments != false %}
+                        <h2>Commentaires :</h2>
+                        {% for comment in comments %}
+                            <div class="comment text-justify mt-2">
+                                <h3 class="comment-author">
+                                    {{ comment.author_firstname ~ ' ' ~ comment.author_lastname }}
+                                </h3>
+                                <span>{{ comment.created_at | date('d/m/Y') }}</span>
+                                <br>
+                                <p>{{ comment.content }}</p>
+                                {% if checkAdmin == true %}
+                                    <a class="comment-delete-btn btn" href="/commentaire/{{ comment.id }}/suppression">Supprimer le commentaire</a>   
+                                {% endif %}
+                            </div>           
+                        {% endfor %}
+                    {% endif %}
+                    {% if checkAuth %}
+                        <form id="comment-form" method="POST" action="/article/{{ article.getSlug() }}/{{ article.getId() }}/commentaire/enregistrement">
+                            <div class="mb-3">
+                                <label for="content">Ajouter un commentaire :</label>
+                                <textarea class="form-control" id="content" name="content" type="text" placeholder="Entrer le contenu de votre commentaire..." style="height: 6rem" required></textarea>
+                            </div>
+                            <div class="comment-btn">  
+                                <button class="btn" id="submit-btn" type="submit">
+                                    Envoyer votre commentaire
+                                </button>
+                            </div>
+                        </form>
+                    {% endif %}
                 </div>
-            {% endif %}          
+            </div>    
         </div>
+
     </section>
 {% endblock %}

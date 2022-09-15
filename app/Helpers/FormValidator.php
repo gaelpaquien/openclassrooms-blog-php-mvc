@@ -42,7 +42,7 @@ class FormValidator
 
     public function validateLength(int $min, int $max, string $value): bool
     {   
-        if (strlen($value) < $min || strlen($value) > $max) {  
+        if (strlen($value) <= $min || strlen($value) >= $max) {  
             return false;
         } else {  
             return true;  
@@ -71,21 +71,21 @@ class FormValidator
             // Check password
             if ($key === "password") {
                 $key = "mot de passe";
-                if ($this->validateLength(8, 25, $value) === false) {
-                    return $this->errors->newError('Le mot de passe doit contenir 8 caractères minimum et 25 caractères maximum.');
+                if ($this->validateLength(8, 35, $value) === false) {
+                    return $this->errors->newError('Le mot de passe doit contenir 8 caractères minimum et 35 caractères maximum.');
                 }
             }
             // Check firstname
             if ($key === "firstname") {
                 $key = "prénom";
-                if ($this->validateString($value) === false || $this->validateLength(3, 25, $value) === false) {
+                if ($this->validateString($value) === false || $this->validateLength(2, 35, $value) === false) {
                     return $this->errors->newError('Vous ne pouvez pas utiliser ce prénom.');
                 }
             }
             // Check lastname
             if ($key === "lastname") {
                 $key = "nom";
-                if ($this->validateString($value) === false || $this->validateLength(3, 25, $value) === false) {
+                if ($this->validateString($value) === false || $this->validateLength(2, 35, $value) === false) {
                     return $this->errors->newError('Vous ne pouvez pas utiliser ce nom.');
                 }
             }
@@ -105,15 +105,15 @@ class FormValidator
             // Check title
             if ($key === "title") {
                 $key = "titre";
-                if ($this->validateLength(10, 25, $value) === false) {
-                    return $this->errors->newError('Le titre doit contenir 10 caractères minimum et 25 caractères maximum.');
+                if ($this->validateLength(8, 70, $value) === false) {
+                    return $this->errors->newError('Le titre doit contenir 8 caractères minimum et 70 caractères maximum.');
                 } 
             } 
             // Check caption
             if ($key === "caption") {
                 $key = "description";
-                if ($this->validateLength(20, 100, $value) === false) {
-                    return $this->errors->newError('La description doit contenir 20 caractères minimum et 100 caractères maximum.');
+                if ($this->validateLength(20, 120, $value) === false) {
+                    return $this->errors->newError('La description doit contenir 20 caractères minimum et 120 caractères maximum.');
                 } 
             }
             // Check title
