@@ -116,7 +116,7 @@ class FormValidator
                     return $this->errors->newError('La description doit contenir 20 caractères minimum et 120 caractères maximum.');
                 } 
             }
-            // Check title
+            // Check content
             if ($key === "content") {
                 $key = "contenu";
                 if ($this->validateLength(50, 250, $value) === false) {

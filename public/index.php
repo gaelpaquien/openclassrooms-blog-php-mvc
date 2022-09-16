@@ -45,6 +45,6 @@ $router
     // Comments
     ->post('/article/[*:slug]/[i:id]/commentaire/enregistrement', 'CommentsController@create', 'comment_create')
     ->get('/commentaire/[i:id]/suppression', 'CommentsController@delete', 'comment_delete')
-    ->get('/commentaire/[i:id]/validation', 'CommentsController@validate', 'comment_validate')
+    ->get('/commentaire/[i:id]/validation', 'CommentsController@validComment', 'comment_validate')
     // Start Router
     ->start();
