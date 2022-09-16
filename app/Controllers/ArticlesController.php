@@ -132,6 +132,8 @@ class ArticlesController extends Controller
         // Get data of current article
         $data = $this->articles->find($this->params['id']);
 
+        $admin = $this->users->findAllAdmin();
+
         // Checks if user is logged in and if he is author of article or admin
         if (isset($_SESSION['auth']) && (($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id() || $_SESSION['auth']['user_admin'] === 1))) {
            
@@ -148,6 +150,8 @@ class ArticlesController extends Controller
                         'caption' => $_POST['caption'],
                         'content' => $_POST['content']
                     ]);
+
+                    dump($_POST);exit();
 
                     // If check form data is ok
                     if ($errors === null) {
@@ -169,7 +173,12 @@ class ArticlesController extends Controller
                 }
             }
             // Render
-            $this->view('pages/articles/update.html.twig', ['article' => $data[0], 'user' => $data[1], 'errors' => $errors]);  
+            $this->view('pages/articles/update.html.twig', [
+                'article' => $data[0], 
+                'user' => $data[1], 
+                'errors' => $errors,
+                'admins' => $admin
+            ]);  
         } else {
             // Error : Forbidden
             header('Location: /erreur/acces-interdit');
