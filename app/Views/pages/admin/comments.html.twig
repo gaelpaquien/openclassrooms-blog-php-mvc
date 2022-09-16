@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blog de Gaël - Administration des commentaires{% endblock %}
+
+{% block content %}
+    <section class="page-section mb-0" id="admin">
+        <div class="container">
+            <h2 class="page-section-heading text-center text-uppercase">Administration des commentaires</h2>
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div class="admin-comments">
+              {% if comments == false %}
+                <p class="text-center">Il n'y a aucun commentaire en attente de validation.</p>
+              {% endif %}
+              {% if comments != false %}
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center">#ID</th>
+                      <th scope="col" class="text-center">Auteur</th>
+                      <th scope="col">Contenu</th>
+                      <th scope="col" class="text-center">Publié le</th>
+                      <th scope="col" class="text-center">Validation</th>
+                      <th scope="col" class="text-center">Article</th>
+                    </tr>
+                  </thead>
+                  {% for comment in comments %}
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="text-center">{{ comment.id }}</th>
+                        <td class="text-center">{{ comment.authorFirstname ~ ' ' ~ comment.authorLastname ~ ' (#' ~ comment.author_id ~ ')'}}</td>
+                        <td>{{ comment.content }}</td>
+                        <td class="text-center">{{ comment.created_at }}</td>
+                        <td>
+                            <div class="td-btn text-center">
+                                <a class="btn" href="/commentaire/{{ comment.id }}/validation">Valider</a>
+                                <a class="btn" href="/commentaire/{{ comment.id }}/suppression">Refuser</a>
+                            </div>
+                        </td>
+                        <td>
+                          <div class="td-btn text-center">
+                              <a class="btn" href="/article/{{ comment.articleSlug }}/{{ comment.article_id }}">Voir l'article</a>
+                          </div>
+                      </td>
+                      </tr>
+                    </tbody>    
+                  {% endfor %}
+                </table>
+              {% endif %}
+            </div>
+            <div class="admin-btn text-center">
+                <a class="btn" href="/administration">Retour</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
