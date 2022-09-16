@@ -16,12 +16,17 @@ class ArticlesController extends Controller
     public function show(): void
     {
         $checkAuth = false;
+        $checkCommentSent = false;
+
+        if (isset($_GET['commentSent'])) {
+            $checkCommentSent = $_GET['commentSent'];
+        }
 
         // Get data of current article
         $data = $this->articles->find($this->params['id']);
 
         // Get validate comments of current article
-        $comments = $this->comments->findValidateComments($this->params['id']);
+        $comments = $this->comments->findValid($this->params['id']);
 
         // Check if user is logged in
         $checkAuth = false;
@@ -46,7 +51,8 @@ class ArticlesController extends Controller
             'comments' => $comments,
             'checkAuth' => $checkAuth,
             'articlePermission' => $articlePermission,
-            'checkAdmin' => $checkAdmin
+            'checkAdmin' => $checkAdmin,
+            'checkCommentSent' => $checkCommentSent
         ]);
     }
 
