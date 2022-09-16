@@ -25,9 +25,21 @@
                     <label for="caption">Description courte :</label>
                     <input class="form-control" id="caption" name="caption" type="text" value="{{ article.getCaption() }}" required/>
                 </div>
+                <!-- 
                 <div class="mb-3">
                     <label for="author">Auteur :</label>
-                    <input class="form-control" id="author" name="author" type="text" value="{{ user.getFirstname() ~ ' ' ~ user.getLastname}}" required/>
+                    <input class="form-control" id="author" name="author" type="text" value="{{ user.getFirstname() ~ ' ' ~ user.getLastname }}" required/>
+                </div>
+                -->
+                <div class="mb-3">
+                    <label for="author">Auteur :</label><br>
+                    <select name="author" id="" required>
+                        <option value="{{ article.getAuthor() }}">{{ user.getFirstname() ~ ' ' ~ user.getLastname }}</option>
+                        {% for admin in admins %}
+                            <option value="{{ admin.id }}">{{ admin.firstname  ~ ' ' ~ admin.lastname }}</option>
+                        {% endfor %}
+                        
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="content">Contenu :</label>
