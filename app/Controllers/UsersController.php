@@ -93,7 +93,7 @@ class UsersController extends Controller
         header('Location: /');
     }
 
-    public function indexAdmin(): void
+    public function adminIndex(): void
     {
         // Checks if user is logged in and if he is admin
         if (isset($_SESSION['auth']['user_admin']) && $_SESSION['auth']['user_admin'] === 1) {

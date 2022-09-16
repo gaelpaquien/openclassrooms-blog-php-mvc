@@ -6,6 +6,7 @@ use App\Helpers\ErrorsHandling;
 use App\Helpers\FormValidator;
 use App\Helpers\Text;
 use App\Models\ArticlesModel;
+use App\Models\CommentsModel;
 use App\Models\UsersModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -18,6 +19,8 @@ class Controller
     protected Environment $twig;
 
     protected ArticlesModel $articles;
+
+    protected CommentsModel $comments;
 
     protected UsersModel $users;
 
@@ -46,6 +49,7 @@ class Controller
 
         // Models
         $this->articles = new ArticlesModel;
+        $this->comments = new CommentsModel;
         $this->users = new UsersModel;
 
         // Helpers class

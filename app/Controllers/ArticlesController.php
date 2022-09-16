@@ -16,19 +16,44 @@ class ArticlesController extends Controller
     public function show(): void
     {
         $checkAuth = false;
+        $checkCommentSent = false;
+
+        if (isset($_GET['commentSent'])) {
+            $checkCommentSent = $_GET['commentSent'];
+        }
 
         // Get data of current article
         $data = $this->articles->find($this->params['id']);
 
-        // Checks if user is logged in and if he is author of article
-        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
-            $checkAuth = true;
-        } else {
-            $checkAuth = false;
+        // Get validate comments of current article
+        $comments = $this->comments->findValid($this->params['id']);
+
+        // Check if user is logged in
+        $checkAuth = false;
+        $checkAdmin = false;
+        $articlePermission = false;
+        if (isset($_SESSION['auth'])) {
+            $checkAuth = true; 
+            // Check if user is author of article
+            if ($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
+                $articlePermission = true;
+            }
+            // Check if user is admin
+            if ($_SESSION['auth']['user_admin'] === 1) {
+                $checkAdmin = true;
+            }
         }
 
         // Render
-        $this->view('pages/articles/show.html.twig', ['article' => $data[0], 'user' => $data[1], 'checkAuth' => $checkAuth]);
+        $this->view('pages/articles/show.html.twig', [
+            'article' => $data[0], 
+            'userArticle' => $data[1], 
+            'comments' => $comments,
+            'checkAuth' => $checkAuth,
+            'articlePermission' => $articlePermission,
+            'checkAdmin' => $checkAdmin,
+            'checkCommentSent' => $checkCommentSent
+        ]);
     }
 
     public function create(): void
@@ -107,9 +132,9 @@ class ArticlesController extends Controller
         // Get data of current article
         $data = $this->articles->find($this->params['id']);
 
-        // Checks if user is logged in and if he is author of article
-        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
-
+        // Checks if user is logged in and if he is author of article or admin
+        if (isset($_SESSION['auth']) && (($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id() || $_SESSION['auth']['user_admin'] === 1))) {
+           
             // Check if form as sent
             if (isset($_POST) && !empty($_POST)) {
 
@@ -142,7 +167,7 @@ class ArticlesController extends Controller
                     // Error : Title already exist
                     $errors = $this->errorsHandling->newError('Ce titre existe déjà.');
                 }
-            } 
+            }
             // Render
             $this->view('pages/articles/update.html.twig', ['article' => $data[0], 'user' => $data[1], 'errors' => $errors]);  
         } else {
@@ -156,9 +181,9 @@ class ArticlesController extends Controller
         // Get data of current articles
         $data = $this->articles->find($this->params['id']);
 
-        // Checks if user is logged in and if he is author of article
-        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
-            
+        // Check if user is logged in and if he is author of article or admin
+        if (isset($_SESSION['auth']) && ($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id() || $_SESSION['auth']['user_admin'] === 1)) {
+
             // Delete image from article
             $image = $data[0]->getImage();
             if ($image !== '01default.jpg') {
@@ -168,7 +193,7 @@ class ArticlesController extends Controller
             // Delete article and redirection
             $this->articles->delete($this->params['id']);
             header('Location: /articles');
-
+                  
         } else {
             // Error : Forbidden
             header('Location: /erreur/acces-interdit');

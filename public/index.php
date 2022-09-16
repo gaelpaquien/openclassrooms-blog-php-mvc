@@ -22,6 +22,9 @@ $router
     // Terms of Use & Privacy Policy
     ->get('/cgu', 'MainController@termsOfUse', 'terms_of_use')
     ->get('/politique-de-confidentialite', 'MainController@privacyPolicy', 'privacy_policy')
+    // Errors 
+    ->get('/erreur/page-introuvable', 'MainController@errorNotFound', 'error_404')
+    ->get('/erreur/acces-interdit', 'MainController@errorForbidden', 'error_forbidden')
     // Authentication
     ->get('/inscription', 'UsersController@signup', 'signup')
     ->post('/inscription/enregistrement', 'UsersController@signup', 'signup_post')
@@ -29,7 +32,8 @@ $router
     ->post('/connexion/enregistrement', 'UsersController@login', 'login_post')
     ->get('/deconnexion', 'UsersController@logout', 'logout')
     // Administration
-    ->get('/administration', 'UsersController@indexAdmin', 'admin_index')
+    ->get('/administration', 'UsersController@adminIndex', 'admin_index')
+    ->get('/administration/commentaires', 'CommentsController@adminComments', 'admin_comments')
     // Articles
     ->get('/articles', 'ArticlesController@index', 'articles')
     ->get('/article/[*:slug]/[i:id]', 'ArticlesController@show', 'article_show')
@@ -38,8 +42,9 @@ $router
     ->get('/article/[*:slug]/[i:id]/edition', 'ArticlesController@update', 'article_update')
     ->post('/article/[*:slug]/[i:id]/edition/enregistrement', 'ArticlesController@update', 'article_update_post')
     ->get('/article/[*:slug]/[:id]/suppression', 'ArticlesController@delete', 'article_delete')
-    // Errors 
-    ->get('/erreur/page-introuvable', 'MainController@errorNotFound', 'error_404')
-    ->get('/erreur/acces-interdit', 'MainController@errorForbidden', 'error_forbidden')
+    // Comments
+    ->post('/article/[*:slug]/[i:id]/commentaire/enregistrement', 'CommentsController@create', 'comment_create')
+    ->get('/commentaire/[i:id]/suppression', 'CommentsController@delete', 'comment_delete')
+    ->get('/commentaire/[i:id]/validation', 'CommentsController@validComment', 'comment_validate')
     // Start Router
     ->start();
