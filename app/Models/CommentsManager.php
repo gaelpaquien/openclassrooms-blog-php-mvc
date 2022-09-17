@@ -9,7 +9,7 @@ class CommentsManager extends Database
 
     private Database $db;
 
-    public function findAllInvalid()
+    public function findAllInvalid(int $limit, int $perPage)
     {
         // Query
         $sql = "SELECT 
@@ -26,10 +26,17 @@ class CommentsManager extends Database
                 FROM comments as A
                 INNER JOIN users as B on A.author_id = B.id
                 INNER JOIN articles as C on A.article_id = C.id
-                WHERE validate = 0";
+                WHERE validate = 0
+                ORDER BY created_at ASC
+                LIMIT $limit, $perPage";
 
         // Execute request
         return $this->request($sql)->fetchAll();
+    }
+
+    public function countAllInvalid()
+    {
+        return $this->request("SELECT COUNT(*) as nb_comments_invalid FROM comments")->fetch();
     }
 
     public function findValid($id)

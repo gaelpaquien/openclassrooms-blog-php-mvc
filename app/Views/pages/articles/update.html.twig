@@ -27,8 +27,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="author">Auteur :</label><br>
-                    <select name="author" id="" required>
-                        <option value="{{ article.getAuthor() }}">{{ user.getFirstname() ~ ' ' ~ user.getLastname }}</option>
+                    <select name="author" id="">
+                        <option selected value="{{ article.getAuthor_id() }}">{{ user.getFirstname() ~ ' ' ~ user.getLastname }}</option>
                         {% for admin in admins %}
                             <option value="{{ admin.id }}">{{ admin.firstname  ~ ' ' ~ admin.lastname }}</option>
                         {% endfor %}
