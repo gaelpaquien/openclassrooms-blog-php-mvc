@@ -9,11 +9,40 @@ class CommentsController extends Controller
         // Check if user is logged in and if he is admin
         if (isset($_SESSION['auth']) && $_SESSION['auth']['user_admin'] === 1) {
 
+            // Pagination
+            if (isset($_GET['p']) && !empty($_GET['p'])) {
+                $currentPage = (int) strip_tags($_GET['p']);
+            } else {
+                $currentPage = 1;
+            }
+            // Count all invalid comments
+            $countComments = $this->comments->countAllInvalid();
+            $nbComments = (int) $countComments->nb_comments_invalid;
+            // Comments per page
+            $perPage = 10;
+            // Total page calcul
+            $totalPages = intval(ceil($nbComments / $perPage));
+            // Check current page
+            if ($currentPage > $totalPages || $currentPage < 1) {
+                $currentPage = 1;
+            }
+            if ($currentPage === $totalPages) {
+                $lastPage = true;
+            } else {
+                $lastPage = false;
+            }
+            // Limit calcul
+            $limitFirst = ($currentPage * $perPage) - $perPage;
+
             // Get data of all invalid comments
-            $comments = $this->comments->findAllInvalid();
+            $comments = $this->comments->findAllInvalid($limitFirst, $perPage);
 
             // Render
-            $this->view('pages/admin/comments.html.twig', ['comments' => $comments]);
+            $this->view('pages/admin/comments.html.twig', [
+                'lastPage' => $lastPage,
+                'currentPage' => $currentPage,
+                'comments' => $comments
+            ]);
         
         } else {
             // Error : Forbidden
