@@ -123,6 +123,12 @@ class FormValidator
                     return $this->errors->newError('Le contenu doit contenir 50 caractères minimum et 250 caractères maximum.');
                 } 
             }
+            // Check author_id 
+            if ($key === "author_id") {
+                if ($this->validateNumber($value) === false) {
+                    return $this->errors->newError('Un problème est survenue lors du choix de l\'auteur.');
+                }
+            }
             // Check empty field
             if($this->validateEmpty($value) === false) {
                 return $this->errors->newError("Le champ '$key' ne peut pas être vide.");

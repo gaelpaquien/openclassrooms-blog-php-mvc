@@ -32,7 +32,7 @@
                             {% if articlePermission == true or checkAdmin == true %}
                                 <div class="article-admin card-footer text-center">
                                     <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition">Modifier l'article</a>
-                                    <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition">Supprimer l'article</a>
+                                    <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/suppression">Supprimer l'article</a>
                                 </div>                   
                             {% endif %}
                         </div>
