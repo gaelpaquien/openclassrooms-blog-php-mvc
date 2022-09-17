@@ -19,8 +19,10 @@ class ArticlesController extends Controller
         $checkCommentSent = false;
 
         if (isset($_GET['commentSent'])) {
-            $checkCommentSent = $_GET['commentSent'];
+            $checkCommentSent = true;
         }
+
+        
 
         // Get data of current article
         $data = $this->articles->find($this->params['id']);
