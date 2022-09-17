@@ -132,6 +132,20 @@ class ArticlesController extends Controller
         // Get data of current article
         $data = $this->articles->find($this->params['id']);
 
+        $admins = $this->users->findAllAdmin();
+        $listAdmins = [];
+        foreach ($admins as $admin) {
+            if ($admin->id != $data[0]->getAuthor_id()) {
+                $listAdmin = [
+                    'id' => $admin->id,
+                    'firstname' => $admin->firstname,
+                    'lastname' => $admin->lastname
+                ];
+                array_push($listAdmins, $listAdmin);
+            }  
+        } 
+
+        
         // Checks if user is logged in and if he is author of article or admin
         if (isset($_SESSION['auth']) && (($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id() || $_SESSION['auth']['user_admin'] === 1))) {
            
@@ -146,7 +160,8 @@ class ArticlesController extends Controller
                     $errors = $this->formValidator->checkArticleForm([
                         'title' => $_POST['title'],
                         'caption' => $_POST['caption'],
-                        'content' => $_POST['content']
+                        'content' => $_POST['content'],
+                        'author_id' => $_POST['author']
                     ]);
 
                     // If check form data is ok
@@ -157,7 +172,7 @@ class ArticlesController extends Controller
                                     ->setSlug($this->text->slugify($_POST['title']))
                                     ->setContent($_POST['content'])
                                     ->setCaption($_POST['caption'])
-                                    ->setAuthor_id(1)
+                                    ->setAuthor_id($_POST['author'])
                                     ->setUpdated_at($this->date->getDateNow())
                                     ->update($this->params['id']);
                         header('Location: /article/' . $this->articles->getSlug() . '/' . $this->articles->getId()); 
@@ -169,7 +184,12 @@ class ArticlesController extends Controller
                 }
             }
             // Render
-            $this->view('pages/articles/update.html.twig', ['article' => $data[0], 'user' => $data[1], 'errors' => $errors]);  
+            $this->view('pages/articles/update.html.twig', [
+                'article' => $data[0], 
+                'user' => $data[1], 
+                'errors' => $errors,
+                'admins' => $listAdmins
+            ]);  
         } else {
             // Error : Forbidden
             header('Location: /erreur/acces-interdit');

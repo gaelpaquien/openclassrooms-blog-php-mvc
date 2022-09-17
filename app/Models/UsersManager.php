@@ -42,6 +42,11 @@ class UsersManager extends Database
         return $this->request($sql, ['id' => $id])->fetch();
     }
 
+    public function findAllAdmin()
+    {
+        return $this->request("SELECT * FROM users WHERE admin = 1")->fetchAll();
+    }
+
     public function checkExists(string $params, string $value): bool
     {
         // Query
