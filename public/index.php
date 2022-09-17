@@ -10,8 +10,8 @@ define('ROOT', dirname(__DIR__));
 require_once ROOT . '/vendor/autoload.php';
 
 // Starts Whoops to display errors during development
-/* $whoops = new Whoops;
-$whoops->run(); */
+$whoops = new Whoops;
+$whoops->run();
 
 // Start Router
 $router = new Router;
