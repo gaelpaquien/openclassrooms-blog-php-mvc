@@ -61,6 +61,17 @@ class CommentsManager extends Database
         return $data;
     }
 
+    public function findAllBy(string $params, string $value)
+    {
+        // Query 
+        $sql = "SELECT * FROM comments WHERE $params = :value";
+
+        // Execute request
+        $result = $this->request($sql, ['value' => $value])->fetchAll();
+
+        return $result;
+    }
+
     public function validComment($comment_id, $admin_id) 
     {
         $sql = "UPDATE comments SET validate = 1, validate_by = :admin_id WHERE id = :comment_id";
