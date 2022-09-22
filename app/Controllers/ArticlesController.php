@@ -34,14 +34,14 @@ class ArticlesController extends Controller
         $checkAuth = false;
         $checkAdmin = false;
         $articlePermission = false;
-        if (isset($_SESSION['auth'])) {
+        if ($this->checkAuth()['isLogged'] === true) {
             $checkAuth = true; 
             // Check if user is author of article
             if ($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
                 $articlePermission = true;
             }
             // Check if user is admin
-            if ($_SESSION['auth']['user_admin'] === 1) {
+            if ($this->checkAuth()['isAdmin'] === true) {
                 $checkAdmin = true;
             }
         }
@@ -63,7 +63,7 @@ class ArticlesController extends Controller
         $errors = null;
 
         // Checks if user is logged in and if he is admin
-        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_admin'] === 1) {
+        if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
             // Check if form as sent
             if (isset($_POST) && !empty($_POST)) {
@@ -149,7 +149,7 @@ class ArticlesController extends Controller
 
         
         // Checks if user is logged in and if he is author of article or admin
-        if (isset($_SESSION['auth']) && (($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id() || $_SESSION['auth']['user_admin'] === 1))) {
+        if ($this->checkAuth()['isLogged'] === true && (($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id() || $this->checkAuth()['isAdmin'] === true))) {
            
             // Check if form as sent
             if (isset($_POST) && !empty($_POST)) {
@@ -204,7 +204,7 @@ class ArticlesController extends Controller
         $data = $this->articles->find($this->params['id']);
 
         // Check if user is logged in and if he is author of article or admin
-        if (isset($_SESSION['auth']) && ($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id() || $_SESSION['auth']['user_admin'] === 1)) {
+        if ($this->checkAuth()['isLogged'] === true && ($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id() || $this->checkAuth()['isAdmin'] === true)) {
 
             // Delete image from article
             $image = $data[0]->getImage();
