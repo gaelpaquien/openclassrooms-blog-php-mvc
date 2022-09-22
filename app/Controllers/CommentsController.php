@@ -7,7 +7,7 @@ class CommentsController extends Controller
     public function adminComments()
     {
         // Check if user is logged in and if he is admin
-        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_admin'] === 1) {
+        if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
             // Pagination
             if (isset($_GET['p']) && !empty($_GET['p'])) {
@@ -53,7 +53,7 @@ class CommentsController extends Controller
     public function validComment()
     {
         // Check if user is logged in and if he is admin
-        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_admin'] === 1) {
+        if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
             // Valid comment
             $this->comments->validComment($this->params['id'], $_SESSION['auth']['user_id']);
@@ -70,7 +70,7 @@ class CommentsController extends Controller
         $commentSent = false; 
 
         // Checks if user is logged in
-        if (isset($_SESSION['auth'])) {
+        if ($this->checkAuth()['isLogged'] === true) {
             
             // Check if form as sent
             if (isset($_POST) && !empty($_POST)) {
@@ -98,7 +98,7 @@ class CommentsController extends Controller
     public function delete()
     {
         // Check if user is logged in and if he is admin
-        if (isset($_SESSION['auth']) && $_SESSION['auth']['user_admin'] === 1) {
+        if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
             // Delete comment and redirection
             $this->comments->delete($this->params['id']);
