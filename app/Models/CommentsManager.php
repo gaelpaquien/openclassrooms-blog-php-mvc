@@ -36,7 +36,7 @@ class CommentsManager extends Database
 
     public function countAllInvalid()
     {
-        return $this->request("SELECT COUNT(*) as nb_comments_invalid FROM comments")->fetch();
+        return $this->request("SELECT COUNT(*) as nb_comments_invalid FROM comments WHERE validate = 0")->fetch();
     }
 
     public function findValid($id)

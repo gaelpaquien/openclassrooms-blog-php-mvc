@@ -22,7 +22,7 @@ class ArticlesController extends Controller
             $checkCommentSent = true;
         }
 
-        
+       
 
         // Get data of current article
         $data = $this->articles->find($this->params['id']);
