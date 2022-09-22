@@ -3,6 +3,11 @@
 use App\Helpers\Whoops;
 use App\Core\Router;
 
+// Start session if is not
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Define constant for root path of project
 define('ROOT', dirname(__DIR__));
 
