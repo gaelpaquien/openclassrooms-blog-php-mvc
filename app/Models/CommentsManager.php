@@ -9,6 +9,12 @@ class CommentsManager extends Database
 
     private Database $db;
 
+
+    public function countAllInvalid()
+    {
+        return $this->request("SELECT COUNT(*) as nb_comments_invalid FROM comments WHERE validate = 0")->fetch();
+    }
+
     public function findAllInvalid(int $limit, int $perPage)
     {
         // Query
@@ -34,12 +40,7 @@ class CommentsManager extends Database
         return $this->request($sql)->fetchAll();
     }
 
-    public function countAllInvalid()
-    {
-        return $this->request("SELECT COUNT(*) as nb_comments_invalid FROM comments WHERE validate = 0")->fetch();
-    }
-
-    public function findValid($id)
+    public function findAllValid($id)
     {
         // Query
         $sql = "SELECT 
@@ -47,8 +48,10 @@ class CommentsManager extends Database
                     A.author_id as author_id,
                     A.content as content,
                     A.created_at as created_at,
+                    B.id as author_id,
                     B.lastname as author_lastname,
                     B.firstname as author_firstname,
+                    C.id as admin_id,
                     C.lastname as admin_lastname,
                     C.firstname as admin_firstname
                 FROM comments as A
@@ -58,13 +61,28 @@ class CommentsManager extends Database
                 ORDER BY created_at DESC";
 
         // Execute Request
-        $result = $this->request($sql, ['id' => $id]);
-        $data = $result->fetchAll();
+        $results = $this->request($sql, ['id' => $id])->fetchAll();
         
-        if (empty($data)) {
+        if (empty($results)) {
             return false;
         }
 
+        // Transforms data
+        $data = array();
+        foreach ($results as $result) {
+            $articlesModel = new CommentsModel;
+            $articlesModel->setId($result->id)
+                          ->setAuthor_id($result->author_id)
+                          ->setContent($result->content)
+                          ->setCreated_at($result->created_at);
+            $usersModel = new UsersModel;
+            $usersModel->setId($result->author_id)
+                       ->setLastname($result->author_lastname)
+                       ->setFirstname($result->author_firstname);
+            array_push($data, $articlesModel, $usersModel);
+        }
+
+        // Return data
         return $data;
     }
 
