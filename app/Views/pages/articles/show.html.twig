@@ -42,6 +42,7 @@
             <!-- Comments -->
             <div class="row comments" >
                 <div class="col-md-12">
+                    <p>{{ comments.getId() }}</p>
                     {% if comments != false %}
                         {% if checkCommentSent == true %}
                             <div class="success">
@@ -52,13 +53,13 @@
                         {% for comment in comments %}
                             <div class="comment text-justify mt-2">
                                 <h3 class="comment-author">
-                                    {{ comment.author_firstname ~ ' ' ~ comment.author_lastname }}
+                                    {{ comment.getFirstname() ~ ' ' ~ comment.author_lastname }}
                                 </h3>
                                 <span>{{ comment.created_at | date('d/m/Y') }}</span>
                                 <br>
-                                <p>{{ comment.content }}</p>
+                                <p>{{ comment.getContent() }}</p>
                                 {% if checkAdmin == true %}
-                                    <a class="comment-delete-btn btn" href="/commentaire/{{ comment.id }}/suppression">Supprimer le commentaire</a>   
+                                    <a class="comment-delete-btn btn" href="/commentaire/{{ comment.getId() }}/suppression">Supprimer le commentaire</a>   
                                 {% endif %}
                             </div>           
                         {% endfor %}
