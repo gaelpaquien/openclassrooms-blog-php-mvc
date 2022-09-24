@@ -74,8 +74,8 @@ class AdminController extends Controller
                 $currentPage = 1;
             }
             // Count all invalid comments
-            $countComments = $this->comments->countAllInvalid();
-            $nbComments = (int) $countComments->nb_comments_invalid;
+            $countComments = $this->users->countAll();
+            $nbComments = (int) $countComments->nb_users;
             // Comments per page
             $perPage = 10;
             // Total page calcul

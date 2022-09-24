@@ -98,7 +98,30 @@ class UsersController extends Controller
         // Check if user is logged in and if he is admin
         if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
-            // Delete comment and redirection
+            // Delete comment if user is author
+            $comments = $this->comments->findAllBy('author_id', $this->params['id']);
+            if (!empty($comments)) {
+                foreach ($comments as $comment) {
+                    $this->comments->delete($comment->id);
+                }
+            }
+
+            // Delete article if user is author
+            $articles = $this->articles->findAllBy('author_id', $this->params['id']);
+            if (!empty($articles)) {
+                foreach ($articles as $article) {
+                    $articleComments = $this->comments->findAllBy('article_id', $article->id);
+                    if (!empty($articleComments)) {
+                        foreach ($articleComments as $comment) {
+                            $this->comments->delete($comment->id);
+                        }
+                    }
+
+                    $this->articles->delete($article->id);
+                }
+            }
+            
+            // Delete user and redirection
             $this->users->delete($this->params['id']);
             header('Location: /administration/utilisateurs');
             
