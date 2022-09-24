@@ -7,6 +7,34 @@ use PDOStatement;
 class UsersManager extends Database
 {
 
+    public function findAll(int $limit, int $perPage)
+    {
+        // Query
+        $sql = "SELECT *
+                FROM users as A
+                WHERE admin = 0
+                ORDER BY created_at ASC
+                LIMIT $limit, $perPage";
+
+        // Execute request
+        $results = $this->request($sql)->fetchAll();
+
+        // Transforms data
+        $data = array();
+        foreach ($results as $result) {
+            $usersModel = new UsersModel();
+            $usersModel->setId($result->id)
+                       ->setEmail($result->email)
+                       ->setFirstname($result->firstname)
+                       ->setLastname($result->lastname)
+                       ->setCreated_at($result->created_at);
+            array_push($data, $usersModel);
+        }
+
+        // Return data
+        return $data;
+    }
+
     public function findBy(string $params, string $value) : UsersModel | null
     {
         $user = null;
@@ -84,6 +112,11 @@ class UsersManager extends Database
 
         // Execute request
         return $this->request('INSERT INTO users (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
+    }
+
+    public function delete(int $id): PDOStatement | false 
+    {
+        return $this->request("DELETE FROM users WHERE id = ?", [$id]);
     }
 
     public function hydrate($data): self
