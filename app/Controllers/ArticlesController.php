@@ -29,11 +29,6 @@ class ArticlesController extends Controller
 
         // Get validate comments of current article
         $comments = $this->comments->findAllValid($this->params['id']);
-        $item = [];
-        foreach ($comments as $comment) {
-            var_dump($comment->getId());
-            echo '<br>';
-        }exit();
 
         // Check if user is logged in
         $checkAuth = false;
@@ -55,8 +50,7 @@ class ArticlesController extends Controller
         $this->view('pages/articles/show.html.twig', [
             'article' => $data[0], 
             'userArticle' => $data[1], 
-            'comments' => $comments[0],
-            'commentsAuthor' => $comments[1],
+            'comments' => $comments,
             'checkAuth' => $checkAuth,
             'articlePermission' => $articlePermission,
             'checkAdmin' => $checkAdmin,

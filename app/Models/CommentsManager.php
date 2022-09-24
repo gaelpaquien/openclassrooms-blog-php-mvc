@@ -23,7 +23,6 @@ class CommentsManager extends Database
                     A.author_id as author_id,
                     A.content as content,
                     A.validate as validate,
-                    A.validate_by as validate_by,
                     A.article_id as article_id,
                     A.created_at as created_at,
                     B.firstname as authorFirstname,
@@ -37,7 +36,33 @@ class CommentsManager extends Database
                 LIMIT $limit, $perPage";
 
         // Execute request
-        return $this->request($sql)->fetchAll();
+        $results = $this->request($sql)->fetchAll();
+
+        // Transforms data
+        $data = array();
+        foreach ($results as $result) {
+            $item = array();
+            $commentsModel = new CommentsModel;
+            $commentsModel->setId($result->id)
+                            ->setAuthor_id($result->author_id)
+                            ->setContent($result->content)
+                            ->setValidate($result->validate)
+                            ->setArticle_id($result->article_id)
+                            ->setCreated_at($result->created_at);
+            $usersModel = new UsersModel;
+            $usersModel->setId($result->author_id)
+                       ->setLastname($result->authorLastname)
+                       ->setFirstname($result->authorFirstname);
+
+            $articlesModel = new ArticlesModel;
+            $articlesModel->setSlug($result->articleSlug);
+
+            array_push($item, $commentsModel, $usersModel, $articlesModel);
+            array_push($data, $item);
+        }
+
+        // Return data
+        return $data;
     }
 
     public function findAllValid($id)
@@ -70,6 +95,7 @@ class CommentsManager extends Database
         // Transforms data
         $data = array();
         foreach ($results as $result) {
+            $item = array();
             $articlesModel = new CommentsModel;
             $articlesModel->setId($result->id)
                           ->setAuthor_id($result->author_id)
@@ -79,7 +105,9 @@ class CommentsManager extends Database
             $usersModel->setId($result->author_id)
                        ->setLastname($result->author_lastname)
                        ->setFirstname($result->author_firstname);
-            array_push($data, $articlesModel, $usersModel);
+
+            array_push($item, $articlesModel, $usersModel);
+            array_push($data, $item);
         }
 
         // Return data

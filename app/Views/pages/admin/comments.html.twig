@@ -30,19 +30,19 @@
                   {% for comment in comments %}
                     <tbody>
                       <tr>
-                        <th scope="row" class="text-center">{{ comment.id }}</th>
-                        <td class="text-center">{{ comment.authorFirstname ~ ' ' ~ comment.authorLastname ~ ' (#' ~ comment.author_id ~ ')'}}</td>
-                        <td>{{ comment.content }}</td>
-                        <td class="text-center">{{ comment.created_at }}</td>
+                        <th scope="row" class="text-center">{{ comment[0].getId() }}</th>
+                        <td class="text-center">{{ comment[1].getFirstname() ~ ' ' ~ comment[1].getLastname() ~ ' (#' ~ comment[0].getAuthor_id() ~ ')'}}</td>
+                        <td>{{ comment[0].getContent() }}</td>
+                        <td class="text-center">{{ comment[0].getCreated_at() }}</td>
                         <td>
                             <div class="td-btn text-center">
-                                <a class="btn" href="/commentaire/{{ comment.id }}/validation">Valider</a>
-                                <a class="btn" href="/commentaire/{{ comment.id }}/suppression">Refuser</a>
+                                <a class="btn" href="/commentaire/{{ comment[0].getId() }}/validation">Valider</a>
+                                <a class="btn" href="/commentaire/{{ comment[0].getId() }}/suppression">Refuser</a>
                             </div>
                         </td>
                         <td>
                           <div class="td-btn text-center">
-                              <a class="btn" href="/article/{{ comment.articleSlug }}/{{ comment.article_id }}">Voir l'article</a>
+                              <a class="btn" href="/article/{{ comment[2].getSlug() }}/{{ comment[0].getArticle_id() }}">Voir l'article</a>
                           </div>
                       </td>
                       </tr>
