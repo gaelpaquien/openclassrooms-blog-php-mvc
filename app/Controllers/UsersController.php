@@ -93,17 +93,20 @@ class UsersController extends Controller
         header('Location: /');
     }
 
-    public function adminIndex(): void
+    public function delete()
     {
-        // Checks if user is logged in and if he is admin
-        if (isset($_SESSION['auth']['user_admin']) && $_SESSION['auth']['user_admin'] === 1) {
-            // Render
-            $this->view('pages/admin/index.html.twig');
-        } else {
+        // Check if user is logged in and if he is admin
+        if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
+
+            // Delete comment and redirection
+            $this->users->delete($this->params['id']);
+            header('Location: /administration/utilisateurs');
+            
+        }   else {
             // Error : Forbidden
             header('Location: /erreur/acces-interdit');
         }
-        
+
     }
-    
+
 }

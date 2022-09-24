@@ -30,15 +30,17 @@ $router
     // Errors 
     ->get('/erreur/page-introuvable', 'MainController@errorNotFound', 'error_404')
     ->get('/erreur/acces-interdit', 'MainController@errorForbidden', 'error_forbidden')
-    // Authentication
+    // Users
     ->get('/inscription', 'UsersController@signup', 'signup')
     ->post('/inscription/enregistrement', 'UsersController@signup', 'signup_post')
     ->get('/connexion', 'UsersController@login', 'login')
     ->post('/connexion/enregistrement', 'UsersController@login', 'login_post')
     ->get('/deconnexion', 'UsersController@logout', 'logout')
-    // Administration
-    ->get('/administration', 'UsersController@adminIndex', 'admin_index')
-    ->get('/administration/commentaires', 'CommentsController@adminComments', 'admin_comments')
+    ->get('/utilisateur/[i:id]/suppression', 'UsersController@delete', 'user_delete')
+    // Admin
+    ->get('/administration', 'AdminController@index', 'admin_index')
+    ->get('/administration/commentaires', 'AdminController@indexComments', 'admin_comments_index')
+    ->get('/administration/utilisateurs', 'AdminController@indexUsers', 'admin_users_index')
     // Articles
     ->get('/articles', 'ArticlesController@index', 'articles')
     ->get('/article/[*:slug]/[i:id]', 'ArticlesController@show', 'article_show')
@@ -49,7 +51,7 @@ $router
     ->get('/article/[*:slug]/[:id]/suppression', 'ArticlesController@delete', 'article_delete')
     // Comments
     ->post('/article/[*:slug]/[i:id]/commentaire/enregistrement', 'CommentsController@create', 'comment_create')
+    ->get('/commentaire/[i:id]/validation', 'CommentsController@validation', 'comment_validate')
     ->get('/commentaire/[i:id]/suppression', 'CommentsController@delete', 'comment_delete')
-    ->get('/commentaire/[i:id]/validation', 'CommentsController@validComment', 'comment_validate')
     // Start Router
     ->start();
