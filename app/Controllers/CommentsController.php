@@ -4,67 +4,6 @@ namespace App\Controllers;
 class CommentsController extends Controller
 {
 
-    public function adminComments()
-    {
-        // Check if user is logged in and if he is admin
-        if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
-
-            // Pagination
-            if (isset($_GET['p']) && !empty($_GET['p'])) {
-                $currentPage = (int) strip_tags($_GET['p']);
-            } else {
-                $currentPage = 1;
-            }
-            // Count all invalid comments
-            $countComments = $this->comments->countAllInvalid();
-            $nbComments = (int) $countComments->nb_comments_invalid;
-            // Comments per page
-            $perPage = 10;
-            // Total page calcul
-            $totalPages = intval(ceil($nbComments / $perPage));
-            // Check current page
-            if ($currentPage > $totalPages || $currentPage < 1) {
-                $currentPage = 1;
-            }
-            if ($currentPage === $totalPages) {
-                $lastPage = true;
-            } else {
-                $lastPage = false;
-            }
-            // Limit calcul
-            $limitFirst = ($currentPage * $perPage) - $perPage;
-
-            // Get data of all invalid comments
-            $comments = $this->comments->findAllInvalid($limitFirst, $perPage);
-
-            // Render
-            $this->view('pages/admin/comments.html.twig', [
-                'lastPage' => $lastPage,
-                'currentPage' => $currentPage,
-                'comments' => $comments
-            ]);
-        
-        } else {
-            // Error : Forbidden
-            header('Location: /erreur/acces-interdit');
-        }
-    }
-
-    public function validComment()
-    {
-        // Check if user is logged in and if he is admin
-        if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
-
-            // Valid comment
-            $this->comments->validComment($this->params['id'], $_SESSION['auth']['user_id']);
-            header('Location: /administration/commentaires');
-
-        } else {
-            // Error : Forbidden
-            header('Location: /erreur/acces-interdit');
-        }
-    }
-
     public function create() 
     {
         $commentSent = false; 
@@ -89,6 +28,21 @@ class CommentsController extends Controller
                 header('Location: /article/' . $this->params['slug'] . '/' . $this->params['id'] . '?commentSent=' . $commentSent);
                 
             }
+        } else {
+            // Error : Forbidden
+            header('Location: /erreur/acces-interdit');
+        }
+    }
+
+    public function validation()
+    {
+        // Check if user is logged in and if he is admin
+        if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
+
+            // Valid comment
+            $this->comments->validComment($this->params['id'], $_SESSION['auth']['user_id']);
+            header('Location: /administration/commentaires');
+
         } else {
             // Error : Forbidden
             header('Location: /erreur/acces-interdit');
