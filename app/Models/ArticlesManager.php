@@ -41,6 +41,17 @@ class ArticlesManager extends Database
         return $data;
     }
 
+    public function findAllBy(string $params, string $value)
+    {
+        // Query 
+        $sql = "SELECT * FROM articles WHERE $params = :value";
+
+        // Execute request
+        $result = $this->request($sql, ['value' => $value])->fetchAll();
+
+        return $result;
+    }
+
     public function find(int $id): array
     { 
         // Query

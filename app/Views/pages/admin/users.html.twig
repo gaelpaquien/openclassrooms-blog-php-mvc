@@ -44,13 +44,13 @@
                     {% if currentPage != 1 %}
                     <li class="page-item">
                       {% set previousPage = currentPage - 1 %}
-                      <a href="/administration/commentaires?p={{ previousPage }}" class="page-link">Précédent</a>
+                      <a href="/administration/utilisateurs?p={{ previousPage }}" class="page-link">Précédent</a>
                     </li>    
                     {% endif %}
                     {% if lastPage != true %}
                       <li class="page-item">
                         {% set nextPage = currentPage + 1 %}
-                        <a href="/administration/commentaires?p={{ nextPage }}" class="page-link">Suivant</a>
+                        <a href="/administration/utilisateurs?p={{ nextPage }}" class="page-link">Suivant</a>
                       </li>
                     {% endif %}
 

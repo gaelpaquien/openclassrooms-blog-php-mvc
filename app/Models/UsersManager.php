@@ -7,6 +7,11 @@ use PDOStatement;
 class UsersManager extends Database
 {
 
+    public function countAll()
+    {
+        return $this->request("SELECT COUNT(*) as nb_users FROM users WHERE admin = 0")->fetch();
+    }
+
     public function findAll(int $limit, int $perPage)
     {
         // Query
