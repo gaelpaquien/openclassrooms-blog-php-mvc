@@ -53,13 +53,13 @@
                         {% for comment in comments %}
                             <div class="comment text-justify mt-2">
                                 <h3 class="comment-author">
-                                    {{ comment.getFirstname() ~ ' ' ~ comment.author_lastname }}
+                                    {{ comment[1].getFirstname() ~ ' ' ~ comment[1].getLastname() }}
                                 </h3>
-                                <span>{{ comment.created_at | date('d/m/Y') }}</span>
+                                <span>{{ comment[0].getCreated_at() | date('d/m/Y') }}</span>
                                 <br>
-                                <p>{{ comment.getContent() }}</p>
+                                <p>{{ comment[0].getContent() }}</p>
                                 {% if checkAdmin == true %}
-                                    <a class="comment-delete-btn btn" href="/commentaire/{{ comment.getId() }}/suppression">Supprimer le commentaire</a>   
+                                    <a class="comment-delete-btn btn" href="/commentaire/{{ comment[0].getId() }}/suppression">Supprimer le commentaire</a>   
                                 {% endif %}
                             </div>           
                         {% endfor %}
