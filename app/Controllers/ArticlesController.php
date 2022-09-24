@@ -6,11 +6,40 @@ class ArticlesController extends Controller
 
     public function index(): void
     {
+        // Pagination
+        if (isset($_GET['p']) && !empty($_GET['p'])) {
+            $currentPage = (int) strip_tags($_GET['p']);
+        } else {
+            $currentPage = 1;
+        }
+        // Count all users if not admin
+        $countArticles = $this->articles->countAll();
+        $nbArticles = (int) $countArticles->nb_articles;
+        // Comments per page
+        $perPage = 6;
+        // Total page calcul
+        $totalPages = intval(ceil($nbArticles / $perPage));
+        // Check current page
+        if ($currentPage > $totalPages || $currentPage < 1) {
+            $currentPage = 1;
+        }
+        if ($currentPage === $totalPages) {
+            $lastPage = true;
+        } else {
+            $lastPage = false;
+        }
+        // Limit calcul
+        $limitFirst = ($currentPage * $perPage) - $perPage;
+        
         // Get data of all articles
-        $data = $this->articles->findAll();
+        $data = $this->articles->findAll($limitFirst, $perPage);
 
         // Render
-        $this->view('pages/articles/index.html.twig', ['articles' => $data]);
+        $this->view('pages/articles/index.html.twig', [
+            'lastPage' => $lastPage,
+            'currentPage' => $currentPage,
+            'articles' => $data
+        ]);
     }
 
     public function show(): void

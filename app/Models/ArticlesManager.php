@@ -9,14 +9,18 @@ class ArticlesManager extends Database
 
     private Database $db;
 
-    public function findAll(int $limit = 0): array
+    public function countAll()
     {
-        // Default query
-        $sql = 'SELECT * FROM articles ORDER BY updated_at DESC, created_at DESC';
-        // Add a limit if it is defined
-        if ($limit !== 0) {
-            $sql .= ' LIMIT ' . $limit;
-        }
+        return $this->request("SELECT COUNT(*) as nb_articles FROM articles")->fetch();
+    }
+
+    public function findAll(int $limit, int $perPage)
+    {
+        // Query
+        $sql = "SELECT * 
+                FROM articles 
+                ORDER BY updated_at DESC, created_at DESC 
+                LIMIT $limit, $perPage";
 
         // Execute request
         $query = $this->request($sql);
