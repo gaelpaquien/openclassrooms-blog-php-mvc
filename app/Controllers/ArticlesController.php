@@ -28,7 +28,7 @@ class ArticlesController extends Controller
         $data = $this->articles->find($this->params['id']);
 
         // Get validate comments of current article
-        $comments = $this->comments->findValid($this->params['id']);
+        $comments = $this->comments->findAllValid($this->params['id']);
 
         // Check if user is logged in
         $checkAuth = false;
