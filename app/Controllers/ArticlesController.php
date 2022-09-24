@@ -212,7 +212,7 @@ class ArticlesController extends Controller
                 unlink(ROOT . '/public/assets/img/articles/' . $image);
             }
 
-            // Delete comments 
+            // Delete comments associated with article
             $comments = $this->comments->findAllBy('article_id', $this->params['id']);
             if (!empty($comments)) {
                 foreach ($comments as $comment) {
