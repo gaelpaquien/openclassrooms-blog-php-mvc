@@ -73,13 +73,13 @@ class AdminController extends Controller
             } else {
                 $currentPage = 1;
             }
-            // Count all invalid comments
-            $countComments = $this->users->countAll();
-            $nbComments = (int) $countComments->nb_users;
+            // Count all users if not admin
+            $countUsers = $this->users->countAll();
+            $nbUsers = (int) $countUsers->nb_users;
             // Comments per page
             $perPage = 10;
             // Total page calcul
-            $totalPages = intval(ceil($nbComments / $perPage));
+            $totalPages = intval(ceil($nbUsers / $perPage));
             // Check current page
             if ($currentPage > $totalPages || $currentPage < 1) {
                 $currentPage = 1;
