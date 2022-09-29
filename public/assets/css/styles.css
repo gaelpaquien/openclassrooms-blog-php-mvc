@@ -1,12 +1,7 @@
-/*************************
-         ALL VIEWS
-*************************/
-
 /* Global */
 
 html {
   height: 100%;
-  scroll-padding-top: calc(4.5rem - 1px);
   font-family: "Montserrat", "Lato", "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
 }
@@ -161,97 +156,6 @@ ul {
   }
 }
 
-/* Scroll to top */
-
-.scrollToTop {
-  display: none;
-  position: fixed;
-  bottom: 8px;
-  right: 8px;
-  z-index: 99;
-  border: none;
-  background-color: #f4ebd0;
-  color: #122620;
-  padding: 8px;
-  border-radius: 15px;
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-.scrollToTop:hover,
-.scrollToTop:focus {
-  opacity: 0.3;
-  outline: none;
-}
-
-/* Footer */
-
-.footer {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  background-color: #122620;
-  color: #f4ebd0;
-}
-
-.footer h4 {
-  color: #d6ad60;
-}
-
-.footer .btn {
-  border-radius: 100%;
-  display: inline-flex;
-  width: 3.25rem;
-  height: 3.25rem;
-  justify-content: center;
-  align-items: center;
-  border-color: #f4ebd0;
-}
-
-.footer .btn:hover {
-  background-color: none;
-  border-color: #b68d40;
-}
-
-.footer-localisation {
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.footer-icon {
-  color: #f4ebd0;
-}
-
-.footer-about-items p {
-  margin-bottom: 10px;
-}
-
-.footer-about-items a {
-  text-decoration: none;
-  color: #f4ebd0;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.footer-about-items a:hover {
-  color: #b68d40;
-}
-
-/* Copyright */
-
-.copyright {
-  background-color: #d6ad60;
-}
-
-.copyright span {
-  font-size: 1rem;
-  color: #122620;
-  font-weight: 600;
-}
-
-/*************************
-           HOME
-*************************/
-
 /* Header */
 
 .header {
@@ -298,6 +202,29 @@ ul {
   .header .header-subheading {
     font-size: 1.8rem;
   }
+}
+
+/* Scroll to top */
+
+.scrollToTop {
+  display: none;
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  z-index: 99;
+  border: none;
+  background-color: #f4ebd0;
+  color: #122620;
+  padding: 8px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.scrollToTop:hover,
+.scrollToTop:focus {
+  opacity: 0.3;
+  outline: none;
 }
 
 /* Recent Articles */
@@ -428,10 +355,6 @@ ul {
   color: #122620;
 }
 
-/*************************
-       ERROR PAGES
-*************************/
-
 /* Not Found & Forbidden */
 
 .errorNotFound,
@@ -473,7 +396,6 @@ ul {
   margin-top: 30px;
   margin: 20px;
   background-color: #d6ad60;
-  color: #122620;
   color: #122620;
 }
 
@@ -676,10 +598,6 @@ ul {
   margin-bottom: 10px;
 }
 
-/*************************
-  CREATE & UPDATE ARTICLE
-*************************/
-
 /* Create Article & Update Article */
 
 .update-article,
@@ -740,4 +658,68 @@ ul {
 
 .create-article .text-muted {
   color: #d6ad60!important;
+}
+
+/* Footer */
+
+.footer {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: #122620;
+  color: #f4ebd0;
+}
+
+.footer h4 {
+  color: #d6ad60;
+}
+
+.footer .btn {
+  border-radius: 100%;
+  display: inline-flex;
+  width: 3.25rem;
+  height: 3.25rem;
+  justify-content: center;
+  align-items: center;
+  border-color: #f4ebd0;
+}
+
+.footer .btn:hover {
+  background-color: none;
+  border-color: #b68d40;
+}
+
+.footer-localisation {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.footer-icon {
+  color: #f4ebd0;
+}
+
+.footer-about-items p {
+  margin-bottom: 10px;
+}
+
+.footer-about-items a {
+  text-decoration: none;
+  color: #f4ebd0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.footer-about-items a:hover {
+  color: #b68d40;
+}
+
+/* Copyright */
+
+.copyright {
+  background-color: #d6ad60;
+}
+
+.copyright span {
+  font-size: 1rem;
+  color: #122620;
+  font-weight: 600;
 }
