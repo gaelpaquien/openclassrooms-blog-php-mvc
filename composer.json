@@ -17,6 +17,7 @@
     },
     "require": {
         "twig/twig": "^3.4",
-        "altorouter/altorouter": "^2.0"
+        "altorouter/altorouter": "^2.0",
+        "vlucas/phpdotenv": "^5.4"
     }
 }
