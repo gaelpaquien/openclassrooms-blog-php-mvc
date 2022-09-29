@@ -23,7 +23,7 @@ class CommentsController extends Controller
 
                 // Creation of article and redirection
                 $hydratedData = $this->comments->hydrate($data);
-                $this->comments->create($hydratedData); 
+                $this->comments->create('comments', $hydratedData); 
                 $commentSent = true;
                 header('Location: /article/' . $this->params['slug'] . '/' . $this->params['id'] . '?commentSent=' . $commentSent);
                 
@@ -55,7 +55,7 @@ class CommentsController extends Controller
         if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
             // Delete comment and redirection
-            $this->comments->delete($this->params['id']);
+            $this->comments->delete('comments', $this->params['id']);
             header('Location: /administration/commentaires');
             
         }   else {

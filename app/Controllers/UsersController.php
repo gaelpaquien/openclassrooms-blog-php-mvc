@@ -12,7 +12,7 @@ class UsersController extends Controller
         if (isset($_POST) && !empty($_POST)) {
 
             // Check if email already exists
-            $checkEmail = $this->users->checkExists('email', $_POST['email']);
+            $checkEmail = $this->users->checkExists('users', 'email', $_POST['email']);
             if ($checkEmail === false) {
                 
                 // Check if password and password-confirm match
@@ -35,7 +35,7 @@ class UsersController extends Controller
                         $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
                         // Creation of user and redirection
                         $hydratedData = $this->users->hydrate($data);
-                        $this->users->create($hydratedData); 
+                        $this->users->create('users', $hydratedData); 
                         header('Location: ' . '/'); 
                     }
 
@@ -99,30 +99,30 @@ class UsersController extends Controller
         if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
             // Delete comment if user is author
-            $comments = $this->comments->findAllBy('author_id', $this->params['id']);
+            $comments = $this->comments->findAllBy('comments', 'author_id', $this->params['id']);
             if (!empty($comments)) {
                 foreach ($comments as $comment) {
-                    $this->comments->delete($comment->id);
+                    $this->comments->delete('comments', $comment->id);
                 }
             }
 
             // Delete article if user is author
-            $articles = $this->articles->findAllBy('author_id', $this->params['id']);
+            $articles = $this->articles->findAllBy('articles', 'author_id', $this->params['id']);
             if (!empty($articles)) {
                 foreach ($articles as $article) {
-                    $articleComments = $this->comments->findAllBy('article_id', $article->id);
+                    $articleComments = $this->comments->findAllBy('comments', 'article_id', $article->id);
                     if (!empty($articleComments)) {
                         foreach ($articleComments as $comment) {
-                            $this->comments->delete($comment->id);
+                            $this->comments->delete('comments', $comment->id);
                         }
                     }
 
-                    $this->articles->delete($article->id);
+                    $this->articles->delete('articles', $article->id);
                 }
             }
             
             // Delete user and redirection
-            $this->users->delete($this->params['id']);
+            $this->users->delete('users', $this->params['id']);
             header('Location: /administration/utilisateurs');
             
         }   else {
