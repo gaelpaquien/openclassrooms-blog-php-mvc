@@ -13,8 +13,7 @@ class ArticlesManager extends GlobalManager
         $sql = "SELECT * FROM articles ORDER BY updated_at DESC, created_at DESC LIMIT $limit, $perPage";
 
         // Execute request
-        $query = $this->request($sql);
-        $items = $query->fetchAll();
+        $items = $this->request($sql)->fetchAll();
 
         // Transforms and return data
         $data = array();
