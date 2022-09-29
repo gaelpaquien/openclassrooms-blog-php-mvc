@@ -68,7 +68,7 @@ class CommentsManager extends GlobalManager
         return $this->request("SELECT COUNT(*) as nb_comments FROM comments WHERE article_id = :id AND validate = 1", ['id' => $id])->fetch();
     }
 
-    public function findAllValid($id, int $limit, int $perPage)
+    public function findAllValidFromArticle($id, int $limit, int $perPage)
     {
         // Query
         $sql = "SELECT 

@@ -99,7 +99,7 @@ class GlobalManager extends Database
 
     public function delete(string $table, int $id): PDOStatement | false 
     {
-        return $this->request("DELETE FROM $table WHERE id = ?", [$id]);
+        return $this->request("DELETE FROM $table WHERE id = :id", ['id' => $id]);
     }
 
     public function request(string $sql, array $params = null): PDOStatement | false

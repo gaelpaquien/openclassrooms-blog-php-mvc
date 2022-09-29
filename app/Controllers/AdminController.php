@@ -48,35 +48,9 @@ class AdminController extends Controller
         if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
             // Pagination
-<<<<<<< HEAD
-            if (isset($_GET['p']) && !empty($_GET['p'])) {
-                $currentPage = (int) strip_tags($_GET['p']);
-            } else {
-                $currentPage = 1;
-            }
-            // Count all users if not admin
-            $countUsers = $this->users->countAll();
-            $nbUsers = (int) $countUsers->nb_users;
-            // Comments per page
-            $perPage = 10;
-            // Total page calcul
-            $totalPages = intval(ceil($nbUsers / $perPage));
-            // Check current page
-            if ($currentPage > $totalPages || $currentPage < 1) {
-                $currentPage = 1;
-            }
-            if ($currentPage === $totalPages) {
-                $lastPage = true;
-            } else {
-                $lastPage = false;
-            }
-            // Limit calcul
-            $limitFirst = ($currentPage * $perPage) - $perPage;
-=======
-            $countComments = $this->users->countAllUsers();
-            $nbComments = (int) $countComments->nb_users;
+            $countUsers = $this->users->countAllUsers();
+            $nbComments = (int) $countUsers->nb_users;
             $pages = $this->pagination->pagination($nbComments, 10);
->>>>>>> Optimization
 
             // Get data of all invalid comments
             $users = $this->users->findAll($pages[0]['limitFirst'], $pages[0]['perPage']);

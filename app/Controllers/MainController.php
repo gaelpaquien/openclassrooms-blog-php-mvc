@@ -32,7 +32,7 @@ class MainController extends Controller
                 echo "failed";
             }
             */
-            dump('WIP');exit();
+            
             
         }
         // Redirection
