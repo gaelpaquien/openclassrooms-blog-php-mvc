@@ -17,36 +17,36 @@ class FormValidator
     {
         if (empty($value)) {  
             return false;
-        } else {  
-            return true; 
-        }  
+        } 
+
+        return true; 
     }
 
     public function validateString(string $string): bool
     {  
         if (!preg_match ("/^[a-zA-z]*$/", $string) ) {  
             return false; 
-        } else {  
-            return true;  
-        }  
+        }
+
+        return true;  
     }
 
     public function validateNumber(int $value): bool
     {  
         if (!preg_match ("/^[0-9]*$/", $value) ){  
             return false;
-        } else {  
-            return true;
-        }  
+        } 
+
+        return true;
     }
 
     public function validateLength(int $min, int $max, string $value): bool
     {   
         if (strlen($value) <= $min || strlen($value) >= $max) {  
             return false;
-        } else {  
-            return true;  
-        }  
+        } 
+        
+        return true;   
     }
 
     public function validateEmail(string $email): bool
@@ -54,9 +54,9 @@ class FormValidator
         $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^";  
         if (!preg_match ($pattern, $email) ){  
             return false;
-        } else {  
-            return true;  
-        }  
+        }
+
+        return true;  
     }
 
     public function checkSignupForm(array $data): string | null 
