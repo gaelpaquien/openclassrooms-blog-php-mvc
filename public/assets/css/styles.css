@@ -109,13 +109,8 @@ ul {
   font-size: 80%;
   padding: 0.8rem;
   background-color: #b68d40;
-  border: none;
   color: #122620;
   border: solid 1px #b68d40;
-}
-
-.navigation .navbar-toggler:focus {
-  box-shadow: 0 0 0 var(--bs-navbar-toggler-focus-width) #f4ebd0;
 }
 
 .navigation .navbar-toggler:hover {
@@ -651,13 +646,12 @@ ul {
   margin: 20px;
   background-color: #d6ad60;
   color: #122620;
-  color: #122620;
 }
 
 /* Specific Create Article */ 
 
 .create-article .text-muted {
-  color: #d6ad60!important;
+  color: #d6ad60 !important;
 }
 
 /* Footer */
@@ -684,7 +678,6 @@ ul {
 }
 
 .footer .btn:hover {
-  background-color: none;
   border-color: #b68d40;
 }
 
