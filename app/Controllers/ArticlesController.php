@@ -39,7 +39,7 @@ class ArticlesController extends Controller
         $pages = $this->pagination->pagination($nbComments, 3);
 
         // Get validate comments of current article
-        $comments = $this->comments->findAllValid($this->params['id'], $pages[0]['limitFirst'], $pages[0]['perPage']);
+        $comments = $this->comments->findAllValidFromArticle($this->params['id'], $pages[0]['limitFirst'], $pages[0]['perPage']);
 
         // Check if user is logged in
         $checkAuth = false;

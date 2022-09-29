@@ -1,8 +1,4 @@
 <?php
-
-use App\Helpers\Whoops;
-use App\Core\Router;
-
 // Start session if is not
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -15,11 +11,11 @@ define('ROOT', dirname(__DIR__));
 require_once ROOT . '/vendor/autoload.php';
 
 // Starts Whoops to display errors during development
-$whoops = new Whoops;
+$whoops = new App\Helpers\Whoops;
 $whoops->run();
 
 // Start Router
-$router = new Router;
+$router = new App\Core\Router;
 $router
     // Home
     ->get('/', 'MainController@home', 'home')
