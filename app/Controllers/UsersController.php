@@ -48,6 +48,7 @@ class UsersController extends Controller
                $errors = $this->errorsHandling->newError('Cette adresse email existe déjà.');
             }
         }
+
         // Render
         $this->view('pages/auth/signup.html.twig', ['errors' => $errors]);
     }
@@ -82,6 +83,7 @@ class UsersController extends Controller
                 $errors = $this->errorsHandling->newError('Email et/ou mot de passe incorrect.');
             }
         }
+
         // Render
         $this->view('pages/auth/login.html.twig', ['errors' => $errors]);
     }
@@ -96,40 +98,36 @@ class UsersController extends Controller
     public function delete()
     {
         // Check if user is logged in and if he is admin
-        if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
-
-            // Delete comment if user is author
-            $comments = $this->comments->findAllBy('comments', 'author_id', $this->params['id']);
-            if (!empty($comments)) {
-                foreach ($comments as $comment) {
-                    $this->comments->delete('comments', $comment->id);
-                }
-            }
-
-            // Delete article if user is author
-            $articles = $this->articles->findAllBy('articles', 'author_id', $this->params['id']);
-            if (!empty($articles)) {
-                foreach ($articles as $article) {
-                    $articleComments = $this->comments->findAllBy('comments', 'article_id', $article->id);
-                    if (!empty($articleComments)) {
-                        foreach ($articleComments as $comment) {
-                            $this->comments->delete('comments', $comment->id);
-                        }
-                    }
-
-                    $this->articles->delete('articles', $article->id);
-                }
-            }
-            
-            // Delete user and redirection
-            $this->users->delete('users', $this->params['id']);
-            header('Location: /administration/utilisateurs');
-            
-        }   else {
+        if ($this->checkAuth()['isLogged'] !== true && $this->checkAuth()['isAdmin'] !== true) {
             // Error : Forbidden
             header('Location: /erreur/acces-interdit');
+        }  
+
+        // Delete comment if user is author
+        $comments = $this->comments->findAllBy('comments', 'author_id', $this->params['id']);
+        if (!empty($comments)) {
+            foreach ($comments as $comment) {
+                $this->comments->delete('comments', $comment->id);
+            }
         }
 
+        // Delete article if user is author
+        $articles = $this->articles->findAllBy('articles', 'author_id', $this->params['id']);
+        if (!empty($articles)) {
+            foreach ($articles as $article) {
+                $articleComments = $this->comments->findAllBy('comments', 'article_id', $article->id);
+                if (!empty($articleComments)) {
+                    foreach ($articleComments as $comment) {
+                        $this->comments->delete('comments', $comment->id);
+                    }
+                }
+                $this->articles->delete('articles', $article->id);
+            }
+        }
+        
+        // Delete user and redirection
+        $this->users->delete('users', $this->params['id']);
+        header('Location: /administration/utilisateurs');
     }
 
 }
