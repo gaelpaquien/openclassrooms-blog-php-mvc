@@ -84,7 +84,6 @@ ul {
   font-weight: 500;
 }
 
-
 /* Navigation */
 
 #navigation {
@@ -95,11 +94,15 @@ ul {
   border-bottom: 2px solid #f4ebd0;
 }
 
-#navigation .navbar-brand, #navigation .navbar-nav li.nav-item a.nav-link, #navigation .navbar-nav li.nav-item a.nav-link:active, #navigation .navbar-nav li.nav-item a.nav-link:focus {
+#navigation .navbar-brand, 
+#navigation .navbar-nav li.nav-item a.nav-link, 
+#navigation .navbar-nav li.nav-item a.nav-link:active, 
+#navigation .navbar-nav li.nav-item a.nav-link:focus {
   color: #f4ebd0;
 }
 
-#navigation .navbar-nav li.nav-item a.nav-link:hover, #navigation .navbar-nav li.nav-item a.nav-link.active {
+#navigation .navbar-nav li.nav-item a.nav-link:hover, 
+#navigation .navbar-nav li.nav-item a.nav-link.active {
   color: #b68d40;
 }
 
@@ -140,7 +143,10 @@ ul {
     margin-top: 0;
   }
 
-  #navigation .navbar-nav > li.nav-item > a.nav-link.active, #navigation .navbar-nav > li.nav-item > a.nav-link.active:active, #navigation .navbar-nav > li.nav-item > a.nav-link.active:focus, #navigation .navbar-nav > li.nav-item > a.nav-link.active:hover {
+  #navigation .navbar-nav > li.nav-item > a.nav-link.active, 
+  #navigation .navbar-nav > li.nav-item > a.nav-link.active:active, 
+  #navigation .navbar-nav > li.nav-item > a.nav-link.active:focus, 
+  #navigation .navbar-nav > li.nav-item > a.nav-link.active:hover {
     color: #f4ebd0;
     background: #122620;
   }
@@ -154,7 +160,6 @@ ul {
     font-size: 1.5em;
   }
 }
-
 
 /* Scroll to top */
 
@@ -177,7 +182,6 @@ ul {
 #scrollToTop:hover {
   opacity: 0.3;
 }
-
 
 /* Footer */
 
@@ -231,7 +235,6 @@ ul {
   color: #b68d40;
 }
 
-
 /* Copyright */
 
 .copyright {
@@ -243,7 +246,6 @@ ul {
   color: #122620;
   font-weight: 600;
 }
-
 
 /*************************
            HOME
@@ -297,7 +299,6 @@ ul {
   }
 }
 
-
 /* Recent Articles */
 
 #recent-articles {
@@ -324,11 +325,13 @@ ul {
   border-bottom: 1px solid #d6ad60;
 }
 
-#recent-articles .card-body, #recent-articles .card-footer {
+#recent-articles .card-body, 
+#recent-articles .card-footer {
   background-color: #fff;
 }
 
-#recent-articles .card-title, #recent-articles .card-text{
+#recent-articles .card-title, 
+#recent-articles .card-text{
   color: #122620;
 }
 
@@ -350,7 +353,6 @@ ul {
   background-color: #d6ad60;
   color: #122620;
 }
-
 
 /* CV */
 
@@ -379,7 +381,6 @@ ul {
   background-color: #122620;
   color: #d6ad60;
 }
-
 
 /* Contact */
 
@@ -426,24 +427,26 @@ ul {
   color: #122620;
 }
 
-
 /*************************
        ERROR PAGES
 *************************/
 
 /* Not Found & Forbidden */
 
-#errorNotFound, #errorForbidden {
+#errorNotFound, 
+#errorForbidden {
   margin-top: 90px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
 }
 
-#errorNotFound h2, #errorForbidden h2 {
+#errorNotFound h2, 
+#errorForbidden h2 {
   color: #d6ad60;
 }
 
-#errorNotFound p, #errorForbidden p {
+#errorNotFound p, 
+#errorForbidden p {
   margin-top: 40px;
   margin-bottom: 20px;
   border: 1px solid #d6ad60;
@@ -464,14 +467,14 @@ ul {
   background-color: #d6ad60;
 }
 
-#errorForbidden .btn, #errorNotFound .btn {
+#errorForbidden .btn, 
+#errorNotFound .btn {
   margin-top: 30px;
   margin: 20px;
   background-color: #d6ad60;
   color: #122620;
   color: #122620;
 }
-
 
 /*************************
       ADMINISTRATION
@@ -503,7 +506,8 @@ ul {
   color: #122620;
 }
 
-#admin .admin-stats, #admin .admin-btn {
+#admin .admin-stats, 
+#admin .admin-btn {
   margin-top: 70px;
 }
 
@@ -528,47 +532,57 @@ ul {
   margin: 0px;
 }
 
-
 /*************************
    ALL & SINGLE ARTICLE
 *************************/
 
 /* All Articles & Single Article */
 
-#articles, #article {
+#articles, 
+#article {
   margin-top: 50px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
 }
 
-#articles h2, #article h2 {
+#articles h2, 
+#article h2 {
   color: #d6ad60;
 }
 
-#articles .divider-custom .divider-custom-icon, #article .divider-custom .divider-custom-icon {
+#articles .divider-custom .divider-custom-icon, 
+#article .divider-custom .divider-custom-icon {
   color: #d6ad60;
 }
 
-#articles .divider-custom .divider-custom-line, #article .divider-custom .divider-custom-line {
+#articles .divider-custom .divider-custom-line, 
+#article .divider-custom .divider-custom-line {
   background-color: #d6ad60;
 }
 
-#articles .card, #article .card {
+#articles .card, 
+#article .card {
   border: solid 2px #d6ad60;
 }
 
-#articles .card-body, #articles .card-footer, #article .card-body, #article .card-footer {
+#articles .card-body, 
+#articles .card-footer, 
+#article .card-body, 
+#article .card-footer {
   background-color: #fff;
 }
 
-#articles .card-title, #articles .card-text, #article .card-title, #article .card-text{
+#articles .card-title, 
+#articles .card-text, 
+#article .card-title, 
+#article .card-text{
   color: #122620;
 }
 
-#articles .card-footer, #article .card-footer {
+#articles .card-footer, 
+#article .card-footer {
   border-top: 1px solid #d6ad60;
 }
-
 
 /* Specific All Article */
 
@@ -581,7 +595,6 @@ ul {
   color: #122620;
   margin: 20px;
 }
-
 
 /* Specific Single Article */
 
@@ -652,7 +665,8 @@ ul {
   margin-bottom: 5px;
 }
 
-#article #comment-form .btn, #article .comment-delete-btn {
+#article #comment-form .btn, 
+#article .comment-delete-btn {
   margin-top: 0px;
 }
 
@@ -661,32 +675,36 @@ ul {
   margin-bottom: 10px;
 }
 
-
 /*************************
   CREATE & UPDATE ARTICLE
 *************************/
 
 /* Create Article & Update Article */
 
-#update-article, #create-article {
+#update-article, 
+#create-article {
   margin-top: 50px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
 }
 
-#update-article h2, #create-article h2 {
+#update-article h2, 
+#create-article h2 {
   color: #d6ad60;
 }
 
-#update-article .divider-custom .divider-custom-icon, #create-article .divider-custom .divider-custom-icon {
+#update-article .divider-custom .divider-custom-icon, 
+#create-article .divider-custom .divider-custom-icon {
   color: #d6ad60;
 }
 
-#update-article .divider-custom .divider-custom-line, #create-article .divider-custom .divider-custom-line {
+#update-article .divider-custom .divider-custom-line, 
+#create-article .divider-custom .divider-custom-line {
   background-color: #d6ad60;
 }
 
-#update-article .form-control, #create-article .form-control {
+#update-article .form-control, 
+#create-article .form-control {
   font-size: 1.5rem;
   border-left: 0;
   border-right: 0;
@@ -695,25 +713,27 @@ ul {
   border-width: 1px;
 }
 
-#update-article .form-control:focus, #create-article .form-control:focus {
+#update-article .form-control:focus, 
+#create-article .form-control:focus {
   box-shadow: 0 0 0 .25rem #d6ad60;
 }
 
-#update-article label, #create-article label {
+#update-article label, 
+#create-article label {
   font-size: 1.5rem;
   color: #d6ad60;
   margin-bottom: 2px;
   margin-top: 2px;
 }
 
-#update-article .btn, #create-article .btn {
+#update-article .btn, 
+#create-article .btn {
   margin-top: 30px;
   margin: 20px;
   background-color: #d6ad60;
   color: #122620;
   color: #122620;
 }
-
 
 /* Specific Create Article */ 
 
