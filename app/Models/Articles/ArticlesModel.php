@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace App\Models\Articles;
 
 class ArticlesModel extends ArticlesManager
 {
