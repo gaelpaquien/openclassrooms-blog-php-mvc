@@ -69,7 +69,8 @@ ul {
   opacity: 0.8;
 }
 
-.error, .success {
+.error, 
+.success {
   border: 1px solid #d6ad60;
   border-radius: 12px;
   margin-bottom: 10px;
@@ -291,7 +292,8 @@ ul {
   background-color: #122620;
 }
 
-.cv h2, .cv p {
+.cv h2, 
+.cv p {
   color: #122620;
 }
 
@@ -331,10 +333,6 @@ ul {
   border-top: 0;
   border-radius: 8px;
   border-width: 1px;
-}
-
-.contact .form-control:focus {
-  box-shadow: 0 0 0 .25rem #d6ad60;
 }
 
 .contact label {
@@ -388,8 +386,7 @@ ul {
 
 .errorForbidden .btn,
 .errorNotFound .btn {
-  margin-top: 30px;
-  margin: 20px;
+  margin: 30px 20px 20px 20px;
   background-color: #d6ad60;
   color: #122620;
 }
@@ -435,7 +432,7 @@ ul {
   font-weight: 500;
 }
 
-/* Specific admin comments */ 
+/* Specific admin comments */
 
 .admin .admin-comments p {
   padding-top: 70px;
@@ -447,12 +444,8 @@ ul {
 }
 
 .admin .admin-comments table .td-btn .btn {
-  margin: 0px;
+  margin: 0;
 }
-
-/*************************
-   ALL & SINGLE ARTICLE
-*************************/
 
 /* All Articles & Single Article */
 
@@ -493,7 +486,7 @@ ul {
 .articles .card-title,
 .articles .card-text,
 .article .card-title,
-.article .card-text{
+.article .card-text {
   color: #122620;
 }
 
@@ -546,7 +539,7 @@ ul {
 }
 
 .article .article-admin a {
-  margin: 10px 10px 00px 10px;
+  margin: 10px 10px 0 10px;
 }
 
 .article .comments {
@@ -561,7 +554,7 @@ ul {
 
 .article .comments h3 {
   font-size: 1.5rem;
-  margin: 0px;
+  margin: 0;
 }
 
 .article .comments p {
@@ -570,7 +563,7 @@ ul {
 
 .article .comments .comment {
   border-bottom: 1px solid #e2d5af;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 0 10px 0;
 }
 
 .article .comment-form {
@@ -585,7 +578,7 @@ ul {
 
 .article .comment-form .btn,
 .article .comment-delete-btn {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .article .comment-delete-btn {
@@ -648,7 +641,7 @@ ul {
   color: #122620;
 }
 
-/* Specific Create Article */ 
+/* Specific Create Article */
 
 .image-info {
   color: #d6ad60;
