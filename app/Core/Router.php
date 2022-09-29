@@ -58,7 +58,7 @@ class Router
         }
         
         $class->$method();
-        $router = $this;
+        //$router = $this;
 
         return $this;
     }
