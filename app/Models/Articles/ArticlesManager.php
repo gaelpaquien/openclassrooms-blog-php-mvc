@@ -59,7 +59,6 @@ class ArticlesManager extends GlobalManager
         // Checks id of article
         if ($result === false) {
             header('Location: /erreur/page-introuvable');
-            die();
         }
 
         // Transforms data

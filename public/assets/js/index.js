@@ -1,5 +1,5 @@
 // Bootstrap Theme Script
-window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('DOMContentLoaded', (event) => {
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
         if (!navbarCollapsible) {
