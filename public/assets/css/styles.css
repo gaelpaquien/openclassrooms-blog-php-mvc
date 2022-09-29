@@ -164,25 +164,23 @@ ul {
 /* Scroll to top */
 
 .scrollToTop {
-  display: none; 
-  position: fixed; 
-  bottom: 8px; 
-  right: 8px; 
+  display: none;
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
   z-index: 99;
-  border: none; 
+  border: none;
   background-color: #f4ebd0;
-  color: #122620; 
-  padding: 8px; 
-  border-radius: 15px; 
+  color: #122620;
+  padding: 8px;
+  border-radius: 15px;
   font-size: 14px;
   opacity: 0.8;
 }
 
-.scrollToTop:hover {
+.scrollToTop:hover,
+.scrollToTop:focus {
   opacity: 0.3;
-}
-
-.scrollToTop:hover {
   outline: none;
 }
 
@@ -328,13 +326,13 @@ ul {
   border-bottom: 1px solid #d6ad60;
 }
 
-.recent-articles .card-body, 
+.recent-articles .card-body,
 .recent-articles .card-footer {
   background-color: #fff;
 }
 
-.recent-articles .card-title, 
-.recent-articles .card-text{
+.recent-articles .card-title,
+.recent-articles .card-text {
   color: #122620;
 }
 
@@ -436,19 +434,19 @@ ul {
 
 /* Not Found & Forbidden */
 
-.errorNotFound, 
+.errorNotFound,
 .errorForbidden {
   margin-top: 90px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
 }
 
-.errorNotFound h2, 
+.errorNotFound h2,
 .errorForbidden h2 {
   color: #d6ad60;
 }
 
-.errorNotFound p, 
+.errorNotFound p,
 .errorForbidden p {
   margin-top: 40px;
   margin-bottom: 20px;
@@ -509,7 +507,7 @@ ul {
   color: #122620;
 }
 
-.admin .admin-stats, 
+.admin .admin-stats,
 .admin .admin-btn {
   margin-top: 70px;
 }
