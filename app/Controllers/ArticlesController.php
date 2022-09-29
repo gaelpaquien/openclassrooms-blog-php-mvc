@@ -7,57 +7,39 @@ class ArticlesController extends Controller
     public function index(): void
     {
         // Pagination
-        if (isset($_GET['p']) && !empty($_GET['p'])) {
-            $currentPage = (int) strip_tags($_GET['p']);
-        } else {
-            $currentPage = 1;
-        }
-        // Count all users if not admin
-        $countArticles = $this->articles->countAll();
+        $countArticles = $this->articles->countAll('articles');
         $nbArticles = (int) $countArticles->nb_articles;
-        // Comments per page
-        $perPage = 6;
-        // Total page calcul
-        $totalPages = intval(ceil($nbArticles / $perPage));
-        // Check current page
-        if ($currentPage > $totalPages || $currentPage < 1) {
-            $currentPage = 1;
-        }
-        if ($currentPage === $totalPages) {
-            $lastPage = true;
-        } else {
-            $lastPage = false;
-        }
-        // Limit calcul
-        $limitFirst = ($currentPage * $perPage) - $perPage;
-        
+        $pages = $this->pagination->pagination($nbArticles, 6);
+
         // Get data of all articles
-        $data = $this->articles->findAll($limitFirst, $perPage);
+        $data = $this->articles->findAll($pages[0]['limitFirst'], $pages[0]['perPage']);
 
         // Render
         $this->view('pages/articles/index.html.twig', [
-            'lastPage' => $lastPage,
-            'currentPage' => $currentPage,
+            'lastPage' => $pages[0]['lastPage'],
+            'currentPage' => $pages[0]['currentPage'],
             'articles' => $data
         ]);
     }
 
     public function show(): void
     {
-        $checkAuth = false;
-        $checkCommentSent = false;
 
+        $checkCommentSent = false;
         if (isset($_GET['commentSent'])) {
             $checkCommentSent = true;
         }
 
-       
-
         // Get data of current article
         $data = $this->articles->find($this->params['id']);
 
+        // Pagination
+        $countComments = $this->comments->countAllValidFromArticle($this->params['id']);
+        $nbComments = (int) $countComments->nb_comments;
+        $pages = $this->pagination->pagination($nbComments, 3);
+
         // Get validate comments of current article
-        $comments = $this->comments->findAllValid($this->params['id']);
+        $comments = $this->comments->findAllValid($this->params['id'], $pages[0]['limitFirst'], $pages[0]['perPage']);
 
         // Check if user is logged in
         $checkAuth = false;
@@ -83,7 +65,9 @@ class ArticlesController extends Controller
             'checkAuth' => $checkAuth,
             'articlePermission' => $articlePermission,
             'checkAdmin' => $checkAdmin,
-            'checkCommentSent' => $checkCommentSent
+            'checkCommentSent' => $checkCommentSent,
+            'lastPage' => $pages[0]['lastPage'],
+            'currentPage' => $pages[0]['currentPage'],
         ]);
     }
 
@@ -119,7 +103,7 @@ class ArticlesController extends Controller
                 }
 
                 // Check if title already exists
-                $checkTitle = $this->articles->checkExists('title', $_POST['title']);
+                $checkTitle = $this->articles->checkExists('articles', 'title', $_POST['title']);
                 if ($checkTitle === false) {
 
                     // Add data of article in array
@@ -139,7 +123,7 @@ class ArticlesController extends Controller
                     if ($errors === null) {
                         // Creation of article and redirection
                         $hydratedData = $this->articles->hydrate($data);
-                        $this->articles->create($hydratedData); 
+                        $this->articles->create('articles', $hydratedData); 
                         header('Location: ' . '/articles'); 
                     }
 
@@ -184,7 +168,7 @@ class ArticlesController extends Controller
             if (isset($_POST) && !empty($_POST)) {
 
                 // Checks if title exist and title is not equal to this title
-                $checkTitle = $this->articles->checkExists('title', $_POST['title']);
+                $checkTitle = $this->articles->checkExists('articles', 'title', $_POST['title']);
                 if ($checkTitle === false || $_POST['title'] === $data[0]->getTitle()) {
 
                     // Check form data
@@ -205,7 +189,7 @@ class ArticlesController extends Controller
                                     ->setCaption($_POST['caption'])
                                     ->setAuthor_id($_POST['author'])
                                     ->setUpdated_at($this->date->getDateNow())
-                                    ->update($this->params['id']);
+                                    ->update('articles', $this->params['id']);
                         header('Location: /article/' . $this->articles->getSlug() . '/' . $this->articles->getId()); 
                     }
 
@@ -242,15 +226,15 @@ class ArticlesController extends Controller
             }
 
             // Delete comments associated with article
-            $comments = $this->comments->findAllBy('article_id', $this->params['id']);
+            $comments = $this->comments->findAllBy('comments', 'article_id', $this->params['id']);
             if (!empty($comments)) {
                 foreach ($comments as $comment) {
-                    $this->comments->delete($comment->id);
+                    $this->comments->delete('comments', $comment->id);
                 }
             }
             
             // Delete article and redirection
-            $this->articles->delete($this->params['id']);
+            $this->articles->delete('articles', $this->params['id']);
             header('Location: /articles');
                   
         } else {

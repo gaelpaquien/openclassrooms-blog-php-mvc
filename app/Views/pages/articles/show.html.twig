@@ -63,6 +63,23 @@
                                 {% endif %}
                             </div>           
                         {% endfor %}
+                        <nav>
+                            <ul class="pagination">
+                              {% if currentPage != 1 %}
+                              <li class="page-item">
+                                {% set previousPage = currentPage - 1 %}
+                                <a href="/article/{{ article.getSlug() }}/{{ article.getId() }}?p={{ previousPage }}" class="page-link">Précédent</a>
+                              </li>    
+                              {% endif %}
+                              {% if lastPage != true %}
+                                <li class="page-item">
+                                  {% set nextPage = currentPage + 1 %}
+                                  <a href="/article/{{ article.getSlug() }}/{{ article.getId() }}?p={{ nextPage }}" class="page-link">Suivant</a>
+                                </li>
+                              {% endif %}
+            
+                            </ul>
+                          </nav>
                     {% endif %}
                     {% if checkAuth %}
                         <form id="comment-form" method="POST" action="/article/{{ article.getSlug() }}/{{ article.getId() }}/commentaire/enregistrement">

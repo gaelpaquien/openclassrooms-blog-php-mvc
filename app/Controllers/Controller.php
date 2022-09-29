@@ -4,10 +4,11 @@ namespace App\Controllers;
 use App\Helpers\Date;
 use App\Helpers\ErrorsHandling;
 use App\Helpers\FormValidator;
+use App\Helpers\Pagination;
 use App\Helpers\Text;
-use App\Models\ArticlesModel;
-use App\Models\CommentsModel;
-use App\Models\UsersModel;
+use App\Models\Articles\ArticlesModel;
+use App\Models\Comments\CommentsModel;
+use App\Models\Users\UsersModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -32,6 +33,8 @@ class Controller
 
     protected Date $date;
 
+    protected Pagination $pagination;
+
     protected array $params;
 
     public function __construct()
@@ -39,7 +42,7 @@ class Controller
         // Twig
         $this->loader = new FilesystemLoader(ROOT . '/app/Views');
         $this->twig = new Environment($this->loader, [
-            'cache' => false // ROOT . '/tmp/cache',
+            'cache' => false // ROOT . '/tmp/cache'
         ]);
 
         // Models
@@ -47,11 +50,12 @@ class Controller
         $this->comments = new CommentsModel;
         $this->users = new UsersModel;
 
-        // Helpers class
+        // Helpers
         $this->formValidator = new FormValidator;
         $this->errorsHandling = new ErrorsHandling;
         $this->text = new Text;
         $this->date = new Date;
+        $this->pagination = new Pagination;
     }
 
     public function checkAuth(): array
