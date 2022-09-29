@@ -82,7 +82,7 @@
                           </nav>
                     {% endif %}
                     {% if checkAuth %}
-                        <form id="comment-form" method="POST" action="/article/{{ article.getSlug() }}/{{ article.getId() }}/commentaire/enregistrement">
+                        <form id="comment-form" class="comment-form" method="POST" action="/article/{{ article.getSlug() }}/{{ article.getId() }}/commentaire/enregistrement">
                             <div class="mb-3">
                                 <label for="content">Ajouter un commentaire :</label>
                                 <textarea class="form-control" id="content" name="content" type="text" placeholder="Entrer le contenu de votre commentaire..." style="height: 6rem" required></textarea>
