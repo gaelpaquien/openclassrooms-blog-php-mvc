@@ -62,35 +62,26 @@ class FormValidator
     public function checkSignupForm(array $data): string | null 
     { 
         foreach ($data as $key => $value) {
-            // Check email
             if ($key === "email") {
                 if ($this->validateEmail($value) === false) {
                     return $this->errors->newError('Cette adresse email est invalide.');
                 }
-            }
-            // Check password
-            if ($key === "password") {
+            } elseif ($key === "password") {
                 $key = "mot de passe";
                 if ($this->validateLength(8, 35, $value) === false) {
                     return $this->errors->newError('Le mot de passe doit contenir 8 caractères minimum et 35 caractères maximum.');
                 }
-            }
-            // Check firstname
-            if ($key === "firstname") {
+            } elseif ($key === "firstname") {
                 $key = "prénom";
                 if ($this->validateString($value) === false || $this->validateLength(2, 35, $value) === false) {
                     return $this->errors->newError('Vous ne pouvez pas utiliser ce prénom.');
                 }
-            }
-            // Check lastname
-            if ($key === "lastname") {
+            } elseif ($key === "lastname") {
                 $key = "nom";
                 if ($this->validateString($value) === false || $this->validateLength(2, 35, $value) === false) {
                     return $this->errors->newError('Vous ne pouvez pas utiliser ce nom.');
                 }
-            }
-            // Check empty field
-            if($this->validateEmpty($value) === false) {
+            } elseif ($this->validateEmpty($value) === false) {
                 return $this->errors->newError("Le champ '$key' ne peut pas être vide.");
             }
         }
