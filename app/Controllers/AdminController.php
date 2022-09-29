@@ -22,37 +22,17 @@ class AdminController extends Controller
         if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
             // Pagination
-            if (isset($_GET['p']) && !empty($_GET['p'])) {
-                $currentPage = (int) strip_tags($_GET['p']);
-            } else {
-                $currentPage = 1;
-            }
-            // Count all invalid comments
             $countComments = $this->comments->countAllInvalid();
             $nbComments = (int) $countComments->nb_comments_invalid;
-            // Comments per page
-            $perPage = 10;
-            // Total page calcul
-            $totalPages = intval(ceil($nbComments / $perPage));
-            // Check current page
-            if ($currentPage > $totalPages || $currentPage < 1) {
-                $currentPage = 1;
-            }
-            if ($currentPage === $totalPages) {
-                $lastPage = true;
-            } else {
-                $lastPage = false;
-            }
-            // Limit calcul
-            $limitFirst = ($currentPage * $perPage) - $perPage;
+            $pages = $this->pagination->pagination($nbComments, 10);
 
             // Get data of all invalid comments
-            $comments = $this->comments->findAllInvalid($limitFirst, $perPage);
+            $comments = $this->comments->findAllInvalid($pages[0]['limitFirst'], $pages[0]['perPage']);
 
             // Render
             $this->view('pages/admin/comments.html.twig', [
-                'lastPage' => $lastPage,
-                'currentPage' => $currentPage,
+                'lastPage' => $pages[0]['lastPage'],
+                'currentPage' => $pages[0]['currentPage'],
                 'comments' => $comments
             ]);
         
@@ -64,10 +44,11 @@ class AdminController extends Controller
 
     public function indexUsers()
     {
-        // Check if user is logged in and if he is admin
+        // Check if user is logged and if he is admin
         if ($this->checkAuth()['isLogged'] === true && $this->checkAuth()['isAdmin'] === true) {
 
             // Pagination
+<<<<<<< HEAD
             if (isset($_GET['p']) && !empty($_GET['p'])) {
                 $currentPage = (int) strip_tags($_GET['p']);
             } else {
@@ -91,14 +72,19 @@ class AdminController extends Controller
             }
             // Limit calcul
             $limitFirst = ($currentPage * $perPage) - $perPage;
+=======
+            $countComments = $this->users->countAllUsers();
+            $nbComments = (int) $countComments->nb_users;
+            $pages = $this->pagination->pagination($nbComments, 10);
+>>>>>>> Optimization
 
             // Get data of all invalid comments
-            $users = $this->users->findAll($limitFirst, $perPage);
+            $users = $this->users->findAll($pages[0]['limitFirst'], $pages[0]['perPage']);
 
             // Render
             $this->view('pages/admin/users.html.twig', [
-                'lastPage' => $lastPage,
-                'currentPage' => $currentPage,
+                'lastPage' => $pages[0]['lastPage'],
+                'currentPage' => $pages[0]['currentPage'],
                 'users' => $users
             ]);
         
