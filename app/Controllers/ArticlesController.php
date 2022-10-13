@@ -47,7 +47,7 @@ class ArticlesController extends Controller
         if ($this->checkAuth()['isLogged'] === true) {
             $checkAuth = true; 
             // Check if user is author of article
-            if ($_SESSION['auth']['user_id'] === $data[0]->getAuthor_id()) {
+            if ($this->superglobals->get_SESSION()['user_id'] === $data[0]->getAuthor_id()) {
                 $articlePermission = true;
             }
             // Check if user is admin

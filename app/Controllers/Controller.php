@@ -5,6 +5,7 @@ use App\Helpers\Date;
 use App\Helpers\ErrorsHandling;
 use App\Helpers\FormValidator;
 use App\Helpers\Pagination;
+use App\Helpers\Superglobals;
 use App\Helpers\Text;
 use App\Models\Articles\ArticlesModel;
 use App\Models\Comments\CommentsModel;
@@ -35,6 +36,8 @@ class Controller
 
     protected Pagination $pagination;
 
+    protected Superglobals $superglobals;
+
     protected array $params;
 
     public function __construct()
@@ -56,6 +59,7 @@ class Controller
         $this->text = new Text;
         $this->date = new Date;
         $this->pagination = new Pagination;
+        $this->superglobals = new Superglobals;
     }
 
     public function checkAuth(): array
