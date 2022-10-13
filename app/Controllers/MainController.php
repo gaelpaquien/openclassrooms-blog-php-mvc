@@ -16,11 +16,11 @@ class MainController extends Controller
     public function homeContact(): void 
     {
         // Check if form as sent
-        if (isset($_POST) && !empty($_POST)) {
+        if (!empty($this->superglobals->get_POST())) {
             /*
-            $to = $_POST['email']; 
-            $subject = $_POST['subject'];
-            $message = $_POST['message'];
+            $to = $this->superglobals->get_POST()['email']; 
+            $subject = $this->superglobals->get_POST()['subject'];
+            $message = $this->superglobals->get_POST()['message'];
             $from = "gael.paquien.contact@gmail.com";
             $headers = "From:" . $from;
         

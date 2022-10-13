@@ -70,7 +70,7 @@ class Controller
         ];
         
         // Check if user is logged in
-        if (isset($_SESSION['auth'])) {
+        if (isset($this->superglobals->get_SESSION()['user_id'])) {
             $auth['isLogged'] = true;
             // Check if user is admin
             if ($this->superglobals->get_SESSION()['user_admin'] === 1) {

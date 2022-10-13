@@ -15,12 +15,12 @@ class CommentsController extends Controller
         } 
 
         // Check if form as sent
-        if (isset($_POST) && !empty($_POST)) {
+        if (!empty($this->superglobals->get_POST())) {
 
             // Add data of article in array
             $data = [
                 'author_id' => $this->superglobals->get_SESSION()['user_id'],
-                'content' => $_POST['content'],
+                'content' => $this->superglobals->get_POST()['content'],
                 'article_id' => $this->params['id'],
             ];
 
