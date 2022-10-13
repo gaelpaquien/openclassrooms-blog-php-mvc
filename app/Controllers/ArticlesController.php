@@ -91,9 +91,9 @@ class ArticlesController extends Controller
             $file = '01default.jpg';
 
             // File management (image of article)
-            if (isset($_FILES)) {
+            if (!empty($this->superglobals->get_FILES()['image']['name'])) {
                 // Get file extension
-                $fileExtension = explode('.', $_FILES['image']['name']);
+                $fileExtension = explode('.', $this->superglobals->get_FILES()['image']['name']);
                 $extension = strtolower(end($fileExtension));
 
                 // Checks file extension
@@ -101,7 +101,7 @@ class ArticlesController extends Controller
                 if (in_array($extension, $permittedExtension)) {
                     // Saves file
                     $file = $slug . '.' . $extension;
-                    move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/assets/img/articles/' . $file);
+                    move_uploaded_file($this->superglobals->get_FILES()['image']['tmp_name'], ROOT . '/public/assets/img/articles/' . $file);
                 }
             }
 
