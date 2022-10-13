@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Helpers\Session;
 use App\Helpers\Date;
 use App\Helpers\ErrorsHandling;
 use App\Helpers\FormValidator;
@@ -35,6 +36,8 @@ class Controller
 
     protected Pagination $pagination;
 
+    protected Session $session;
+
     protected array $params;
 
     public function __construct()
@@ -56,6 +59,7 @@ class Controller
         $this->text = new Text;
         $this->date = new Date;
         $this->pagination = new Pagination;
+        $this->session = new Session;
     }
 
     public function checkAuth(): array
