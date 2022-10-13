@@ -19,7 +19,7 @@ class CommentsController extends Controller
 
             // Add data of article in array
             $data = [
-                'author_id' => $_SESSION['auth']['user_id'],
+                'author_id' => $this->superglobals->get_SESSION()['user_id'],
                 'content' => $_POST['content'],
                 'article_id' => $this->params['id'],
             ];
@@ -41,7 +41,7 @@ class CommentsController extends Controller
         } 
 
         // Valid comment
-        $this->comments->validComment($this->params['id'], $_SESSION['auth']['user_id']);
+        $this->comments->validComment($this->params['id'], $this->superglobals->get_SESSION()['user_id']);
         header('Location: /administration/commentaires');
     }
 

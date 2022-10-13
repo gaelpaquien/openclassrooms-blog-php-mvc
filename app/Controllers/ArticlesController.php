@@ -114,7 +114,7 @@ class ArticlesController extends Controller
                     'slug' => $slug,
                     'caption' => $_POST['caption'],
                     'content' => $_POST['content'],
-                    'author_id' => $_SESSION['auth']['user_id'],
+                    'author_id' => $this->superglobals->get_SESSION()['user_id'],
                     'image' => $file
                 ];
 
@@ -160,7 +160,7 @@ class ArticlesController extends Controller
         } 
 
         // Checks if user is logged in and if he is author of article or admin
-        if ($this->checkAuth()['isLogged'] !== true && (($_SESSION['auth']['user_id'] !== $data[0]->getAuthor_id() || $this->checkAuth()['isAdmin'] !== true))) {
+        if ($this->checkAuth()['isLogged'] !== true && (($this->superglobals->get_SESSION()['user_id'] !== $data[0]->getAuthor_id() || $this->checkAuth()['isAdmin'] !== true))) {
             // Error : Forbidden
             header('Location: /erreur/acces-interdit');  
         }
@@ -210,7 +210,7 @@ class ArticlesController extends Controller
         $data = $this->articles->find($this->params['id']);
 
         // Check if user is logged in and if he is author of article or admin
-        if ($this->checkAuth()['isLogged'] !== true && ($_SESSION['auth']['user_id'] !== $data[0]->getAuthor_id() || $this->checkAuth()['isAdmin'] !== true)) {
+        if ($this->checkAuth()['isLogged'] !== true && ($this->superglobals->get_SESSION()['user_id'] !== $data[0]->getAuthor_id() || $this->checkAuth()['isAdmin'] !== true)) {
             // Error : Forbidden
             header('Location: /erreur/acces-interdit');  
         }
