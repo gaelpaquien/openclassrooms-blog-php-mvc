@@ -68,10 +68,8 @@ class UsersController extends Controller
                 if (password_verify($_POST['password'], $user->getPassword())) {
 
                     // Save user data in session and redirection
-                    $_SESSION['auth'] = [
-                        'user_id' => $user->getId(),
-                        'user_admin' => $user->getAdmin()
-                    ];
+                    $_SESSION['user_id'] = $user->getId();
+                    $_SESSION['user_admin'] = $user->getAdmin();
                     header('Location: /');
 
                 } else {
