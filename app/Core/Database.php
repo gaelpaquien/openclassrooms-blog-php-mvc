@@ -1,6 +1,7 @@
 <?php
 namespace App\Core;
 
+use App\Helpers\Superglobals;
 use Dotenv\Dotenv;
 use PDO;
 use PDOException;
@@ -17,12 +18,15 @@ class Database extends PDO
         $dotenv = Dotenv::createImmutable(ROOT);
         $dotenv->load();
 
+        // Load Superglobals ($_ENV)
+        $superglobals = new Superglobals;
+
         // Data Source Name
-        $dsn = 'mysql:dbname=' . $_ENV['DB_NAME'] . ';host=' . $_ENV['DB_HOST'];
+        $dsn = 'mysql:dbname=' . $superglobals->get_ENV()['DB_NAME'] . ';host=' . $superglobals->get_ENV()['DB_HOST'];
 
         // Call the constructor of PDO class
         try {
-            parent::__construct($dsn, $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+            parent::__construct($dsn, $superglobals->get_ENV()['DB_USER'], $superglobals->get_ENV()['DB_PASSWORD']);
             // PDO attribute
             $this->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
             $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
