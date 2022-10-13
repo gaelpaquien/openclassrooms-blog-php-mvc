@@ -7,6 +7,8 @@ class Superglobals
     private $_POST;
     private $_GET;
     private $_SESSION;
+    private $_FILES;
+    private $_ENV;
 
     public function __construct()
     {
@@ -79,6 +81,38 @@ class Superglobals
     }
 
     /**
+     * Returns a key from the superglobal,
+     * as it was at the time of instantiation.
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function get_FILES($key = null)
+    {
+        if (null !== $key) {
+            return (isset($this->_FILES["$key"])) ? $this->_FILES["$key"] : null;
+        } else {
+            return $this->_FILES;
+        }
+    }
+
+    /**
+     * Returns a key from the superglobal,
+     * as it was at the time of instantiation.
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function get_ENV($key = null)
+    {
+        if (null !== $key) {
+            return (isset($this->_ENV["$key"])) ? $this->_ENV["$key"] : null;
+        } else {
+            return $this->_ENV;
+        }
+    }
+
+    /**
      * Function to define superglobals for use locally.
      * We do not automatically unset the superglobals after
      * defining them, since they might be used by other code.
@@ -94,6 +128,8 @@ class Superglobals
         $this->_POST = (isset($_POST)) ? $_POST : null;
         $this->_GET = (isset($_GET)) ? $_GET : null;
         $this->_SESSION = (isset($_SESSION)) ? $_SESSION : null;
+        $this->_FILES = (isset($_FILES)) ? $_FILES : null;
+        $this->_ENV = (isset($_ENV)) ? $_ENV : null;
 
     }
     
@@ -110,6 +146,8 @@ class Superglobals
         unset($_POST);
         unset($_GET);
         unset($_SESSION);
+        unset($_FILES);
+        unset($_ENV);
     }
 
 }
