@@ -1,11 +1,11 @@
 <?php
 namespace App\Controllers;
 
-use App\Helpers\Session;
 use App\Helpers\Date;
 use App\Helpers\ErrorsHandling;
 use App\Helpers\FormValidator;
 use App\Helpers\Pagination;
+use App\Helpers\Superglobals;
 use App\Helpers\Text;
 use App\Models\Articles\ArticlesModel;
 use App\Models\Comments\CommentsModel;
@@ -36,7 +36,7 @@ class Controller
 
     protected Pagination $pagination;
 
-    protected Session $session;
+    protected Superglobals $superglobals;
 
     protected array $params;
 
@@ -59,7 +59,7 @@ class Controller
         $this->text = new Text;
         $this->date = new Date;
         $this->pagination = new Pagination;
-        $this->session = new Session;
+        $this->superglobals = new Superglobals;
     }
 
     public function checkAuth(): array
