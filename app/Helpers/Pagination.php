@@ -6,8 +6,9 @@ class Pagination {
     public function pagination(int $nbItems, int $perPage) {
 
         // Define current page
-        if (isset($_GET['p']) && !empty($_GET['p'])) {
-            $currentPage = (int) strip_tags($_GET['p']);
+        $superglobals = new Superglobals;
+        if (isset($superglobals->get_GET()['p']) && !empty($superglobals->get_GET()['p'])) {
+            $currentPage = (int) strip_tags($superglobals->get_GET()['p']);
         } else {
             $currentPage = 1;
         }
