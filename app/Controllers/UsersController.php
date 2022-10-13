@@ -9,21 +9,21 @@ class UsersController extends Controller
         $errors = null;
 
         // Check if form as sent
-        if (isset($_POST) && !empty($_POST)) {
+        if (!empty($this->superglobals->get_POST())) {
 
             // Check if email already exists
-            $checkEmail = $this->users->checkExists('users', 'email', $_POST['email']);
+            $checkEmail = $this->users->checkExists('users', 'email', $this->superglobals->get_POST()['email']);
             if ($checkEmail === false) {
                 
                 // Check if password and password-confirm match
-                if ($_POST['password'] === $_POST['password-confirm']) {
+                if ($this->superglobals->get_POST()['password'] === $this->superglobals->get_POST()['password-confirm']) {
 
                     // Add data of user in array
                     $data = [
-                        'email' => $_POST['email'],
-                        'password' => $_POST['password'],
-                        'firstname' => $_POST['firstname'],
-                        'lastname' => $_POST['lastname']
+                        'email' => $this->superglobals->get_POST()['email'],
+                        'password' => $this->superglobals->get_POST()['password'],
+                        'firstname' => $this->superglobals->get_POST()['firstname'],
+                        'lastname' => $this->superglobals->get_POST()['lastname']
                     ];
 
                     // Check form data
@@ -32,7 +32,7 @@ class UsersController extends Controller
                     // If check form data is ok
                     if ($errors === null) {
                         // Hash password
-                        $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                        $data['password'] = password_hash($this->superglobals->get_POST()['password'], PASSWORD_DEFAULT);
                         // Creation of user and redirection
                         $hydratedData = $this->users->hydrate($data);
                         $this->users->create('users', $hydratedData); 
@@ -58,14 +58,14 @@ class UsersController extends Controller
         $errors = null;
 
         // Check if form as sent
-        if (isset($_POST) && !empty($_POST)) {
+        if (!empty($this->superglobals->get_POST())) {
 
             // Check if email exist
-            $user = $this->users->findBy('email', $_POST['email']);
+            $user = $this->users->findBy('email', $this->superglobals->get_POST()['email']);
             if ($user !== null) {
 
                 // Check if password match
-                if (password_verify($_POST['password'], $user->getPassword())) {
+                if (password_verify($this->superglobals->get_POST()['password'], $user->getPassword())) {
 
                     // Save user data in session and redirection
                     $_SESSION['user_id'] = $user->getId();
