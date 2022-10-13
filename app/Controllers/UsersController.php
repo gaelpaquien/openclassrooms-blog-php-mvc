@@ -39,10 +39,11 @@ class UsersController extends Controller
                         header('Location: ' . '/'); 
                     }
 
-                } else {
-                    // Error : Password and password-confirm don't match
-                    $errors = $this->errorsHandling->newError('Le mot de passe et la confirmation du mot de passe doivent corespondres.');
-                }
+                } 
+
+                // Error : Password and password-confirm don't match
+                $errors = $this->errorsHandling->newError('Le mot de passe et la confirmation du mot de passe doivent corespondres.');
+            
             } else {
                 // Error : Email already exist
                $errors = $this->errorsHandling->newError('Cette adresse email existe déjà.');
