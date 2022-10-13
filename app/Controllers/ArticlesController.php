@@ -25,7 +25,8 @@ class ArticlesController extends Controller
     public function show(): void
     {
         $checkCommentSent = false;
-        if (isset($_GET['commentSent'])) {
+        
+        if (isset($this->superglobals->get_GET()['commentSent'])) {
             $checkCommentSent = true;
         }
 
@@ -81,10 +82,10 @@ class ArticlesController extends Controller
         } 
 
         // Check if form as sent
-        if (isset($_POST) && !empty($_POST)) {
+        if (!empty($this->superglobals->get_POST())) {
 
             // Slug of article
-            $slug = $this->text->slugify($_POST['title']);
+            $slug = $this->text->slugify($this->superglobals->get_POST()['title']);
 
             // Default image of article
             $file = '01default.jpg';
@@ -105,15 +106,15 @@ class ArticlesController extends Controller
             }
 
             // Check if title already exists
-            $checkTitle = $this->articles->checkExists('articles', 'title', $_POST['title']);
+            $checkTitle = $this->articles->checkExists('articles', 'title', $this->superglobals->get_POST()['title']);
             if ($checkTitle === false) {
 
                 // Add data of article in array
                 $data = [
-                    'title' => $_POST['title'],
+                    'title' => $this->superglobals->get_POST()['title'],
                     'slug' => $slug,
-                    'caption' => $_POST['caption'],
-                    'content' => $_POST['content'],
+                    'caption' => $this->superglobals->get_POST()['caption'],
+                    'content' => $this->superglobals->get_POST()['content'],
                     'author_id' => $this->superglobals->get_SESSION()['user_id'],
                     'image' => $file
                 ];
@@ -166,26 +167,26 @@ class ArticlesController extends Controller
         }
 
         // Check if form as sent
-        if (isset($_POST) && !empty($_POST)) {
+        if (!empty($this->superglobals->get_POST())) {
             // Checks if title exist and title is not equal to this title
-            $checkTitle = $this->articles->checkExists('articles', 'title', $_POST['title']);
-            if ($checkTitle === false || $_POST['title'] === $data[0]->getTitle()) {
+            $checkTitle = $this->articles->checkExists('articles', 'title', $this->superglobals->get_POST()['title']);
+            if ($checkTitle === false || $this->superglobals->get_POST()['title'] === $data[0]->getTitle()) {
                 // Check form data
                 $errors = $this->formValidator->checkArticleForm([
-                    'title' => $_POST['title'],
-                    'caption' => $_POST['caption'],
-                    'content' => $_POST['content'],
-                    'author_id' => $_POST['author']
+                    'title' => $this->superglobals->get_POST()['title'],
+                    'caption' => $this->superglobals->get_POST()['caption'],
+                    'content' => $this->superglobals->get_POST()['content'],
+                    'author_id' => $this->superglobals->get_POST()['author']
                 ]);
                 // If check form data is ok
                 if ($errors === null) {
                     // Update of article and redirection
                     $this->articles->setId($this->params['id'])
-                                ->setTitle($_POST['title'])
-                                ->setSlug($this->text->slugify($_POST['title']))
-                                ->setContent($_POST['content'])
-                                ->setCaption($_POST['caption'])
-                                ->setAuthor_id($_POST['author'])
+                                ->setTitle($this->superglobals->get_POST()['title'])
+                                ->setSlug($this->text->slugify($this->superglobals->get_POST()['title']))
+                                ->setContent($this->superglobals->get_POST()['content'])
+                                ->setCaption($this->superglobals->get_POST()['caption'])
+                                ->setAuthor_id($this->superglobals->get_POST()['author'])
                                 ->setUpdated_at($this->date->getDateNow())
                                 ->update('articles', $this->params['id']);
                     header('Location: /article/' . $this->articles->getSlug() . '/' . $this->articles->getId()); 
