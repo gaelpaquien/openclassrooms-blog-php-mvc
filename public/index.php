@@ -1,14 +1,14 @@
 <?php
+// Define constant for root path of project
+define('ROOT', dirname(__DIR__));
+
+// Autoload
+require_once ROOT . '/vendor/autoload.php';
+
 // Start session if is not
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-// Define constant for root path of project
-define('ROOT', dirname(__DIR__));
-
-// Require Autoloader to load \App namespace
-require_once ROOT . '/vendor/autoload.php';
 
 // Starts Whoops to display errors during development
 $whoops = new App\Helpers\Whoops;
