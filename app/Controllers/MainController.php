@@ -17,24 +17,21 @@ class MainController extends Controller
     {
         // Check if form as sent
         if (!empty($this->superglobals->get_POST())) {
-            /*
-            $to = $this->superglobals->get_POST()['email']; 
+            
+            $to = "gael.paquien.contact@gmail.com"; 
             $subject = $this->superglobals->get_POST()['subject'];
             $message = $this->superglobals->get_POST()['message'];
-            $from = "gael.paquien.contact@gmail.com";
+            $from = $this->superglobals->get_POST()['email'];
             $headers = "From:" . $from;
-        
-            
-            if (mail($to, $subject, $message, $headers)) {
-                echo "Mail Sent.";
-            }
-            else {
-                echo "failed";
-            }
-            */
-            
-            
+            //phpinfo();exit();
+            imap_mail(
+                $to,
+                $subject,
+                $message,
+                $headers
+            );
         }
+
         // Redirection
         header('Location: /#contact');
     }
