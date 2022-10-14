@@ -89,7 +89,7 @@ class Controller
         $this->twig->addGlobal('auth', $auth);
 
         // Display Twig render
-        echo $this->twig->render($path, $datas);
+        print_r($this->twig->render($path, $datas));
     }
 
     // Get URL parameters from router
