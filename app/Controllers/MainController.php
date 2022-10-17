@@ -23,8 +23,8 @@ class MainController extends Controller
             $message = $this->superglobals->get_POST()['message'];
             $from = $this->superglobals->get_POST()['email'];
             $headers = "From:" . $from;
-            //phpinfo();exit();
-            imap_mail(
+
+            mail(
                 $to,
                 $subject,
                 $message,
