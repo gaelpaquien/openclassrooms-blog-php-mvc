@@ -12,8 +12,16 @@ class AdminController extends Controller
             header('Location: /erreur/acces-interdit');
         }
 
+        $countComments = $this->comments->countAll("comments");
+        $countUsers = $this->users->countAll("users");
+        $countArticles = $this->articles->countAll("articles");
+
         // Render
-        $this->view('pages/admin/index.html.twig');
+        $this->view('pages/admin/index.html.twig', [
+            'comments' => $countComments->nb_comments,
+            'users' => $countUsers->nb_users,
+            'articles' => $countArticles->nb_articles
+        ]);
     }
 
     public function indexComments()
