@@ -6,85 +6,73 @@ class UsersController extends Controller
 
     public function signup(): void
     {
-        $errors = null;
+        $error = null;
 
         // Check if form as sent
-        if (!empty($this->superglobals->get_POST())) {
-
-            // Check if email already exists
-            $checkEmail = $this->users->checkExists('users', 'email', $this->superglobals->get_POST()['email']);
-            if ($checkEmail === false) {
-                
-                // Check if password and password-confirm match
-                if ($this->superglobals->get_POST()['password'] === $this->superglobals->get_POST()['password-confirm']) {
-
-                    // Add data of user in array
-                    $data = [
-                        'email' => $this->superglobals->get_POST()['email'],
-                        'password' => $this->superglobals->get_POST()['password'],
-                        'firstname' => $this->superglobals->get_POST()['firstname'],
-                        'lastname' => $this->superglobals->get_POST()['lastname']
-                    ];
-
-                    // Check form data
-                    $errors = $this->formValidator->checkSignupForm($data);
-
-                    // If check form data is ok
-                    if ($errors === null) {
-                        // Hash password
-                        $data['password'] = password_hash($this->superglobals->get_POST()['password'], PASSWORD_DEFAULT);
-                        // Creation of user and redirection
-                        $hydratedData = $this->users->hydrate($data);
-                        $this->users->create('users', $hydratedData); 
-                        header('Location: ' . '/'); 
-                    }
-
-                } 
-
-                // Error : Password and password-confirm don't match
-                $errors = $this->errorsHandling->newError('Le mot de passe et la confirmation du mot de passe doivent corespondres.');
-            
-            } else {
-                // Error : Email already exist
-               $errors = $this->errorsHandling->newError('Cette adresse email existe déjà.');
-            }
+        if (empty($this->superglobals->get_POST())) {
+            $this->view('pages/auth/login.html.twig', ['error' => $error]);
+            return;
         }
 
-        // Render
-        $this->view('pages/auth/signup.html.twig', ['errors' => $errors]);
+        // Check if email already exists
+        $checkEmail = $this->users->checkExists('users', 'email', $this->superglobals->get_POST()['email']);
+        if (false === $checkEmail) {
+            $error = "Cette adresse email existe déjà.";
+            $this->view('pages/auth/login.html.twig', ['error' => $error]);
+            return;
+        }
+                
+        // Check if password and password-confirm match
+        if ($this->superglobals->get_POST()['password'] !== $this->superglobals->get_POST()['password-confirm']) {
+            $error = "Le mot de passe et la confirmation du mot de passe doivent corespondres.";
+            $this->view('pages/auth/login.html.twig', ['error' => $error]);
+            return;
+        }
+
+        // Add data of user in array
+        $data = [
+            'email' => $this->superglobals->get_POST()['email'],
+            'password' => $this->superglobals->get_POST()['password'],
+            'firstname' => $this->superglobals->get_POST()['firstname'],
+            'lastname' => $this->superglobals->get_POST()['lastname']
+        ];
+
+        // Check form data
+        $errors = $this->formValidator->checkSignupForm($data);
+
+        // Check if form data is ok
+        if (null === $errors) {
+            // Hash password
+            $data['password'] = password_hash($this->superglobals->get_POST()['password'], PASSWORD_DEFAULT);
+            // Creation of user and redirection
+            $hydratedData = $this->users->hydrate($data);
+            $this->users->create('users', $hydratedData); 
+            header('Location: ' . '/'); 
+        }
     }
 
     public function login(): void
     {
-        $errors = null;
+        $error = null;
 
         // Check if form as sent
-        if (!empty($this->superglobals->get_POST())) {
-
-            // Check if email exist
-            $user = $this->users->findBy('email', $this->superglobals->get_POST()['email']);
-            if ($user !== null) {
-
-                // Check if password match
-                if (password_verify($this->superglobals->get_POST()['password'], $user->getPassword())) {
-
-                    // Save user data in session and redirection
-                    $_SESSION['user_id'] = $user->getId();
-                    $_SESSION['user_admin'] = $user->getAdmin();
-                    header('Location: /');
-
-                } else {
-                    // Error : invalid password
-                    $errors = $this->errorsHandling->newError('Email et/ou mot de passe incorrect.');
-                }
-            } else {
-                // Error : invalid email
-                $errors = $this->errorsHandling->newError('Email et/ou mot de passe incorrect.');
-            }
+        if (empty($this->superglobals->get_POST())) {
+            $this->view('pages/auth/login.html.twig', ['error' => $error]);
+            return;
         }
 
-        // Render
-        $this->view('pages/auth/login.html.twig', ['errors' => $errors]);
+        // Check if the email exists and if the password and the confirmation password are identical
+        $user = $this->users->findBy('email', $this->superglobals->get_POST()['email']);
+        if (null === $user || !password_verify($this->superglobals->get_POST()['password'], $user->getPassword())) {
+            $error = "Email et/ou mot de passe incorrect.";
+            $this->view('pages/auth/login.html.twig', ['error' => $error]);
+            return;
+        }
+
+        // Save user data in session and redirection
+        $_SESSION['user_id'] = $user->getId();
+        $_SESSION['user_admin'] = $user->getAdmin();
+        header('Location: /');
     }
 
     public function logout(): void

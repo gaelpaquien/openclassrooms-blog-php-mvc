@@ -22,9 +22,9 @@ class GlobalManager extends Database
         // Check and return result
         if ($result) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+        
     }
 
     public function findAllBy(string $table, string $params, string $value)
