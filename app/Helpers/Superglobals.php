@@ -127,7 +127,7 @@ class Superglobals
         $this->_SERVER = (isset($_SERVER)) ? $_SERVER : null;
         $this->_POST = (isset($_POST)) ? $_POST : null;
         $this->_GET = (isset($_GET)) ? $_GET : null;
-        $this->_SESSION = (isset($_SESSION)) ? $_SESSION : null;
+        $this->_SESSION = (isset($_SESSION)) ? $_SESSION : null; // Faire une référence
         $this->_FILES = (isset($_FILES)) ? $_FILES : null;
         $this->_ENV = (isset($_ENV)) ? $_ENV : null;
 
