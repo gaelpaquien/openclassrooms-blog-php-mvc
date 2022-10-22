@@ -10,13 +10,11 @@ class CommentsController extends Controller
 
         // Checks if user is logged in
         if ($this->checkAuth()['isLogged'] !== true) {
-            // Error : Forbidden
             header('Location: /erreur/acces-interdit');
         } 
 
         // Check if form as sent
         if (!empty($this->superglobals->get_POST())) {
-
             // Add data of article in array
             $data = [
                 'author_id' => $this->superglobals->get_SESSION()['user_id'],
@@ -36,11 +34,10 @@ class CommentsController extends Controller
     {
         // Check if user is logged in and if he is admin
         if ($this->checkAuth()['isLogged'] !== true && $this->checkAuth()['isAdmin'] !== true) {
-            // Error : Forbidden
             header('Location: /erreur/acces-interdit');
         } 
 
-        // Valid comment
+        // Valid comment and redirection
         $this->comments->validComment($this->params['id'], $this->superglobals->get_SESSION()['user_id']);
         header('Location: /administration/commentaires');
     }
@@ -49,7 +46,6 @@ class CommentsController extends Controller
     {
         // Check if user is logged in and if he is admin
         if ($this->checkAuth()['isLogged'] !== true && $this->checkAuth()['isAdmin'] !== true) {
-            // Error : Forbidden
             header('Location: /erreur/acces-interdit');
         }
 
