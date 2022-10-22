@@ -2,7 +2,6 @@
 namespace App\Controllers;
 
 use App\Helpers\Date;
-use App\Helpers\ErrorsHandling;
 use App\Helpers\FormValidator;
 use App\Helpers\Pagination;
 use App\Helpers\Superglobals;
@@ -27,8 +26,6 @@ class Controller
     protected UsersModel $users;
 
     protected FormValidator $formValidator;
-
-    protected ErrorsHandling $errorsHandling;
 
     protected Text $text;
 
@@ -55,7 +52,6 @@ class Controller
 
         // Helpers
         $this->formValidator = new FormValidator;
-        $this->errorsHandling = new ErrorsHandling;
         $this->text = new Text;
         $this->date = new Date;
         $this->pagination = new Pagination;

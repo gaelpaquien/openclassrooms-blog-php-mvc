@@ -8,7 +8,6 @@ class AdminController extends Controller
     {
         // Checks if user is logged in and if he is admin
         if ($this->checkAuth()['isAdmin'] !== true) {
-            // Error : Forbidden
             header('Location: /erreur/acces-interdit');
         }
 
@@ -28,7 +27,6 @@ class AdminController extends Controller
     {
         // Check if user is logged in and if he is admin
         if ($this->checkAuth()['isLogged'] !== true && $this->checkAuth()['isAdmin'] !== true) {
-            // Error : Forbidden
             header('Location: /erreur/acces-interdit'); 
         }
 
@@ -52,7 +50,6 @@ class AdminController extends Controller
     {
         // Check if user is logged and if he is admin
         if ($this->checkAuth()['isLogged'] !== true && $this->checkAuth()['isAdmin'] !== true) {
-            // Error : Forbidden
             header('Location: /erreur/acces-interdit');
         }
 

@@ -11,9 +11,9 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            {% if errors != null %}
+            {% if error != null %}
                 <div class="error">
-                    {{ 'Erreur : ' ~ errors }}
+                    {{ 'Erreur : ' ~ error }}
                 </div>     
             {% endif %}
             <form id="contact-form" method="POST" action="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition/enregistrement">
