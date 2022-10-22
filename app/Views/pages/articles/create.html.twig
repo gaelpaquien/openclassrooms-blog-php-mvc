@@ -12,9 +12,9 @@
                 <div class="divider-custom-line"></div>
             </div>
             <form id="contact-form" method="POST" action="/article/creation/enregistrement" enctype="multipart/form-data">
-                {% if errors != null %}
+                {% if error != null %}
                     <div class="error">
-                        {{ 'Erreur : ' ~ errors }}
+                        {{ 'Erreur : ' ~ error }}
                     </div>     
                 {% endif %}
                 <div class="mb-3">

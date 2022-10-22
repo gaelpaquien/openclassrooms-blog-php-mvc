@@ -10,22 +10,22 @@ class UsersController extends Controller
 
         // Check if form as sent
         if (empty($this->superglobals->get_POST())) {
-            $this->view('pages/auth/login.html.twig', ['error' => $error]);
+            $this->view('pages/auth/signup.html.twig', ['error' => $error]);
             return;
         }
 
         // Check if email already exists
         $checkEmail = $this->users->checkExists('users', 'email', $this->superglobals->get_POST()['email']);
-        if (false === $checkEmail) {
+        if (true === $checkEmail) {
             $error = "Cette adresse email existe déjà.";
-            $this->view('pages/auth/login.html.twig', ['error' => $error]);
+            $this->view('pages/auth/signup.html.twig', ['error' => $error]);
             return;
         }
                 
         // Check if password and password-confirm match
         if ($this->superglobals->get_POST()['password'] !== $this->superglobals->get_POST()['password-confirm']) {
             $error = "Le mot de passe et la confirmation du mot de passe doivent corespondres.";
-            $this->view('pages/auth/login.html.twig', ['error' => $error]);
+            $this->view('pages/auth/signup.html.twig', ['error' => $error]);
             return;
         }
 
@@ -37,11 +37,9 @@ class UsersController extends Controller
             'lastname' => $this->superglobals->get_POST()['lastname']
         ];
 
-        // Check form data
-        $errors = $this->formValidator->checkSignupForm($data);
-
         // Check if form data is ok
-        if (null === $errors) {
+        $error = $this->formValidator->checkSignupForm($data);
+        if (null === $error) {
             // Hash password
             $data['password'] = password_hash($this->superglobals->get_POST()['password'], PASSWORD_DEFAULT);
             // Creation of user and redirection
@@ -49,6 +47,9 @@ class UsersController extends Controller
             $this->users->create('users', $hydratedData); 
             header('Location: ' . '/'); 
         }
+
+        // Render if form data is not ok
+        $this->view('pages/auth/signup.html.twig', ['error' => $error]);
     }
 
     public function login(): void
@@ -86,7 +87,6 @@ class UsersController extends Controller
     {
         // Check if user is logged in and if he is admin
         if ($this->checkAuth()['isLogged'] !== true && $this->checkAuth()['isAdmin'] !== true) {
-            // Error : Forbidden
             header('Location: /erreur/acces-interdit');
         }  
 

@@ -1,17 +1,8 @@
 <?php
 namespace App\Helpers;
 
-use Twig\Node\Expression\Test\NullTest;
-
 class FormValidator
 {
-
-    protected ErrorsHandling $errors;
-
-    public function __construct()
-    {
-        $this->errors = new ErrorsHandling;
-    }
 
     public function validateEmpty(?string $value): bool
     {
@@ -64,25 +55,25 @@ class FormValidator
         foreach ($data as $key => $value) {
             if ($key === "email") {
                 if ($this->validateEmail($value) === false) {
-                    return $this->errors->newError('Cette adresse email est invalide.');
+                    return "Cette adresse email est invalide.";
                 }
             } elseif ($key === "password") {
                 $key = "mot de passe";
                 if ($this->validateLength(8, 35, $value) === false) {
-                    return $this->errors->newError('Le mot de passe doit contenir 8 caractères minimum et 35 caractères maximum.');
+                    return "Le mot de passe doit contenir 8 caractères minimum et 35 caractères maximum.";
                 }
             } elseif ($key === "firstname") {
                 $key = "prénom";
                 if ($this->validateString($value) === false || $this->validateLength(2, 35, $value) === false) {
-                    return $this->errors->newError('Vous ne pouvez pas utiliser ce prénom.');
+                    return "Vous ne pouvez pas utiliser ce prénom.";
                 }
             } elseif ($key === "lastname") {
                 $key = "nom";
                 if ($this->validateString($value) === false || $this->validateLength(2, 35, $value) === false) {
-                    return $this->errors->newError('Vous ne pouvez pas utiliser ce nom.');
+                    return "Vous ne pouvez pas utiliser ce nom.";
                 }
             } elseif ($this->validateEmpty($value) === false) {
-                return $this->errors->newError("Le champ '$key' ne peut pas être vide.");
+                return "Le champ '$key' ne peut pas être vide.";
             }
         }
 
@@ -97,32 +88,32 @@ class FormValidator
             if ($key === "title") {
                 $key = "titre";
                 if ($this->validateLength(8, 70, $value) === false) {
-                    return $this->errors->newError('Le titre doit contenir 8 caractères minimum et 70 caractères maximum.');
+                    return "Le titre doit contenir 8 caractères minimum et 70 caractères maximum.";
                 } 
             } 
             // Check caption
             if ($key === "caption") {
                 $key = "description";
                 if ($this->validateLength(20, 120, $value) === false) {
-                    return $this->errors->newError('La description doit contenir 20 caractères minimum et 120 caractères maximum.');
+                    return "La description doit contenir 20 caractères minimum et 120 caractères maximum.";
                 } 
             }
             // Check content
             if ($key === "content") {
                 $key = "contenu";
                 if ($this->validateLength(50, 250, $value) === false) {
-                    return $this->errors->newError('Le contenu doit contenir 50 caractères minimum et 250 caractères maximum.');
+                    return "Le contenu doit contenir 50 caractères minimum et 250 caractères maximum.";
                 } 
             }
             // Check author_id 
             if ($key === "author_id") {
                 if ($this->validateNumber($value) === false) {
-                    return $this->errors->newError('Un problème est survenue lors du choix de l\'auteur.');
+                    return "Un problème est survenue lors du choix de l\'auteur.";
                 }
             }
             // Check empty field
             if($this->validateEmpty($value) === false) {
-                return $this->errors->newError("Le champ '$key' ne peut pas être vide.");
+                return "Le champ '$key' ne peut pas être vide.";
             }
         }
 
