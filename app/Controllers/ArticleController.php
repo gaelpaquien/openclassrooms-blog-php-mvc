@@ -1,18 +1,18 @@
 <?php
 namespace App\Controllers;
 
-class ArticlesController extends Controller
+class ArticleController extends Controller
 {
 
     public function index(): void
     {
         // Pagination
-        $countArticles = $this->articles->countAll('articles');
+        $countArticles = $this->article->countAll('articles');
         $nbArticles = (int) $countArticles->nb_articles;
         $pages = $this->pagination->pagination($nbArticles, 6);
 
         // Get data of all articles
-        $data = $this->articles->findAll($pages[0]['limitFirst'], $pages[0]['perPage']);
+        $data = $this->article->findAll($pages[0]['limitFirst'], $pages[0]['perPage']);
 
         // Render
         $this->view('pages/articles/index.html.twig', [
@@ -34,15 +34,15 @@ class ArticlesController extends Controller
         }
 
         // Get data of current article
-        $data = $this->articles->find($this->params['id']);
+        $data = $this->article->find($this->params['id']);
 
         // Pagination
-        $countComments = $this->comments->countAllValidFromArticle($this->params['id']);
+        $countComments = $this->comment->countAllValidFromArticle($this->params['id']);
         $nbComments = (int) $countComments->nb_comments;
         $pages = $this->pagination->pagination($nbComments, 3);
 
         // Get validate comments of current article
-        $comments = $this->comments->findAllValidFromArticle($this->params['id'], $pages[0]['limitFirst'], $pages[0]['perPage']);
+        $comments = $this->comment->findAllValidFromArticle($this->params['id'], $pages[0]['limitFirst'], $pages[0]['perPage']);
 
         // Check if user is logged in
         if ($this->checkAuth()['isLogged'] === true) {
@@ -87,7 +87,7 @@ class ArticlesController extends Controller
         }
 
         // Check if title already exists
-        $checkTitle = $this->articles->checkExists('articles', 'title', $this->superglobals->get_POST()['title']);
+        $checkTitle = $this->article->checkExists('articles', 'title', $this->superglobals->get_POST()['title']);
         if (true === $checkTitle) {
             $error = "Ce titre existe déjà.";
             $this->view('pages/articles/create.html.twig', ['error' => $error]);
@@ -128,10 +128,9 @@ class ArticlesController extends Controller
         $error = $this->formValidator->checkArticleForm($data);
         if (null === $error) {
             // Creation of article and redirection
-            $hydratedData = $this->articles->hydrate($data);
-            $this->articles->create('articles', $hydratedData); 
+            $hydratedData = $this->article->hydrate($data);
+            $this->article->create('articles', $hydratedData); 
             header('Location: ' . '/articles'); 
-            exit();
         }
         
         // Render
@@ -143,10 +142,10 @@ class ArticlesController extends Controller
         $error = null;
 
         // Get data of current article
-        $data = $this->articles->find($this->params['id']);
+        $data = $this->article->find($this->params['id']);
 
         // Get all admin
-        $admins = $this->users->findAllAdmin();
+        $admins = $this->user->findAllAdmin();
         $listAdmins = [];
         foreach ($admins as $admin) {
             if ($admin->id != $data[0]->getAuthor_id()) {
@@ -177,7 +176,7 @@ class ArticlesController extends Controller
         }
 
         // Checks if title exist and title is not equal to this title
-        $checkTitle = $this->articles->checkExists('articles', 'title', $this->superglobals->get_POST()['title']);  
+        $checkTitle = $this->article->checkExists('articles', 'title', $this->superglobals->get_POST()['title']);  
         if ($checkTitle === true && $this->superglobals->get_POST()['title'] !== $data[0]->getTitle()) {
             $error = "Ce titre existe déjà.";
             $this->view('pages/articles/update.html.twig', [
@@ -201,7 +200,7 @@ class ArticlesController extends Controller
         // If check form data is ok
         if (null === $error) {
             // Update of article and redirection
-            $this->articles->setId($this->params['id'])
+            $this->article->setId($this->params['id'])
                         ->setTitle($this->superglobals->get_POST()['title'])
                         ->setSlug($this->text->slugify($this->superglobals->get_POST()['title']))
                         ->setContent($this->superglobals->get_POST()['content'])
@@ -209,7 +208,7 @@ class ArticlesController extends Controller
                         ->setAuthor_id($this->superglobals->get_POST()['author'])
                         ->setUpdated_at($this->date->getDateNow())
                         ->update('articles', $this->params['id']);
-            header('Location: /article/' . $this->articles->getSlug() . '/' . $this->articles->getId()); 
+            header('Location: /article/' . $this->article->getSlug() . '/' . $this->article->getId()); 
         }
         
         // Render
@@ -224,7 +223,7 @@ class ArticlesController extends Controller
     public function delete(): void
     {
         // Get data of current articles
-        $data = $this->articles->find($this->params['id']);
+        $data = $this->article->find($this->params['id']);
 
         // Check if user is logged in and if he is author of article or admin
         if ($this->checkAuth()['isLogged'] !== true && ($this->superglobals->get_SESSION()['user_id'] !== $data[0]->getAuthor_id() || $this->checkAuth()['isAdmin'] !== true)) {
@@ -238,15 +237,15 @@ class ArticlesController extends Controller
         }
 
         // Delete comments associated with article
-        $comments = $this->comments->findAllBy('comments', 'article_id', $this->params['id']);
+        $comments = $this->comment->findAllBy('comments', 'article_id', $this->params['id']);
         if (!empty($comments)) {
             foreach ($comments as $comment) {
-                $this->comments->delete('comments', $comment->id);
+                $this->comment->delete('comments', $comment->id);
             }
         }
         
         // Delete article and redirection
-        $this->articles->delete('articles', $this->params['id']);
+        $this->article->delete('articles', $this->params['id']);
         header('Location: /articles'); 
     }
 

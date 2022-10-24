@@ -11,9 +11,9 @@ class AdminController extends Controller
             header('Location: /erreur/acces-interdit');
         }
 
-        $countComments = $this->comments->countAll("comments");
-        $countUsers = $this->users->countAll("users");
-        $countArticles = $this->articles->countAll("articles");
+        $countComments = $this->comment->countAll("comments");
+        $countUsers = $this->user->countAll("users");
+        $countArticles = $this->article->countAll("articles");
 
         // Render
         $this->view('pages/admin/index.html.twig', [
@@ -31,12 +31,12 @@ class AdminController extends Controller
         }
 
         // Pagination
-        $countComments = $this->comments->countAllInvalid();
+        $countComments = $this->comment->countAllInvalid();
         $nbComments = (int) $countComments->nb_comments_invalid;
         $pages = $this->pagination->pagination($nbComments, 10);
 
         // Get data of all invalid comments
-        $comments = $this->comments->findAllInvalid($pages[0]['limitFirst'], $pages[0]['perPage']);
+        $comments = $this->comment->findAllInvalid($pages[0]['limitFirst'], $pages[0]['perPage']);
 
         // Render
         $this->view('pages/admin/comments.html.twig', [
@@ -54,12 +54,12 @@ class AdminController extends Controller
         }
 
         // Pagination
-        $countUsers = $this->users->countAllUsers();
+        $countUsers = $this->user->countAllUsers();
         $nbComments = (int) $countUsers->nb_users;
         $pages = $this->pagination->pagination($nbComments, 10);
 
         // Get data of all invalid comments
-        $users = $this->users->findAll($pages[0]['limitFirst'], $pages[0]['perPage']);
+        $users = $this->user->findAll($pages[0]['limitFirst'], $pages[0]['perPage']);
 
         // Render
         $this->view('pages/admin/users.html.twig', [

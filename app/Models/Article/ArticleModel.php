@@ -1,7 +1,7 @@
 <?php
-namespace App\Models\Articles;
+namespace App\Models\Article;
 
-class ArticlesModel extends ArticlesManager
+class ArticleModel extends ArticleManager
 {
 
     protected int $id;

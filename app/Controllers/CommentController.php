@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-class CommentsController extends Controller
+class CommentController extends Controller
 {
 
     public function create() 
@@ -23,8 +23,8 @@ class CommentsController extends Controller
             ];
 
             // Creation of article and redirection
-            $hydratedData = $this->comments->hydrate($data);
-            $this->comments->create('comments', $hydratedData); 
+            $hydratedData = $this->comment->hydrate($data);
+            $this->comment->create('comments', $hydratedData); 
             $commentSent = true;
             header('Location: /article/' . $this->params['slug'] . '/' . $this->params['id'] . '?commentSent=' . $commentSent);
         }
@@ -38,7 +38,7 @@ class CommentsController extends Controller
         } 
 
         // Valid comment and redirection
-        $this->comments->validComment($this->params['id'], $this->superglobals->get_SESSION()['user_id']);
+        $this->comment->validComment($this->params['id'], $this->superglobals->get_SESSION()['user_id']);
         header('Location: /administration/commentaires');
     }
 
@@ -50,7 +50,7 @@ class CommentsController extends Controller
         }
 
         // Delete comment and redirection
-        $this->comments->delete('comments', $this->params['id']);
+        $this->comment->delete('comments', $this->params['id']);
         header('Location: /administration/commentaires');
     }
 
