@@ -1,10 +1,10 @@
 <?php
-namespace App\Models\Articles;
+namespace App\Models\Article;
 
 use App\Models\GlobalManager;
-use App\Models\Users\UsersModel;
+use App\Models\User\UserModel;
 
-class ArticlesManager extends GlobalManager
+class ArticleManager extends GlobalManager
 {
 
     public function findAll(int $limit, int $perPage): array
@@ -18,7 +18,7 @@ class ArticlesManager extends GlobalManager
         // Transforms and return data
         $data = array();
         foreach ($items as $item) {
-            $model = new ArticlesModel;
+            $model = new ArticleModel;
             $model->setId($item->id)
                   ->setTitle($item->title)
                   ->setSlug($item->slug)
@@ -63,7 +63,7 @@ class ArticlesManager extends GlobalManager
 
         // Transforms data
         $data = array();
-        $articlesModel = new ArticlesModel;
+        $articlesModel = new ArticleModel;
         $articlesModel->setId($result->id)
                       ->setTitle($result->title)
                       ->setSlug($result->slug)
@@ -73,7 +73,7 @@ class ArticlesManager extends GlobalManager
                       ->setCreated_at($result->created_at)
                       ->setUpdated_at($result->updated_at)
                       ->setImage($result->image);
-        $usersModel = new UsersModel;
+        $usersModel = new UserModel;
         $usersModel->setId($result->author_id)
                    ->setLastname($result->author_lastname)
                    ->setFirstname($result->author_firstname);

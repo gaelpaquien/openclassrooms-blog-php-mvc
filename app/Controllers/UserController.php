@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
 
     public function signup(): void
@@ -15,7 +15,7 @@ class UsersController extends Controller
         }
 
         // Check if email already exists
-        $checkEmail = $this->users->checkExists('users', 'email', $this->superglobals->get_POST()['email']);
+        $checkEmail = $this->user->checkExists('users', 'email', $this->superglobals->get_POST()['email']);
         if (true === $checkEmail) {
             $error = "Cette adresse email existe déjà.";
             $this->view('pages/auth/signup.html.twig', ['error' => $error]);
@@ -43,8 +43,8 @@ class UsersController extends Controller
             // Hash password
             $data['password'] = password_hash($this->superglobals->get_POST()['password'], PASSWORD_DEFAULT);
             // Creation of user and redirection
-            $hydratedData = $this->users->hydrate($data);
-            $this->users->create('users', $hydratedData); 
+            $hydratedData = $this->user->hydrate($data);
+            $this->user->create('users', $hydratedData); 
             header('Location: ' . '/'); 
         }
 
@@ -63,7 +63,7 @@ class UsersController extends Controller
         }
 
         // Check if the email exists and if the password and the confirmation password are identical
-        $user = $this->users->findBy('email', $this->superglobals->get_POST()['email']);
+        $user = $this->user->findBy('email', $this->superglobals->get_POST()['email']);
         if (null === $user || !password_verify($this->superglobals->get_POST()['password'], $user->getPassword())) {
             $error = "Email et/ou mot de passe incorrect.";
             $this->view('pages/auth/login.html.twig', ['error' => $error]);
@@ -91,29 +91,29 @@ class UsersController extends Controller
         }  
 
         // Delete comment if user is author
-        $comments = $this->comments->findAllBy('comments', 'author_id', $this->params['id']);
+        $comments = $this->comment->findAllBy('comments', 'author_id', $this->params['id']);
         if (!empty($comments)) {
             foreach ($comments as $comment) {
-                $this->comments->delete('comments', $comment->id);
+                $this->comment->delete('comments', $comment->id);
             }
         }
 
         // Delete article if user is author
-        $articles = $this->articles->findAllBy('articles', 'author_id', $this->params['id']);
+        $articles = $this->article->findAllBy('articles', 'author_id', $this->params['id']);
         if (!empty($articles)) {
             foreach ($articles as $article) {
-                $articleComments = $this->comments->findAllBy('comments', 'article_id', $article->id);
+                $articleComments = $this->comment->findAllBy('comments', 'article_id', $article->id);
                 if (!empty($articleComments)) {
                     foreach ($articleComments as $comment) {
-                        $this->comments->delete('comments', $comment->id);
+                        $this->comment->delete('comments', $comment->id);
                     }
                 }
-                $this->articles->delete('articles', $article->id);
+                $this->article->delete('articles', $article->id);
             }
         }
         
         // Delete user and redirection
-        $this->users->delete('users', $this->params['id']);
+        $this->user->delete('users', $this->params['id']);
         header('Location: /administration/utilisateurs');
     }
 

@@ -1,7 +1,7 @@
 <?php
-namespace App\Models\Users;
+namespace App\Models\User;
 
-class UsersModel extends UsersManager
+class UserModel extends UserManager
 {
 
     protected int $id;

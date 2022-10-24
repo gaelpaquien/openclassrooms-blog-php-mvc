@@ -6,9 +6,9 @@ use App\Helpers\FormValidator;
 use App\Helpers\Pagination;
 use App\Helpers\Superglobals;
 use App\Helpers\Text;
-use App\Models\Articles\ArticlesModel;
-use App\Models\Comments\CommentsModel;
-use App\Models\Users\UsersModel;
+use App\Models\Article\ArticleModel;
+use App\Models\Comment\CommentModel;
+use App\Models\User\UserModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -19,11 +19,11 @@ class Controller
 
     protected Environment $twig;
 
-    protected ArticlesModel $articles;
+    protected ArticleModel $article;
 
-    protected CommentsModel $comments;
+    protected CommentModel $comment;
 
-    protected UsersModel $users;
+    protected UserModel $user;
 
     protected FormValidator $formValidator;
 
@@ -46,9 +46,9 @@ class Controller
         ]);
 
         // Models
-        $this->articles = new ArticlesModel;
-        $this->comments = new CommentsModel;
-        $this->users = new UsersModel;
+        $this->article = new ArticleModel;
+        $this->comment = new CommentModel;
+        $this->user = new UserModel;
 
         // Helpers
         $this->formValidator = new FormValidator;

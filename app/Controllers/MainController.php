@@ -7,7 +7,7 @@ class MainController extends Controller
     public function home(): void
     {
         // Get data of all articles with limit
-        $data = $this->articles->findAll(3, 3);
+        $data = $this->article->findAll(3, 3);
 
         // Render
         $this->view('pages/global/home.html.twig', ['articles' => $data]);
