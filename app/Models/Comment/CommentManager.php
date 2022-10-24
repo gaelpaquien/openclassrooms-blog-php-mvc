@@ -1,11 +1,11 @@
 <?php
-namespace App\Models\Comments;
+namespace App\Models\Comment;
 
-use App\Models\Articles\ArticlesModel;
+use App\Models\Article\ArticleModel;
 use App\Models\GlobalManager;
-use App\Models\Users\UsersModel;
+use App\Models\User\UserModel;
 
-class CommentsManager extends GlobalManager
+class CommentManager extends GlobalManager
 {
 
     public function countAllInvalid()
@@ -40,19 +40,19 @@ class CommentsManager extends GlobalManager
         $data = array();
         foreach ($results as $result) {
             $item = array();
-            $commentsModel = new CommentsModel;
+            $commentsModel = new CommentModel;
             $commentsModel->setId($result->id)
                             ->setAuthor_id($result->author_id)
                             ->setContent($result->content)
                             ->setValidate($result->validate)
                             ->setArticle_id($result->article_id)
                             ->setCreated_at($result->created_at);
-            $usersModel = new UsersModel;
+            $usersModel = new UserModel;
             $usersModel->setId($result->author_id)
                        ->setLastname($result->authorLastname)
                        ->setFirstname($result->authorFirstname);
 
-            $articlesModel = new ArticlesModel;
+            $articlesModel = new ArticleModel;
             $articlesModel->setSlug($result->articleSlug);
 
             array_push($item, $commentsModel, $usersModel, $articlesModel);
@@ -100,12 +100,12 @@ class CommentsManager extends GlobalManager
         $data = array();
         foreach ($results as $result) {
             $item = array();
-            $articlesModel = new CommentsModel;
+            $articlesModel = new CommentModel;
             $articlesModel->setId($result->id)
                           ->setAuthor_id($result->author_id)
                           ->setContent($result->content)
                           ->setCreated_at($result->created_at);
-            $usersModel = new UsersModel;
+            $usersModel = new UserModel;
             $usersModel->setId($result->author_id)
                        ->setLastname($result->author_lastname)
                        ->setFirstname($result->author_firstname);

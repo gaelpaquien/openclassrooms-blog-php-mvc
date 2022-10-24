@@ -1,10 +1,10 @@
 <?php
-namespace App\Models\Users;
+namespace App\Models\User;
 
 use App\Models\GlobalManager;
 use PDOStatement;
 
-class UsersManager extends GlobalManager
+class UserManager extends GlobalManager
 {
 
     public function countAllUsers()
@@ -27,7 +27,7 @@ class UsersManager extends GlobalManager
         // Transforms data
         $data = array();
         foreach ($results as $result) {
-            $usersModel = new UsersModel();
+            $usersModel = new UserModel();
             $usersModel->setId($result->id)
                        ->setEmail($result->email)
                        ->setFirstname($result->firstname)
@@ -40,7 +40,7 @@ class UsersManager extends GlobalManager
         return $data;
     }
 
-    public function findBy(string $params, string $value) : UsersModel | null
+    public function findBy(string $params, string $value) : UserModel | null
     {
         $user = null;
 
@@ -52,7 +52,7 @@ class UsersManager extends GlobalManager
 
         // Check result and create UsersModel
         if ($result) {
-            $user = new UsersModel;
+            $user = new UserModel;
             $user->setId($result->id)
                  ->setEmail($result->email)
                  ->setPassword($result->password)
