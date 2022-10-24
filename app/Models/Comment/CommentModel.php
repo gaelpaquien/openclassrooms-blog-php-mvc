@@ -1,7 +1,7 @@
 <?php
-namespace App\Models\Comments;
+namespace App\Models\Comment;
 
-class CommentsModel extends CommentsManager
+class CommentModel extends CommentManager
 {
 
     protected int $id;
