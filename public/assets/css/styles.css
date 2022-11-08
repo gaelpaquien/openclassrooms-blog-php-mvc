@@ -24,9 +24,9 @@ ul {
 }
 
 @media (max-width: 600px) {
-    .page-section .page-section-heading {
-      font-size: 1.55rem;
-      line-height: 2rem;
+  .page-section .page-section-heading {
+    font-size: 1.55rem;
+    line-height: 2rem;
   }
 }
 
@@ -76,7 +76,7 @@ ul {
   opacity: 0.8;
 }
 
-.admin .btn, 
+.admin .btn,
 .pagination .btn {
   background-color: #d6ad60;
   color: #122620;
@@ -457,7 +457,7 @@ ul {
 }
 
 @media (max-width: 750px) {
-  .admin td, 
+  .admin td,
   .admin th {
     font-size: 0.8rem;
   }
@@ -783,7 +783,7 @@ ul {
   margin: 30px;
 }
 
-.termOfUse h2, 
+.termOfUse h2,
 .termOfUse h3 {
   color: #d6ad60;
 }
