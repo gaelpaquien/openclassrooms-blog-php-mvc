@@ -24,10 +24,10 @@ ul {
 }
 
 @media (max-width: 600px) {
-  .page-section .page-section-heading {
-    font-size: 1.55rem;
-    line-height: 2rem;
-}
+    .page-section .page-section-heading {
+      font-size: 1.55rem;
+      line-height: 2rem;
+  }
 }
 
 @media (min-width: 992px) {
@@ -76,7 +76,8 @@ ul {
   opacity: 0.8;
 }
 
-.admin .btn, .pagination .btn {
+.admin .btn, 
+.pagination .btn {
   background-color: #d6ad60;
   color: #122620;
   border: none;
@@ -454,10 +455,13 @@ ul {
     margin: 5px;
   }
 }
+
 @media (max-width: 750px) {
-   .admin td, .admin th {
+  .admin td, 
+  .admin th {
     font-size: 0.8rem;
   }
+
   .admin .td-btn .btn {
     font-size: 0.6rem;
     padding: 5px;
@@ -520,7 +524,7 @@ ul {
 
 .recent-articles .card-img-top,
 .articles .card-img-top,
-.article .card-img-top, 
+.article .card-img-top,
 .img-fluid {
   height: 260px;
   width: 100%;
@@ -655,7 +659,7 @@ ul {
 .article .comment-form .btn,
 .article .comment-delete-btn {
   margin-top: 0;
-  font-size: 0.8pxrem;
+  font-size: 0.8rem;
 }
 
 .article .comment-delete-btn {
@@ -779,7 +783,8 @@ ul {
   margin: 30px;
 }
 
-.termOfUse h2, .termOfUse h3 {
+.termOfUse h2, 
+.termOfUse h3 {
   color: #d6ad60;
 }
 
