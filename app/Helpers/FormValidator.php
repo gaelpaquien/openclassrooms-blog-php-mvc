@@ -50,6 +50,14 @@ class FormValidator
         return true;  
     }
 
+    public function checkToken($token) {
+        $superglobal = new Superglobal;
+        if (!$token || $token !== $superglobal->get_SESSION()['token']) {
+            return false;
+        } 
+        return true;
+    }
+
     public function checkSignupForm(array $data): string | null 
     { 
         foreach ($data as $key => $value) {
@@ -59,18 +67,18 @@ class FormValidator
                 }
             } elseif ($key === "password") {
                 $key = "mot de passe";
-                if ($this->validateLength(8, 35, $value) === false) {
-                    return "Le mot de passe doit contenir 8 caractères minimum et 35 caractères maximum.";
+                if ($this->validateLength(6, 35, $value) === false) {
+                    return "Le mot de passe doit contenir 6 caractères minimum et 35 caractères maximum.";
                 }
             } elseif ($key === "firstname") {
                 $key = "prénom";
                 if ($this->validateString($value) === false || $this->validateLength(2, 35, $value) === false) {
-                    return "Vous ne pouvez pas utiliser ce prénom.";
+                    return "Le prénom doit contenir 2 caractères minimum et 35 caractères maximum.";
                 }
             } elseif ($key === "lastname") {
                 $key = "nom";
                 if ($this->validateString($value) === false || $this->validateLength(2, 35, $value) === false) {
-                    return "Vous ne pouvez pas utiliser ce nom.";
+                    return "Le nom doit contenir 2 caractères minimum et 35 caractères maximum.";
                 }
             } elseif ($this->validateEmpty($value) === false) {
                 return "Le champ '$key' ne peut pas être vide.";
@@ -87,22 +95,22 @@ class FormValidator
             // Check title
             if ($key === "title") {
                 $key = "titre";
-                if ($this->validateLength(8, 70, $value) === false) {
-                    return "Le titre doit contenir 8 caractères minimum et 70 caractères maximum.";
+                if ($this->validateLength(4, 90, $value) === false) {
+                    return "Le titre doit contenir 4 caractères minimum et 90 caractères maximum.";
                 } 
             } 
             // Check caption
             if ($key === "caption") {
                 $key = "description";
-                if ($this->validateLength(20, 120, $value) === false) {
-                    return "La description doit contenir 20 caractères minimum et 120 caractères maximum.";
+                if ($this->validateLength(10, 130, $value) === false) {
+                    return "La description doit contenir 10 caractères minimum et 130 caractères maximum.";
                 } 
             }
             // Check content
             if ($key === "content") {
                 $key = "contenu";
-                if ($this->validateLength(50, 250, $value) === false) {
-                    return "Le contenu doit contenir 50 caractères minimum et 250 caractères maximum.";
+                if ($this->validateLength(30, 350, $value) === false) {
+                    return "Le contenu doit contenir 30 caractères minimum et 350 caractères maximum.";
                 } 
             }
             // Check author_id 

@@ -6,8 +6,9 @@ use PDOStatement;
 
 class GlobalManager extends Database
 {
-    public function countAll(string $table)
+    public function countAll(string $table): mixed
     {
+        // Execute query and return result
         return $this->request("SELECT COUNT(*) as nb_$table FROM $table")->fetch();
     }
 
@@ -16,7 +17,7 @@ class GlobalManager extends Database
         // Query
         $sql = "SELECT * FROM $table WHERE $params = :value";
         
-        // Execute request
+        // Execute query
         $result = $this->request($sql, ['value' => $value])->fetch();
 
         // Check and return result
@@ -27,18 +28,19 @@ class GlobalManager extends Database
         
     }
 
-    public function findAllBy(string $table, string $params, string $value)
+    public function findAllBy(string $table, string $params, string $value): mixed
     {
         // Query 
         $sql = "SELECT * FROM $table WHERE $params = :value";
 
-        // Execute request
+        // Execute query
         $result = $this->request($sql, ['value' => $value])->fetchAll();
 
+        // Return result
         return $result;
     }
 
-    public function create(string $table)
+    public function create(string $table): PDOStatement | false
     {
         $keys = [];
         $inter = [];
@@ -57,7 +59,7 @@ class GlobalManager extends Database
         $list_keys = implode(', ', $keys);
         $list_inter = implode(', ', $inter);
 
-        // Execute request
+        // Execute query and return result
         return $this->request('INSERT INTO ' . $table . ' (' . $list_keys . ')VALUES(' . $list_inter . ')', $values);
     }
 
@@ -79,7 +81,7 @@ class GlobalManager extends Database
         // Transforms array into a string
         $list_keys = implode(', ', $keys);
 
-        // Execute request
+        // Execute query and return result
         return $this->request('UPDATE ' . $table .  ' SET ' . $list_keys . ' WHERE id = ?', $values);
     }
 
@@ -94,11 +96,14 @@ class GlobalManager extends Database
                 $this->$setter($value);
             }
         }
+
+        // Return $this
         return $this;
     }
 
     public function delete(string $table, int $id): PDOStatement | false 
     {
+        // Execute query and return result
         return $this->request("DELETE FROM $table WHERE id = :id", ['id' => $id]);
     }
 
@@ -109,12 +114,12 @@ class GlobalManager extends Database
 
         // Check if there are any parameters
         if ($params !== null) {
-            // Prepared request
+            // Prepared query
             $query = $this->db->prepare($sql);
             $query->execute($params);
             return $query;
         } else {
-            // Simple request
+            // Simple query
             return $this->db->query($sql);
         }
     }

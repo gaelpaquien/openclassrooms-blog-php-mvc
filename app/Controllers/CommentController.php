@@ -4,33 +4,38 @@ namespace App\Controllers;
 class CommentController extends Controller
 {
 
-    public function create() 
+    public function create(): void
     {
         $commentSent = false; 
 
-        // Checks if user is logged in
+        // Check if user is logged in
         if ($this->checkAuth()['isLogged'] !== true) {
             header('Location: /erreur/acces-interdit');
         } 
+        
 
         // Check if form as sent
-        if (!empty($this->superglobals->get_POST())) {
-            // Add data of article in array
-            $data = [
-                'author_id' => $this->superglobals->get_SESSION()['user_id'],
-                'content' => $this->superglobals->get_POST()['content'],
+        if (!empty($this->superglobal->get_POST())) {
+            // Check token form to prevent CSRF attack
+            if (false === $this->formValidator->checkToken($this->superglobal->get_POST()['token'])) {
+                header('Location: /article/' . $this->params['slug'] . '/' . $this->params['id']);
+            };
+
+            // Add data of comment in array
+            $comment = [
+                'author_id' => $this->superglobal->get_SESSION()['user_id'],
+                'content' => $this->superglobal->get_POST()['content'],
                 'article_id' => $this->params['id'],
             ];
 
-            // Creation of article and redirection
-            $hydratedData = $this->comment->hydrate($data);
-            $this->comment->create('comments', $hydratedData); 
+            // Creation of comment and redirection
+            $this->comment->create('comments', $this->comment->hydrate($comment)); 
             $commentSent = true;
             header('Location: /article/' . $this->params['slug'] . '/' . $this->params['id'] . '?commentSent=' . $commentSent);
         }
     }
 
-    public function validation()
+    public function validation(): void
     {
         // Check if user is logged in and if he is admin
         if ($this->checkAuth()['isLogged'] !== true && $this->checkAuth()['isAdmin'] !== true) {
@@ -38,11 +43,11 @@ class CommentController extends Controller
         } 
 
         // Valid comment and redirection
-        $this->comment->validComment($this->params['id'], $this->superglobals->get_SESSION()['user_id']);
+        $this->comment->validComment($this->params['id'], $this->superglobal->get_SESSION()['user_id']);
         header('Location: /administration/commentaires');
     }
 
-    public function delete()
+    public function delete(): void
     {
         // Check if user is logged in and if he is admin
         if ($this->checkAuth()['isLogged'] !== true && $this->checkAuth()['isAdmin'] !== true) {

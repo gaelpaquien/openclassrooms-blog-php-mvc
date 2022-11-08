@@ -7,12 +7,13 @@ use PDOStatement;
 class UserManager extends GlobalManager
 {
 
-    public function countAllUsers()
+    public function countAllUsers(): mixed
     {
+        // Execute query and return result
         return $this->request("SELECT COUNT(*) as nb_users FROM users WHERE admin = 0")->fetch();
     }
 
-    public function findAll(int $limit, int $perPage)
+    public function findAll(int $limit, int $perPage): array
     {
         // Query
         $sql = "SELECT *
@@ -21,10 +22,10 @@ class UserManager extends GlobalManager
                 ORDER BY created_at ASC
                 LIMIT $limit, $perPage";
 
-        // Execute request
+        // Execute query
         $results = $this->request($sql)->fetchAll();
 
-        // Transforms data
+        // Transform result data
         $data = array();
         foreach ($results as $result) {
             $usersModel = new UserModel();
@@ -36,7 +37,7 @@ class UserManager extends GlobalManager
             array_push($data, $usersModel);
         }
 
-        // Return data
+        // Return array containing UserModel
         return $data;
     }
 
@@ -47,7 +48,7 @@ class UserManager extends GlobalManager
         // Query 
         $sql = "SELECT * FROM users WHERE $params = :value";
 
-        // Execute request
+        // Execute query
         $result = $this->request($sql, ['value' => $value])->fetch();
 
         // Check result and create UsersModel
@@ -62,7 +63,7 @@ class UserManager extends GlobalManager
                  ->setCreated_at($result->created_at);
         }
 
-        // Return $user
+        // Return UserModel
         return $user;
     }
 
@@ -71,12 +72,13 @@ class UserManager extends GlobalManager
         // Query 
         $sql = "SELECT * FROM users WHERE id = :id";
 
-        // Execute request
+        // Execute query and return result
         return $this->request($sql, ['id' => $id])->fetch();
     }
 
-    public function findAllAdmin()
+    public function findAllAdmin(): mixed
     {
+        // Execute query and return result
         return $this->request("SELECT * FROM users WHERE admin = 1")->fetchAll();
     }
 

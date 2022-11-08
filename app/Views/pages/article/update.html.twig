@@ -45,6 +45,7 @@
                     </button>
                     <a class="btn" href="/article/{{ article.getSlug }}/{{ article.getId }}/suppression">Supprimer l'article</a>
                 </div>
+                <input type="hidden" name="token" value="{{ formToken }}">
             </form>
         </div>
     </section>
