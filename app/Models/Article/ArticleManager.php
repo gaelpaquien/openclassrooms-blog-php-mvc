@@ -12,10 +12,10 @@ class ArticleManager extends GlobalManager
         // Query
         $sql = "SELECT * FROM articles ORDER BY updated_at DESC, created_at DESC LIMIT $limit, $perPage";
 
-        // Execute request
+        // Execute query
         $items = $this->request($sql)->fetchAll();
 
-        // Transforms and return data
+        // Transform result data
         $data = array();
         foreach ($items as $item) {
             $model = new ArticleModel;
@@ -31,6 +31,8 @@ class ArticleManager extends GlobalManager
 
             array_push($data, $model);
         }
+
+        // Return array containing ArticleModel 
         return $data;
     }
 
@@ -53,15 +55,15 @@ class ArticleManager extends GlobalManager
                 INNER JOIN users as B ON A.author_id = B.id
                 WHERE A.id = :id";
 
-        // Execute request
+        // Execute query
         $result = $this->request($sql, ['id' => $id])->fetch();
         
-        // Checks id of article
+        // Check id of article
         if ($result === false) {
             header('Location: /erreur/page-introuvable');
         }
 
-        // Transforms data
+        // Transform result data
         $data = array();
         $articlesModel = new ArticleModel;
         $articlesModel->setId($result->id)
@@ -79,7 +81,7 @@ class ArticleManager extends GlobalManager
                    ->setFirstname($result->author_firstname);
         array_push($data, $articlesModel, $usersModel);
 
-        // Return data
+        // Return array containing ArticleModel, UserModel
         return $data;
     }
 

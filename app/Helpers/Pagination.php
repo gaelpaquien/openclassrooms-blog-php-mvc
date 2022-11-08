@@ -3,12 +3,12 @@ namespace App\Helpers;
 
 class Pagination {
 
-    public function pagination(int $nbItems, int $perPage) {
-
+    public function pagination(int $nbItems, int $perPage): array 
+    {
         // Define current page
-        $superglobals = new Superglobals;
-        if (isset($superglobals->get_GET()['p']) && !empty($superglobals->get_GET()['p'])) {
-            $currentPage = (int) strip_tags($superglobals->get_GET()['p']);
+        $superglobal = new superglobal;
+        if (isset($superglobal->get_GET()['p']) && !empty($superglobal->get_GET()['p'])) {
+            $currentPage = (int) strip_tags($superglobal->get_GET()['p']);
         } else {
             $currentPage = 1;
         }
@@ -29,7 +29,7 @@ class Pagination {
         // Limit calcul
         $limitFirst = ($currentPage * $perPage) - $perPage;
 
-        // Return pages data
+        // Return data of pages
         return array([
             'limitFirst' => $limitFirst,
             'perPage' => $perPage,
