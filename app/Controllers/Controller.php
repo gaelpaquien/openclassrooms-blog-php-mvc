@@ -4,7 +4,7 @@ namespace App\Controllers;
 use App\Helpers\Date;
 use App\Helpers\FormValidator;
 use App\Helpers\Pagination;
-use App\Helpers\Superglobals;
+use App\Helpers\Superglobal;
 use App\Helpers\Text;
 use App\Models\Article\ArticleModel;
 use App\Models\Comment\CommentModel;
@@ -33,7 +33,7 @@ class Controller
 
     protected Pagination $pagination;
 
-    protected Superglobals $superglobals;
+    protected Superglobal $superglobal;
 
     protected array $params;
 
@@ -42,7 +42,7 @@ class Controller
         // Twig
         $this->loader = new FilesystemLoader(ROOT . '/app/Views');
         $this->twig = new Environment($this->loader, [
-            'cache' => false // ROOT . '/tmp/cache'
+            'cache' => false// ROOT . '/tmp/cache'
         ]);
 
         // Models
@@ -55,7 +55,7 @@ class Controller
         $this->text = new Text;
         $this->date = new Date;
         $this->pagination = new Pagination;
-        $this->superglobals = new Superglobals;
+        $this->superglobal = new Superglobal;
     }
 
     public function checkAuth(): array
@@ -66,10 +66,10 @@ class Controller
         ];
         
         // Check if user is logged in
-        if (isset($this->superglobals->get_SESSION()['user_id'])) {
+        if (isset($this->superglobal->get_SESSION()['user_id'])) {
             $auth['isLogged'] = true;
             // Check if user is admin
-            if ($this->superglobals->get_SESSION()['user_admin'] === 1) {
+            if ($this->superglobal->get_SESSION()['user_admin'] === 1) {
                 $auth['isAdmin'] = true;
             }
         }   
@@ -77,20 +77,23 @@ class Controller
         return $auth;
     }
 
-    // Display Twig renderer
     public function view(string $path, $datas = []): void
     {
         // Defines Twig global variable containing authentication status
         $auth = $this->checkAuth();
         $this->twig->addGlobal('auth', $auth);
+        // Defines Twig global variable containing form token to prevent CSRF attack
+        $token = md5(uniqid(mt_rand(), true));
+        $_SESSION['token'] = $token;
+        $this->twig->addGlobal('formToken', $token);
 
         // Display Twig render
         print_r($this->twig->render($path, $datas));
     }
 
-    // Get URL parameters from router
     public function setParams(array $params): void
     {
+        // Get URL parameters from router
         $this->params = $params;
     }
 

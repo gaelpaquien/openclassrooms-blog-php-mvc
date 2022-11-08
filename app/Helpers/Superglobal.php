@@ -1,7 +1,7 @@
 <?php
 namespace App\Helpers;
 
-class Superglobals
+class Superglobal
 {
     private $_SERVER;
     private $_POST;
@@ -12,17 +12,14 @@ class Superglobals
 
     public function __construct()
     {
-        $this->define_superglobals();
+        $this->define_superglobal();
     }
 
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
-     *
-     * @param $key
-     * @return mixed
      */
-    public function get_SERVER($key = null)
+    public function get_SERVER($key = null): mixed
     {
         if (null !== $key) {
             return (isset($this->_SERVER["$key"])) ? $this->_SERVER["$key"] : null;
@@ -34,12 +31,8 @@ class Superglobals
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
-     *
-     * @param $key
-     * @return mixed
      */
-
-    public function get_POST($key = null)
+    public function get_POST($key = null): mixed
     {
         if (null !== $key) {
             return (isset($this->_POST["$key"])) ? $this->_POST["$key"] : null;
@@ -51,11 +44,8 @@ class Superglobals
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
-     *
-     * @param $key
-     * @return mixed
      */
-    public function get_GET($key = null)
+    public function get_GET($key = null): mixed
     {
         if (null !== $key) {
             return (isset($this->_GET["$key"])) ? $this->_GET["$key"] : null;
@@ -67,11 +57,8 @@ class Superglobals
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
-     *
-     * @param $key
-     * @return mixed
      */
-    public function get_SESSION($key = null)
+    public function get_SESSION($key = null): mixed
     {
         if (null !== $key) {
             return (isset($this->_SESSION["$key"])) ? $this->_SESSION["$key"] : null;
@@ -83,11 +70,8 @@ class Superglobals
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
-     *
-     * @param $key
-     * @return mixed
      */
-    public function get_FILES($key = null)
+    public function get_FILES($key = null): mixed
     {
         if (null !== $key) {
             return (isset($this->_FILES["$key"])) ? $this->_FILES["$key"] : null;
@@ -99,11 +83,8 @@ class Superglobals
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
-     *
-     * @param $key
-     * @return mixed
      */
-    public function get_ENV($key = null)
+    public function get_ENV($key = null): mixed
     {
         if (null !== $key) {
             return (isset($this->_ENV["$key"])) ? $this->_ENV["$key"] : null;
@@ -113,15 +94,13 @@ class Superglobals
     }
 
     /**
-     * Function to define superglobals for use locally.
-     * We do not automatically unset the superglobals after
+     * Function to define superglobal for use locally.
+     * We do not automatically unset the superglobal after
      * defining them, since they might be used by other code.
-     *
-     * @return mixed
      */
-    private function define_superglobals()
+    private function define_superglobal(): void
     {
-        // Store a local copy of the PHP superglobals
+        // Store a local copy of the PHP superglobal
         // This should avoid dealing with the global scope directly
         // $this->_SERVER = $_SERVER;
         $this->_SERVER = (isset($_SERVER)) ? $_SERVER : null;
@@ -135,12 +114,10 @@ class Superglobals
     
     /**
      * You may call this function from your compositioning root,
-     * if you are sure superglobals will not be needed by
+     * if you are sure superglobal will not be needed by
      * dependencies or outside of your own code.
-     *
-     * @return void
      */
-    public function unset_superglobals()
+    public function unset_superglobal(): void
     {
         unset($_SERVER);
         unset($_POST);

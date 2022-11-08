@@ -15,21 +15,21 @@ class Router
 
     public function get(string $url, string $path, ?string $name = null): self
     {
-        // Get route
+        // GET route
         $this->router->map('GET', $url, $path, $name);
         return $this;
     }
 
     public function post(string $url, string $path, ?string $name = null): self
     {
-        // Post route
+        // POST route
         $this->router->map('POST', $url, $path, $name);
         return $this;
     }
 
     public function url(string $name, array $params = []): string
     {
-        // Generate route
+        // Generate URL
         return $this->router->generate($name, $params);
     }
 
@@ -37,7 +37,7 @@ class Router
     {
         $match = $this->router->match();
 
-        // Checks if route match
+        // Check if route match
         if (isset($match['target'])) {
             // Explore array path and get controller->method
             $path = $match['target'];
@@ -58,7 +58,6 @@ class Router
         }
         
         $class->$method();
-        //$router = $this;
 
         return $this;
     }

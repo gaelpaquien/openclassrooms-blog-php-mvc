@@ -37,19 +37,15 @@
                   {% if currentPage != 1 %}
                   <li class="page-item">
                     {% set previousPage = currentPage - 1 %}
-                    <a href="/articles?p={{ previousPage }}" class="page-link">Précédent</a>
+                    <a href="/articles?p={{ previousPage }}" class="btn page-link">Précédent</a>
                   </li>    
                   {% endif %}
                   {% if lastPage != true %}
                     <li class="page-item">
                       {% set nextPage = currentPage + 1 %}
-                      <a href="/articles?p={{ nextPage }}" class="page-link">Suivant</a>
+                      <a href="/articles?p={{ nextPage }}" class="btn page-link">Suivant</a>
                     </li>
                   {% endif %}
-<<<<<<< HEAD
-=======
-
->>>>>>> Optimization
                 </ul>
               </nav>
         </div>

@@ -9,13 +9,20 @@ class UserController extends Controller
         $error = null;
 
         // Check if form as sent
-        if (empty($this->superglobals->get_POST())) {
+        if (empty($this->superglobal->get_POST())) {
             $this->view('pages/auth/signup.html.twig', ['error' => $error]);
             return;
         }
 
+        // Check token form to prevent CSRF attack
+        if (false === $this->formValidator->checkToken($this->superglobal->get_POST()['token'])) {
+            $error = "Une erreur est survenue lors de l'envoi du formulaire.";
+            $this->view('pages/auth/signup.html.twig', ['error' => $error]);
+            return;
+        };
+
         // Check if email already exists
-        $checkEmail = $this->user->checkExists('users', 'email', $this->superglobals->get_POST()['email']);
+        $checkEmail = $this->user->checkExists('users', 'email', $this->superglobal->get_POST()['email']);
         if (true === $checkEmail) {
             $error = "Cette adresse email existe déjà.";
             $this->view('pages/auth/signup.html.twig', ['error' => $error]);
@@ -23,28 +30,27 @@ class UserController extends Controller
         }
                 
         // Check if password and password-confirm match
-        if ($this->superglobals->get_POST()['password'] !== $this->superglobals->get_POST()['password-confirm']) {
+        if ($this->superglobal->get_POST()['password'] !== $this->superglobal->get_POST()['password-confirm']) {
             $error = "Le mot de passe et la confirmation du mot de passe doivent corespondres.";
             $this->view('pages/auth/signup.html.twig', ['error' => $error]);
             return;
         }
 
         // Add data of user in array
-        $data = [
-            'email' => $this->superglobals->get_POST()['email'],
-            'password' => $this->superglobals->get_POST()['password'],
-            'firstname' => $this->superglobals->get_POST()['firstname'],
-            'lastname' => $this->superglobals->get_POST()['lastname']
+        $user = [
+            'email' => $this->superglobal->get_POST()['email'],
+            'password' => $this->superglobal->get_POST()['password'],
+            'firstname' => $this->superglobal->get_POST()['firstname'],
+            'lastname' => $this->superglobal->get_POST()['lastname']
         ];
 
         // Check if form data is ok
-        $error = $this->formValidator->checkSignupForm($data);
+        $error = $this->formValidator->checkSignupForm($user);
         if (null === $error) {
             // Hash password
-            $data['password'] = password_hash($this->superglobals->get_POST()['password'], PASSWORD_DEFAULT);
+            $user['password'] = password_hash($this->superglobal->get_POST()['password'], PASSWORD_DEFAULT);
             // Creation of user and redirection
-            $hydratedData = $this->user->hydrate($data);
-            $this->user->create('users', $hydratedData); 
+            $this->user->create('users', $this->user->hydrate($user)); 
             header('Location: ' . '/'); 
         }
 
@@ -57,14 +63,21 @@ class UserController extends Controller
         $error = null;
 
         // Check if form as sent
-        if (empty($this->superglobals->get_POST())) {
+        if (empty($this->superglobal->get_POST())) {
             $this->view('pages/auth/login.html.twig', ['error' => $error]);
             return;
         }
 
+        // Check token form to prevent CSRF attack
+        if (false === $this->formValidator->checkToken($this->superglobal->get_POST()['token'])) {
+            $error = "Une erreur est survenue lors de l'envoi du formulaire.";
+            $this->view('pages/auth/login.html.twig', ['error' => $error]);
+            return;
+        };
+
         // Check if the email exists and if the password and the confirmation password are identical
-        $user = $this->user->findBy('email', $this->superglobals->get_POST()['email']);
-        if (null === $user || !password_verify($this->superglobals->get_POST()['password'], $user->getPassword())) {
+        $user = $this->user->findBy('email', $this->superglobal->get_POST()['email']);
+        if (null === $user || !password_verify($this->superglobal->get_POST()['password'], $user->getPassword())) {
             $error = "Email et/ou mot de passe incorrect.";
             $this->view('pages/auth/login.html.twig', ['error' => $error]);
             return;
@@ -83,7 +96,7 @@ class UserController extends Controller
         header('Location: /');
     }
 
-    public function delete()
+    public function delete(): void
     {
         // Check if user is logged in and if he is admin
         if ($this->checkAuth()['isLogged'] !== true && $this->checkAuth()['isAdmin'] !== true) {
@@ -98,7 +111,7 @@ class UserController extends Controller
             }
         }
 
-        // Delete article if user is author
+        // Delete article and associated comments if user is author
         $articles = $this->article->findAllBy('articles', 'author_id', $this->params['id']);
         if (!empty($articles)) {
             foreach ($articles as $article) {
