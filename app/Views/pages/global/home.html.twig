@@ -95,6 +95,7 @@
                             <textarea class="form-control" name="message" id="message" type="text" placeholder="Entrer votre message..." style="height: 10rem" required></textarea>
                         </div>
                         <button class="btn" id="submit-btn" type="submit">Envoyer</button>
+                        <input type="hidden" name="token" value="{{ formToken }}">
                     </form>
                 </div>
             </div>

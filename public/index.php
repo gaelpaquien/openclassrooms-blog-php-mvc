@@ -10,7 +10,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Starts Whoops to display errors during development
+// Load Dotenv (.env -> $_ENV)
+$dotenv = Dotenv\Dotenv::createImmutable(ROOT);
+$dotenv->load();
+
+// Start Whoops to display errors during development
 $whoops = new App\Helpers\Whoops;
 $whoops->run();
 
@@ -20,9 +24,8 @@ $router
     // Home
     ->get('/', 'MainController@home', 'home')
     ->post('/contact/enregistrement', 'MainController@homeContact', 'home_contact_post')
-    // Terms of Use & Privacy Policy
+    // Terms of Use
     ->get('/cgu', 'MainController@termsOfUse', 'terms_of_use')
-    ->get('/politique-de-confidentialite', 'MainController@privacyPolicy', 'privacy_policy')
     // Error
     ->get('/erreur/page-introuvable', 'MainController@errorNotFound', 'error_404')
     ->get('/erreur/acces-interdit', 'MainController@errorForbidden', 'error_forbidden')

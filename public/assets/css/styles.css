@@ -23,6 +23,13 @@ ul {
   line-height: 2rem;
 }
 
+@media (max-width: 600px) {
+  .page-section .page-section-heading {
+    font-size: 1.55rem;
+    line-height: 2rem;
+}
+}
+
 @media (min-width: 992px) {
   .page-section .page-section-heading {
     font-size: 3rem;
@@ -61,12 +68,32 @@ ul {
 .btn {
   border-radius: 8px;
   padding: 0.5rem 1.5rem;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
 .btn:hover {
   opacity: 0.8;
+}
+
+.admin .btn, .pagination .btn {
+  background-color: #d6ad60;
+  color: #122620;
+  border: none;
+}
+
+.admin-btn-index .btn {
+  margin: 15px;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+}
+
+.pagination .btn {
+  margin-right: 30px;
+  margin-top: 20px;
 }
 
 .error,
@@ -78,6 +105,29 @@ ul {
   color: #d6ad60;
   font-size: 1.25rem;
   font-weight: 500;
+}
+
+/* Scroll to top */
+
+.scrollToTop {
+  display: none;
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  z-index: 99;
+  border: none;
+  background-color: #f4ebd0;
+  color: #122620;
+  padding: 8px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.scrollToTop:hover,
+.scrollToTop:focus {
+  opacity: 0.3;
+  outline: none;
 }
 
 /* Navigation */
@@ -198,29 +248,6 @@ ul {
   .header .header-subheading {
     font-size: 1.8rem;
   }
-}
-
-/* Scroll to top */
-
-.scrollToTop {
-  display: none;
-  position: fixed;
-  bottom: 8px;
-  right: 8px;
-  z-index: 99;
-  border: none;
-  background-color: #f4ebd0;
-  color: #122620;
-  padding: 8px;
-  border-radius: 15px;
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-.scrollToTop:hover,
-.scrollToTop:focus {
-  opacity: 0.3;
-  outline: none;
 }
 
 /* Recent Articles */
@@ -352,7 +379,6 @@ ul {
 
 .errorNotFound,
 .errorForbidden {
-  margin-top: 90px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
 }
@@ -360,6 +386,7 @@ ul {
 .errorNotFound h2,
 .errorForbidden h2 {
   color: #d6ad60;
+  margin: 30px;
 }
 
 .errorNotFound p,
@@ -391,14 +418,9 @@ ul {
   color: #122620;
 }
 
-/*************************
-      ADMINISTRATION
-*************************/
-
 /* All Admin pages */
 
 .admin {
-  margin-top: 90px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
 }
@@ -413,12 +435,7 @@ ul {
 
 .admin h2 {
   color: #d6ad60;
-}
-
-.admin .btn {
-  margin: 20px;
-  background-color: #d6ad60;
-  color: #122620;
+  margin: 30px;
 }
 
 .admin .admin-stats,
@@ -432,6 +449,21 @@ ul {
   font-weight: 500;
 }
 
+@media (max-width: 1200px) {
+  .admin .td-btn .btn {
+    margin: 5px;
+  }
+}
+@media (max-width: 750px) {
+   .admin td, .admin th {
+    font-size: 0.8rem;
+  }
+  .admin .td-btn .btn {
+    font-size: 0.6rem;
+    padding: 5px;
+  }
+}
+
 /* Specific admin comments */
 
 .admin .admin-comments p {
@@ -440,11 +472,7 @@ ul {
 
 .admin .admin-comments table {
   color: #d6ad60;
-  font-size: 1.2rem;
-}
-
-.admin .admin-comments table .td-btn .btn {
-  margin: 0;
+  font-size: 1rem;
 }
 
 /* All Articles & Single Article */
@@ -490,9 +518,57 @@ ul {
   color: #122620;
 }
 
+.recent-articles .card-img-top,
+.articles .card-img-top,
+.article .card-img-top, 
+.img-fluid {
+  height: 260px;
+  width: 100%;
+}
+
 .articles .card-footer,
 .article .card-footer {
   border-top: 1px solid #d6ad60;
+}
+
+@media (max-width: 992px) {
+  .recent-articles .card-img-top,
+  .recent-articles .img-fluid,
+  .articles .card-img-top,
+  .articles .img-fluid {
+    height: 160px;
+  }
+
+  .recent-articles .card-title,
+  .recent-articles .card-text,
+  .articles .card-title,
+  .articles .card-text,
+  .article .card-title,
+  .article .card-text,
+  .articles .card-footer,
+  .article .card-footer {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .recent-articles .card-img-top,
+  .articles .card-img-top,
+  .article .card-img-top,
+  .img-fluid {
+    height: 260px;
+  }
+
+  .recent-articles .card-title,
+  .recent-articles .card-text,
+  .articles .card-title,
+  .articles .card-text,
+  .article .card-title,
+  .article .card-text,
+  .articles .card-footer,
+  .article .card-footer {
+    font-size: 1.2rem;
+  }
 }
 
 /* Specific All Article */
@@ -579,10 +655,10 @@ ul {
 .article .comment-form .btn,
 .article .comment-delete-btn {
   margin-top: 0;
+  font-size: 0.8pxrem;
 }
 
 .article .comment-delete-btn {
-  font-size: 1rem;
   margin-bottom: 10px;
 }
 
@@ -630,7 +706,7 @@ ul {
 
 .update-article .btn,
 .create-article .btn {
-  margin: 30px 20px 20px 20px;
+  margin-top: 30px;
   background-color: #d6ad60;
   color: #122620;
 }
@@ -690,6 +766,41 @@ ul {
 
 .footer-about-items a:hover {
   color: #b68d40;
+}
+
+/* Term of use */
+
+.termOfUse {
+  background-color: #122620;
+  border-bottom: 2px solid #d6ad60;
+}
+
+.termOfUse h2 {
+  margin: 30px;
+}
+
+.termOfUse h2, .termOfUse h3 {
+  color: #d6ad60;
+}
+
+.termOfUse h3 {
+  font-size: 1.5rem;
+  margin-top: 40px;
+}
+
+.termOfUse p {
+  margin-top: 10px;
+  color: #d6ad60;
+  font-size: 1.3rem;
+  font-weight: 100;
+}
+
+.termOfUse .divider-custom .divider-custom-icon {
+  color: #d6ad60;
+}
+
+.termOfUse .divider-custom .divider-custom-line {
+  background-color: #d6ad60;
 }
 
 /* Copyright */

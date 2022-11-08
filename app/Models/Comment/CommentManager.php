@@ -8,12 +8,19 @@ use App\Models\User\UserModel;
 class CommentManager extends GlobalManager
 {
 
-    public function countAllInvalid()
+    public function countAllInvalid(): mixed
     {
+        // Execute query and return result
         return $this->request("SELECT COUNT(*) as nb_comments_invalid FROM comments WHERE validate = 0")->fetch();
     }
 
-    public function findAllInvalid(int $limit, int $perPage)
+    public function countAllValid(): mixed
+    {
+        // Execute query and return result
+        return $this->request("SELECT COUNT(*) as nb_comments_valid FROM comments WHERE validate = 1")->fetch();
+    }
+
+    public function findAllInvalid(int $limit, int $perPage): array
     {
         // Query
         $sql = "SELECT 
@@ -33,10 +40,10 @@ class CommentManager extends GlobalManager
                 ORDER BY created_at ASC
                 LIMIT $limit, $perPage";
 
-        // Execute request
+        // Execute query
         $results = $this->request($sql)->fetchAll();
 
-        // Transforms data
+        // Transform result data
         $data = array();
         foreach ($results as $result) {
             $item = array();
@@ -59,16 +66,17 @@ class CommentManager extends GlobalManager
             array_push($data, $item);
         }
 
-        // Return data
+        // Return array containing CommentModel, UserModel, ArticleModel
         return $data;
     }
 
-    public function countAllValidFromArticle(int $id)
+    public function countAllValidFromArticle(int $id): mixed
     {
+        // Execute query and return result
         return $this->request("SELECT COUNT(*) as nb_comments FROM comments WHERE article_id = :id AND validate = 1", ['id' => $id])->fetch();
     }
 
-    public function findAllValidFromArticle($id, int $limit, int $perPage)
+    public function findAllValidFromArticle($id, int $limit, int $perPage): array | false
     {
         // Query
         $sql = "SELECT 
@@ -89,14 +97,15 @@ class CommentManager extends GlobalManager
                 ORDER BY created_at DESC
                 LIMIT $limit, $perPage";
 
-        // Execute Request
+        // Execute query
         $results = $this->request($sql, ['id' => $id])->fetchAll();
         
+        // Check result
         if (empty($results)) {
             return false;
         }
 
-        // Transforms data
+        // Transforms result data
         $data = array();
         foreach ($results as $result) {
             $item = array();
@@ -114,14 +123,16 @@ class CommentManager extends GlobalManager
             array_push($data, $item);
         }
 
-        // Return data
+        // Return array containing CommentModel, UserModel
         return $data;
     }
 
-    public function validComment($comment_id, $admin_id) 
+    public function validComment($comment_id, $admin_id): mixed
     {
+        // Query 
         $sql = "UPDATE comments SET validate = 1, validate_by = :admin_id WHERE id = :comment_id";
 
+        // Execute query and return result
         return $this->request($sql, ['admin_id' => $admin_id, 'comment_id' => $comment_id]);
     }
 
