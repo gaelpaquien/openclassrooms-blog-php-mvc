@@ -8,8 +8,8 @@ class MainController extends Controller
     {
         $sentMail = null;
 
-        // Get data of all articles with limit (3)
-        $articles = $this->article->findAll(3, 3);
+        // Get data of recents articles with limit (3)
+        $articles = $this->article->findRecentsArticles(3);
 
         
         if (!empty($this->superglobal->get_GET()['sentMail']) && true == $this->superglobal->get_GET()['sentMail']) {
@@ -21,7 +21,7 @@ class MainController extends Controller
             return;
         }
 
-        if (false == $this->superglobal->get_GET()['sentMail']) {
+        if (!empty($this->superglobal->get_GET()['sentMail']) && false == $this->superglobal->get_GET()['sentMail']) {
             $sentMail = "Votre mail n'a pas pu être envoyé.";
             $this->view('pages/global/home.html.twig', [
                 'articles' => $articles,
