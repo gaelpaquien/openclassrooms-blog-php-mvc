@@ -36,6 +36,35 @@ class ArticleManager extends GlobalManager
         return $data;
     }
 
+    public function findRecentsArticles(int $limit): array
+    {
+        // Query
+        $sql = "SELECT * FROM articles ORDER BY updated_at DESC, created_at DESC LIMIT $limit";
+
+        // Execute query
+        $items = $this->request($sql)->fetchAll();
+
+        // Transform result data
+        $data = array();
+        foreach ($items as $item) {
+            $model = new ArticleModel;
+            $model->setId($item->id)
+                  ->setTitle($item->title)
+                  ->setSlug($item->slug)
+                  ->setContent($item->content)
+                  ->setCaption($item->caption)
+                  ->setAuthor_id($item->author_id)
+                  ->setCreated_at($item->created_at)
+                  ->setUpdated_at($item->updated_at)
+                  ->setImage($item->image);
+
+            array_push($data, $model);
+        }
+
+        // Return array containing ArticleModel 
+        return $data;
+    }
+
     public function find(int $id): array
     { 
         // Query

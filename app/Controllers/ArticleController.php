@@ -129,7 +129,8 @@ class ArticleController extends Controller
             'caption' => $this->superglobal->get_POST()['caption'],
             'content' => $this->superglobal->get_POST()['content'],
             'author_id' => $this->superglobal->get_SESSION()['user_id'],
-            'image' => $file
+            'image' => $file,
+            'updated_at' => $this->date->getDateNow()
         ];
 
         // Check if form data is ok
@@ -215,7 +216,7 @@ class ArticleController extends Controller
             'title' => $this->superglobal->get_POST()['title'],
             'caption' => $this->superglobal->get_POST()['caption'],
             'content' => $this->superglobal->get_POST()['content'],
-            'author_id' => $this->superglobal->get_POST()['author']
+            'author_id' => $this->superglobal->get_POST()['author'],
         ]);
 
         // Check if form data is ok
