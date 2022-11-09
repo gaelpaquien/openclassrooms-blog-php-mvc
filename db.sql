@@ -12,7 +12,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `blog`
 --
-DROP DATABASE IF EXISTS `blog`;
 CREATE DATABASE IF NOT EXISTS `blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `blog`;
 
@@ -29,7 +28,7 @@ CREATE TABLE `articles` (
   `caption` tinytext NOT NULL,
   `content` longtext NOT NULL,
   `author_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `image` varchar(70) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -39,15 +38,15 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `title`, `slug`, `caption`, `content`, `author_id`, `created_at`, `updated_at`, `image`) VALUES
-(64, 'Mon premier article', 'mon-premier-article', 'Ceci est la description courte de mon premier article.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-01 00:55:23', NULL, '01default.jpg'),
-(65, 'Mon deuxième article', 'mon-deuxieme-article', 'Ceci est la description courte de mon deuxième article', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-02 00:56:56', NULL, '01default.jpg'),
-(66, 'Mon troisième article modifié', 'mon-troisieme-article-modifie', 'Ceci est la description courte modifiée de mon troisième article.', 'Edit : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-03 00:57:30', '2022-11-09 01:00:59', 'mon-troisieme-article.jpeg'),
-(67, 'Mon quatrième article', 'mon-quatrieme-article', 'Ceci est la description courte de mon quatrième article', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-04 00:57:58', NULL, '01default.jpg'),
-(68, 'Mon cinquième article', 'mon-cinquieme-article', 'Ceci est la description courte de mon cinquième article.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-05 00:58:26', NULL, 'mon-cinquieme-article.jpeg'),
-(69, 'Mon sixième article', 'mon-sixieme-article', 'Ceci est la description courte de mon sixième article.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-06 00:58:55', NULL, 'mon-sixieme-article.jpeg'),
-(70, 'Mon septième article', 'mon-septieme-article', 'Ceci est la description courte de mon septième article.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-07 00:59:21', NULL, '01default.jpg'),
-(71, 'Mon huitième article', 'mon-huitieme-article', 'Ceci est la description courte de mon huitième article', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-08 00:59:50', NULL, '01default.jpg'),
-(72, 'Mon neuvième article', 'mon-neuvieme-article', 'Ceci est la description courte de mon neuvième article', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-09 01:00:21', NULL, 'mon-neuvieme-article.jpeg');
+(64, 'Mon premier article', 'mon-premier-article', 'Ceci est la description courte de mon premier article.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-01 00:55:23', '2022-11-01 00:55:23', '01default.jpg'),
+(65, 'Mon deuxième article', 'mon-deuxieme-article', 'Ceci est la description courte de mon deuxième article', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-02 00:56:56', '2022-11-02 00:56:56', '01default.jpg'),
+(66, 'Mon troisième article modifié', 'mon-troisieme-article-modifie', 'Ceci est la description courte modifiée de mon troisième article.', 'Edit : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-03 00:57:30', '2022-11-09 21:20:24', 'mon-troisieme-article.jpeg'),
+(67, 'Mon quatrième article modifié', 'mon-quatrieme-article-modifie', 'Ceci est la description courte de mon quatrième article', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-04 00:57:58', '2022-11-09 21:20:41', '01default.jpg'),
+(68, 'Mon cinquième article', 'mon-cinquieme-article', 'Ceci est la description courte de mon cinquième article.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-05 00:58:26', '2022-11-05 00:58:26', 'mon-cinquieme-article.jpeg'),
+(69, 'Mon sixième article', 'mon-sixieme-article', 'Ceci est la description courte de mon sixième article.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-06 00:58:55', '2022-11-06 00:58:55', 'mon-sixieme-article.jpeg'),
+(70, 'Mon septième article', 'mon-septieme-article', 'Ceci est la description courte de mon septième article.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-07 00:59:21', '2022-11-07 00:59:21', '01default.jpg'),
+(71, 'Mon huitième article', 'mon-huitieme-article', 'Ceci est la description courte de mon huitième article', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-08 00:59:50', '2022-11-08 00:59:50', '01default.jpg'),
+(72, 'Mon neuvième article', 'mon-neuvieme-article', 'Ceci est la description courte de mon neuvième article', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-09 01:00:21', '2022-11-09 01:00:21', 'mon-neuvieme-article.jpeg');
 
 -- --------------------------------------------------------
 
@@ -59,10 +58,10 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `author_id` int(11) NOT NULL,
   `content` longtext NOT NULL,
-  `validate` tinyint(4) NOT NULL DEFAULT '0',
+  `validate` tinyint(4) NOT NULL DEFAULT 0,
   `validate_by` int(11) DEFAULT NULL,
   `article_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -73,9 +72,8 @@ INSERT INTO `comments` (`id`, `author_id`, `content`, `validate`, `validate_by`,
 (165, 31, 'Jolie photo !', 1, 29, 66, '2022-11-07 01:05:49'),
 (166, 31, 'Super article !', 1, 29, 71, '2022-11-08 01:06:00'),
 (167, 31, 'Le titre est bien choisi :)', 1, 29, 69, '2022-11-09 01:06:24'),
-(168, 30, 'Commentaire de test', 0, NULL, 68, '2022-11-09 01:12:32'),
-(169, 30, 'Commentaire de test', 0, NULL, 68, '2022-11-09 01:12:42'),
-(170, 30, 'Commentaire de test', 0, NULL, 68, '2022-11-09 01:12:47'),
+(168, 30, 'Commentaire de test', 1, 29, 68, '2022-11-09 01:12:32'),
+(169, 30, 'Commentaire de test', 1, 29, 68, '2022-11-09 01:12:42'),
 (171, 30, 'Commentaire de test', 0, NULL, 68, '2022-11-09 01:12:53'),
 (172, 30, 'Commentaire de test', 0, NULL, 68, '2022-11-09 01:12:58'),
 (173, 30, 'Commentaire de test ', 0, NULL, 68, '2022-11-09 01:13:05'),
@@ -106,8 +104,15 @@ CREATE TABLE `contact_messages` (
   `lastname` varchar(45) NOT NULL,
   `subject` varchar(45) NOT NULL,
   `message` longtext NOT NULL,
-  `sent_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `sent_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `contact_messages`
+--
+
+INSERT INTO `contact_messages` (`id`, `email`, `firstname`, `lastname`, `subject`, `message`, `sent_at`) VALUES
+(12, 'john.doe@email.com', 'John', 'Doe', 'Sujet du mail de test', 'John Doe (john.doe@email.com)\r\nContenu du mail de test....', '2022-11-09 21:37:43');
 
 -- --------------------------------------------------------
 
@@ -121,8 +126,8 @@ CREATE TABLE `users` (
   `password` varchar(70) NOT NULL,
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
-  `admin` tinyint(4) NOT NULL DEFAULT '0',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `admin` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -181,7 +186,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT pour la table `comments`
@@ -193,7 +198,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT pour la table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `users`
