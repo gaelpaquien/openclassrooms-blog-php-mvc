@@ -8,6 +8,7 @@ use App\Helpers\Superglobal;
 use App\Helpers\Text;
 use App\Models\Article\ArticleModel;
 use App\Models\Comment\CommentModel;
+use App\Models\Contact\ContactModel;
 use App\Models\User\UserModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -24,6 +25,8 @@ class Controller
     protected CommentModel $comment;
 
     protected UserModel $user;
+
+    protected ContactModel $contact;
 
     protected FormValidator $formValidator;
 
@@ -47,9 +50,10 @@ class Controller
 
         // Models
         $this->article = new ArticleModel;
-        $this->comment = new CommentModel;
+        $this->comment = new CommentModel;    
         $this->user = new UserModel;
-
+        $this->contact = new ContactModel;
+       
         // Helpers
         $this->formValidator = new FormValidator;
         $this->text = new Text;
