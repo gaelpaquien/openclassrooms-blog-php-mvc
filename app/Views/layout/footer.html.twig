@@ -1,0 +1,29 @@
+<footer class="footer text-center" id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Localisation</h4>
+                <p class="footer-localisation lead mb-0">
+                    France
+                    <br />
+                    Grenoble, 38000
+                </p>
+            </div>
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Suivez-moi sur les réseaux</h4>
+                <a class="btn btn-social mx-1" href="https://www.linkedin.com/in/pgael/" target="_blank"><i class="footer-icon fab fa-fw fa-linkedin-in"></i></a>
+                <a class="btn btn-social mx-1" href="https://github.com/Galusss" target="_blank"><i class="footer-icon fab fa-fw fa-github"></i></a>
+                <a class="btn btn-social mx-1" href="https://twitter.com/galuss_" target="_blank"><i class="footer-icon fab fa-fw fa-twitter"></i></a>
+            </div>
+            <div class="col-lg-4">
+                <h4 class="text-uppercase mb-4">À propos</h4>
+                <div class="footer-about-items">
+                    {% if auth.isAdmin == true %}
+                        <p><a href="/administration">Administration</a></p>
+                    {% endif %}
+                    <p><a href="/cgu">Conditions générales d'utilisation</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
