@@ -459,7 +459,7 @@ ul {
 @media (max-width: 750px) {
   .admin td,
   .admin th {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 
   .admin .td-btn .btn {

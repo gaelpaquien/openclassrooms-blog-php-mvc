@@ -17,7 +17,7 @@
                   <thead>
                     <tr>
                       <th scope="col" class="text-center">Email</th>
-                      <th scope="col" class="text-center">Prénom / Nom</th>
+                      <th scope="col" class="text-center">Prénom Nom</th>
                       <th scope="col" class="text-center">Créer le</th>
                       <th scope="col" class="text-center">Action</th>
                     </tr>
@@ -25,10 +25,10 @@
                   {% for user in users %}
                     <tbody>
                       <tr>
-                        <th scope="row" class="text-center">{{ user.getEmail() }}</th>
-                        <td scope="row" class="text-center">{{ user.getFirstname() ~ ' ' ~ user.getLastname() }}</td>
-                        <td scope="row" class="text-center">{{ user.getCreated_at() | date('d/m/Y') }}</td>
-                        <td scope="row">
+                        <td scope="col-2 row" class="text-center">{{ user.getEmail() }}</td>
+                        <td scope="col-4 row" class="text-center">{{ user.getFirstname() ~ ' ' ~ user.getLastname() }}</td>
+                        <td scope="col-2 row" class="text-center">{{ user.getCreated_at() | date('d/m/Y') }}</td>
+                        <td scope="col-4 row">
                             <div class="td-btn text-center">
                                 <a class="btn" href="/utilisateur/{{ user.getId() }}/suppression">Supprimer</a>
                             </div>
