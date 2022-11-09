@@ -15,8 +15,8 @@ $dotenv = Dotenv\Dotenv::createImmutable(ROOT);
 $dotenv->load();
 
 // Start Whoops to display errors during development
-$whoops = new App\Helpers\Whoops;
-$whoops->run();
+//$whoops = new App\Helpers\Whoops;
+//$whoops->run();
 
 // Start Router
 $router = new App\Core\Router;
