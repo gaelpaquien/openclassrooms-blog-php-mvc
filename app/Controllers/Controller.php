@@ -42,7 +42,7 @@ class Controller
         // Twig
         $this->loader = new FilesystemLoader(ROOT . '/app/Views');
         $this->twig = new Environment($this->loader, [
-            'cache' => false// ROOT . '/tmp/cache'
+            'cache' => ROOT . '/tmp/cache'
         ]);
 
         // Models
