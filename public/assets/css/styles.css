@@ -450,6 +450,10 @@ ul {
   font-weight: 500;
 }
 
+.admin table {
+  color: #d6ad60;
+}
+
 @media (max-width: 1200px) {
   .admin .td-btn .btn {
     margin: 5px;
