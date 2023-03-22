@@ -49,6 +49,7 @@
 
  ---
 
-### Links :
+### Links
 
-[Link to the website](https://blog.gael-paquien.fr/)
+[Link to the website](https://blog.gael-paquien.fr/)\
+[Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-blog/dashboard)
