@@ -1,4 +1,4 @@
-# PHP/Symfony application developer - OpenClassrooms (Project 5)
+# PHP/Symfony Application Developer - OpenClassrooms (Project 5)
 
 ## Create your first blog in PHP
 
