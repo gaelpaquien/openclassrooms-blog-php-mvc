@@ -44,6 +44,6 @@
 --- --- ---
 
 ### Links
-[Website](https://blog.gaelpaquien.com/)\
+[Website](https://formation.blog.gaelpaquien.com/)\
 [Repository archive containing all deliverables](https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-5)\
 [Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-blog/dashboard)
