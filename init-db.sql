@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `training_blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `training_blog`;
 
 GRANT ALL PRIVILEGES ON training_blog.* TO 'admin_gls'@'%';
 FLUSH PRIVILEGES;
