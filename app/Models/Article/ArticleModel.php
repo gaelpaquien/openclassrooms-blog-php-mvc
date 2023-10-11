@@ -14,10 +14,11 @@ class ArticleModel extends ArticleManager
     protected $updated_at;
     protected $image;
 
+    protected $table = 'articles';
+    protected $db;
+
     public function __construct()
-    {
-        $this->table = 'articles';
-    }
+    {}
 
     /**
      * Get the value of id

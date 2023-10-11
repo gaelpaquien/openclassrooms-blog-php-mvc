@@ -12,10 +12,11 @@ class CommentModel extends CommentManager
     protected int $article_id;
     protected $created_at;
 
+    protected $table = 'comments';
+    protected $db;
+
     public function __construct()
-    {
-        $this->table = 'comments';
-    }
+    {}
 
     /**
      * Get the value of id
