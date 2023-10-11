@@ -12,10 +12,11 @@ class UserModel extends UserManager
     protected int $admin;
     protected $created_at;
 
+    protected $table = 'users';
+    protected $db;
+
     public function __construct()
-    {
-        $this->table = 'users';
-    }
+    {}
 
     /**
      * Get the value of id

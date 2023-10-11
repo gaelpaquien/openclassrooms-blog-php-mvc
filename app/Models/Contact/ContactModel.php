@@ -12,7 +12,6 @@ class ContactModel extends ContactManager
     protected string $message;
     protected $sent_at;
 
-
     /**
      * Get the value of id
      */ 

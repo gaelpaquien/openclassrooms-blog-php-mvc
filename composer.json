@@ -1,9 +1,9 @@
 {
-    "name": "gael/blog",
+    "name": "formation/blog",
     "authors": [
         {
-            "name": "Gael",
-            "email": "gael.paquien.contact@gmail.com"
+            "name": "Gaël PAQUIEN",
+            "email": "contact@gaelpaquien.com"
         }
     ],
     "autoload": {
