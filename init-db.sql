@@ -1,14 +1,8 @@
-SET FOREIGN_KEY_CHECKS=0;
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 CREATE DATABASE IF NOT EXISTS `formation_blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+GRANT ALL PRIVILEGES ON formation_blog.* TO 'admin_gls'@'%';
+FLUSH PRIVILEGES;
+
 USE `formation_blog`;
 
 CREATE TABLE `articles` (
@@ -22,7 +16,6 @@ CREATE TABLE `articles` (
   `updated_at` datetime DEFAULT NULL,
   `image` varchar(70) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 INSERT INTO `articles` (`id`, `title`, `slug`, `caption`, `content`, `author_id`, `created_at`, `updated_at`, `image`) VALUES
 (64, 'Mon premier article', 'mon-premier-article', 'Ceci est la description courte de mon premier article.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 29, '2022-11-01 00:55:23', '2022-11-01 00:55:23', '01default.jpg'),
@@ -140,7 +133,3 @@ ALTER TABLE `comments`
   ADD CONSTRAINT `fk_comment_user2` FOREIGN KEY (`validate_by`) REFERENCES `users` (`id`);
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
