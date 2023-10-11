@@ -1,9 +1,9 @@
-# OpenClassrooms training project - Create your first blog in PHP
+# OpenClassrooms training - Create your first blog in PHP
 
-## Training repository containing the context and deliverables of the project
+## Repository containing the context and deliverables of the project
 https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-5
 
-## Setting up the project
+## Setting up
 
 ### Required
 1. [PHP 8.0](https://www.php.net/downloads.php)
