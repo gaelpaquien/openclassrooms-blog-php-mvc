@@ -3,7 +3,8 @@
     "authors": [
         {
             "name": "Gaël PAQUIEN",
-            "email": "contact@gaelpaquien.com"
+            "email": "contact@gaelpaquien.com",
+            "homepage": "https://www.gaelpaquien.com"
         }
     ],
     "autoload": {
