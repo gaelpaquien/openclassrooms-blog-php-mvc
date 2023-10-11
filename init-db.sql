@@ -1,9 +1,9 @@
-CREATE DATABASE IF NOT EXISTS `formation_blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `training_blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-GRANT ALL PRIVILEGES ON formation_blog.* TO 'admin_gls'@'%';
+GRANT ALL PRIVILEGES ON training_blog.* TO 'admin_gls'@'%';
 FLUSH PRIVILEGES;
 
-USE `formation_blog`;
+USE `training_blog`;
 
 CREATE TABLE `articles` (
   `id` int(11) NOT NULL,
