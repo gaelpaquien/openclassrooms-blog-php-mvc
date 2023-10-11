@@ -9,8 +9,11 @@ https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-applicat
 1. [PHP 8.0](https://www.php.net/downloads.php)
 2. [Composer](https://getcomposer.org/download/)
 3. [MySQL](https://www.mysql.com/fr/downloads/)
-4. SMTP configuration
-5. [Docker](https://www.docker.com/) (*optional*)
+
+### Optional
+1. [Docker](https://www.docker.com/)
+2. SMTP (*example: [maildev](https://github.com/maildev/maildev)*) (*SMTP is already included if you are using docker*)
+
 
 ### Installation
 1. **Clone the repository on the main branch**
@@ -39,18 +42,20 @@ MYSQL_DATABASE_TEST=#database_test_name#
 ```bash
 docker-compose up --build -d
 ```
+
 4. **Installing dependencies**
 ```bash
 composer install
 ```
 
 5. **Setting up the database with the init-db.sql file**<br>
-*If you are using docker, the database is already created without the data*
+*If you are using docker, the database "training_blog" is already created with the data at localhost:3310*
 
-6. **Start the project**
+1. **Start the project**
 ```bash
 php -S 127.0.0.1:8080 -t public
 ```
+*If you are using docker, the project is already accessible at http://localhost:8080*
 
 --- --- ---
 
