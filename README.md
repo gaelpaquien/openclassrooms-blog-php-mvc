@@ -17,6 +17,7 @@ https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-applicat
 
 ### Installation
 1. **Clone the repository on the main branch**
+<br>
 
 2. **Create the .env.local file and replace the values of the .env origin file**
 ```bash
@@ -37,25 +38,30 @@ MYSQL_PASSWORD=#database_user_password#
 MYSQL_DATABASE_TEST=#database_test_name#
 ###< docker/database ###
 ```
+<br>
 
 3. **If you are using docker, install your environment**
 ```bash
 docker-compose up --build -d
 ```
+<br>
 
 4. **Installing dependencies**
 ```bash
 composer install
 ```
+<br>
 
 5. **Setting up the database with the init-db.sql file**<br>
 *If you are using docker, the database "training_blog" is already created with the data at localhost:3310*
+<br>
 
-1. **Start the project**
+6. **Start the project**<br>
+*If you are using docker, the project is already accessible at http://localhost:8080*
 ```bash
 php -S 127.0.0.1:8080 -t public
 ```
-*If you are using docker, the project is already accessible at http://localhost:8080*
+<br>
 
 --- --- ---
 
