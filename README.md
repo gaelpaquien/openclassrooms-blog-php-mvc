@@ -40,7 +40,7 @@ MYSQL_DATABASE_TEST=#database_test_name#
 ```
 <br>
 
-3. **If you are using docker, install your environment**
+3. **If you are using docker, install your environment and start the project**
 ```bash
 docker-compose up --build -d
 ```
