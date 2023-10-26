@@ -40,10 +40,10 @@ MYSQL_DATABASE_TEST=#database_test_name# (not required, can be used if you use d
 ```bash
 docker-compose up --build -d
 ```
-Wait a few moments for the environment to fully install.\
-The website is accessible at http://localhost:8080\
-Mailhog is accessible at http://localhost:8025\
-The database was created with data at localhost:3310\
+Wait a few moments for the environment to fully install. \
+The website is accessible at http://localhost:8080 \
+Mailhog is accessible at http://localhost:8025 \
+The database was created with data at localhost:3310 \
 Your installation is complete, you do not need to follow the next steps.
 
 4. **Installing dependencies**
