@@ -16,19 +16,19 @@ class Database extends PDO
         // Load superglobal ($_ENV)
         $superglobal = new Superglobal;
 
-        // Database informations (Data Source Name)
-        $dsn = 'mysql:dbname=' . $superglobal->get_ENV()['DB_NAME'] . ';host=' . $superglobal->get_ENV()['DB_HOST'];
+    // Database informations (Data Source Name)
+    $dsn = 'mysql:dbname=' . $superglobal->get_ENV()['MYSQL_DATABASE'] . ';host=' . $superglobal->get_ENV()['DATABASE_HOST'] . ';charset=utf8mb4';
 
-        // Call the constructor of PDO class
-        try {
-            parent::__construct($dsn, $superglobal->get_ENV()['DB_USER'], $superglobal->get_ENV()['DB_PASSWORD']);
-            // PDO attribute
-            $this->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
-            $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            $e->getMessage();
-        }
+    // Call the constructor of PDO class
+    try {
+        parent::__construct($dsn, $superglobal->get_ENV()['MYSQL_USER'], $superglobal->get_ENV()['MYSQL_PASSWORD']);
+        // PDO attributes
+        $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+
     }
 
     public static function getInstance(): self
