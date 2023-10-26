@@ -3,7 +3,7 @@ FROM php:8-apache
 
 # Install system dependencies and PHP extensions
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y git curl unzip libzip-dev libicu-dev && \
+    apt-get install -y git curl unzip libzip-dev libicu-dev netcat-openbsd && \
     docker-php-ext-install pdo pdo_mysql zip intl opcache && \
     pecl install apcu && docker-php-ext-enable apcu && \
     a2enmod rewrite && \
@@ -11,16 +11,6 @@ RUN apt-get update && apt-get upgrade -y && \
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Apache configurations
-RUN echo '<Directory /var/www/html/public>\n\
-    Options Indexes FollowSymLinks\n\
-    AllowOverride All\n\
-    Require all granted\n\
-    DirectoryIndex index.php\n\
-    </Directory>\n' > /etc/apache2/conf-available/symfony.conf && \
-    a2enconf symfony && \
-    sed -i 's#/var/www/html#/var/www/html/public#g' /etc/apache2/sites-available/000-default.conf
 
 # Add custom php.ini settings
 RUN echo "display_errors = Off" >> /usr/local/etc/php/php.ini && \
@@ -36,6 +26,16 @@ RUN echo "display_errors = Off" >> /usr/local/etc/php/php.ini && \
     echo "session.cookie_secure = true" >> /usr/local/etc/php/php.ini && \
     echo "SMTP = mailhog" >> /usr/local/etc/php/php.ini && \
     echo "smtp_port = 1025" >> /usr/local/etc/php/php.ini
+
+# Apache configurations
+RUN echo '<Directory /var/www/html/public>\n\
+    Options Indexes FollowSymLinks\n\
+    AllowOverride All\n\
+    Require all granted\n\
+    DirectoryIndex index.php\n\
+    </Directory>\n' > /etc/apache2/conf-available/symfony.conf && \
+    a2enconf symfony && \
+    sed -i 's#/var/www/html#/var/www/html/public#g' /etc/apache2/sites-available/000-default.conf
 
 # Set working directory
 WORKDIR /var/www/html
