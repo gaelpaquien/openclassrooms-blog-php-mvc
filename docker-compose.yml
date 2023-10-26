@@ -23,11 +23,13 @@ services:
       - 3310:3306
     env_file:
       - .env.local
+    user: 1000:1000
 
   mailhog:
     image: mailhog/mailhog
     ports:
       - 8025:8025
+      - 1025:1025
 
 volumes:
   database_data: {}

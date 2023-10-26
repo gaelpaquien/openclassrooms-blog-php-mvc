@@ -1,39 +1,19 @@
 <?php
 namespace App\Controllers;
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 class MainController extends Controller
 {
 
     public function home(): void
     {
-        $sentMail = null;
-
         // Get data of recents articles with limit (3)
         $articles = $this->article->findRecentsArticles(3);
 
-        
-        if (!empty($this->superglobal->get_GET()['sentMail']) && true == $this->superglobal->get_GET()['sentMail']) {
-            $sentMail = "Votre mail a bien été envoyé.";
-            $this->view('pages/global/home.html.twig', [
-                'articles' => $articles,
-                'sentMail' => $sentMail
-            ]);
-            return;
-        }
-
-        if (!empty($this->superglobal->get_GET()['sentMail']) && false == $this->superglobal->get_GET()['sentMail']) {
-            $sentMail = "Votre mail n'a pas pu être envoyé.";
-            $this->view('pages/global/home.html.twig', [
-                'articles' => $articles,
-                'sentMail' => $sentMail
-            ]);
-            return;
-        }
-
         // Render
         $this->view('pages/global/home.html.twig', [
-            'articles' => $articles,
-            'sentMail' => $sentMail
+            'articles' => $articles
         ]);
     }
 
@@ -49,40 +29,62 @@ class MainController extends Controller
         if (false === $this->formValidator->checkToken($this->superglobal->get_POST()['token'])) {
             header('Location: /?sentMail=0');
             return;
-        };
+        }
 
-        // Mail configuration
-        $to = $this->superglobal->get_ENV()['MAIL_CONTACT'];
-        $email = $this->superglobal->get_POST()['email'];
-        $lastname = $this->superglobal->get_POST()['lastname'];
+        // Get data for mail
         $firstname = $this->superglobal->get_POST()['firstname'];
+        $lastname = $this->superglobal->get_POST()['lastname'];
+        $email = $this->superglobal->get_POST()['email'];
         $subject = $this->superglobal->get_POST()['subject'];
-        $message = $firstname . " " . $lastname . " (" . $email . ")\r\n" . $this->superglobal->get_POST()['message'];
-        $headers = "From:" . $to;
+        $message = $this->superglobal->get_POST()['message'];
         $date = $this->date->getDateNow();
 
-        // Check if mail as sent
-        if (mail($to, $subject, $message, $headers)) {
-            // Add data of contact in array
-            $contact = [
-                'email' => $email,
-                'firstname' => $firstname,
-                'lastname' => $lastname,
-                'subject' => $subject,
-                'message' => $message,
-                'sent_at' => $date
-            ];
+        // Mail configuration
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = $this->superglobal->get_ENV()['SMTP_HOST'];
+        $mail->Port = $this->superglobal->get_ENV()['SMTP_PORT'];
+        $mail->SMTPAuth = false;
+        $mail->setFrom($email, $firstname . ' ' . $lastname);
+        $mail->addAddress($this->superglobal->get_ENV()['SMTP_MAIL_TO']);
+        $mail->Subject = $subject;
+        $mail->Body =
+        "Message envoyé depuis le formulaire de contact formation.blog.gaelpaquien.com par " . $firstname . " " . $lastname . " (" . $email . ")\r\n"
+        . str_repeat('-', 130) . "\r\n"
+        . $message;
 
-            // Creation of contact and redirection
-            $this->contact->create('contact_messages', $this->contact->hydrate($contact));
-        
-            // Redirection
-            header('Location: /?sentMail=1');
+        // If mail as not sent
+        if (!$mail->send()) {
+            $sentMail = "Votre mail n'a pas pu être envoyé.";
+            $this->view('pages/global/home.html.twig', [
+                'articles' => $this->article->findRecentsArticles(3),
+                'sentMail' => $sentMail
+            ]);
+
             return;
         }
 
-        // Redirection
-        header('Location: /?sentMail=0');
+        // Add data of contact in array
+        $contact = [
+            'email' => $email,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'subject' => $subject,
+            'message' => $message,
+            'sent_at' => $date
+        ];
+
+        // Creation of contact and redirection
+        $this->contact->create('contact_messages', $this->contact->hydrate($contact));
+
+        // Render if mail as sent
+        $sentMail = "Votre mail a bien été envoyé.";
+        $this->view('pages/global/home.html.twig', [
+            'articles' => $this->article->findRecentsArticles(3),
+            'sentMail' => $sentMail
+        ]);
+
+        return;
     }
 
     public function termsOfUse(): void
