@@ -22,7 +22,7 @@ https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-applicat
 
 3. **Only if you are using Docker, environment installation**
 ```bash
-docker-compose up --build -d
+docker-compose up --build
 ```
 Wait a few moments for the environment to fully install. \
 The website is accessible at http://localhost:8080 \
