@@ -92,6 +92,12 @@ class MainController extends Controller
         // Render
         $this->view('pages/global/termsOfUse.html.twig');
     }
+
+    public function legalNotice(): void
+    {
+        // Render
+        $this->view('pages/global/legalNotice.html.twig');
+    }
     
     public function errorNotFound(): void
     {

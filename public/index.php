@@ -24,8 +24,9 @@ $router
     // Home
     ->get('/', 'MainController@home', 'home')
     ->post('/contact/enregistrement', 'MainController@homeContact', 'home_contact_post')
-    // Terms of Use
+    // Terms of Use and Legal Notice
     ->get('/cgu', 'MainController@termsOfUse', 'terms_of_use')
+    ->get('/mentions-legales', 'MainController@legalNotice', 'legal_notice')
     // Error
     ->get('/erreur/page-introuvable', 'MainController@errorNotFound', 'error_404')
     ->get('/erreur/acces-interdit', 'MainController@errorForbidden', 'error_forbidden')
