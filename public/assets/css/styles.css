@@ -314,7 +314,7 @@ ul {
   list-style: initial;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1040px) {
   .popup,
   .popup-content {
     width: 100%;
@@ -346,6 +346,16 @@ ul {
   .popup-content p,
   .popup-content ul {
     font-size: 0.8rem;
+  }
+
+  .popup-footer {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .popup-footer {
+    font-size: 0.7rem;
   }
 }
 
@@ -396,7 +406,7 @@ ul {
 }
 
 .recent-articles .all-articles {
-  margin-top: 80px;
+  padding-top: 80px;
 }
 
 .recent-articles .all-articles .btn {
@@ -585,9 +595,13 @@ ul {
 
 .articles,
 .article {
-  margin-top: 80px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
+}
+
+.articles h2,
+.article h2 {
+  padding-top: 80px;
 }
 
 .articles h2,
@@ -772,9 +786,13 @@ ul {
 
 .update-article,
 .create-article {
-  margin-top: 80px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
+}
+
+.update-article h2,
+.create-article h2 {
+  padding-top: 80px;
 }
 
 .update-article h2,
@@ -878,9 +896,13 @@ ul {
 
 .termOfUse,
 .legalNotice {
-  margin-top: 80px;
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
+}
+
+.termOfUse h2,
+.legalNotice h2 {
+  padding-top: 80px;
 }
 
 .termOfUse h2,
