@@ -144,6 +144,12 @@ ul {
   margin-bottom: 0;
 }
 
+@media (max-width: 470px) {
+  .top-headband {
+    font-size: 0.6rem;
+  }
+}
+
 /* Navigation */
 .navigation {
   padding-bottom: 1rem;
@@ -276,7 +282,22 @@ ul {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.popup h3, .popup h2 {
   text-align: center;
+}
+
+.popup-context {
+  width: 100%; /* Prend toute la largeur du conteneur parent */
+  padding: 10px; /* Ajoute une marge intérieure de 10px sur tous les côtés */
+  box-sizing: border-box; /* Inclut padding dans le calcul de la largeur */
+  word-wrap: break-word; /* Assure que le texte ne dépasse pas et casse les mots si nécessaire */
+}
+
+.popup-context p {
+  text-align: justify; /* Justifie le texte pour une lecture plus agréable */
+  margin-bottom: 10px; /* Ajoute une marge en bas du paragraphe */
 }
 
 .popup-content {
@@ -295,23 +316,29 @@ ul {
   padding: 15px;
 }
 
-.popup-footer {
-  border-top: 1px solid #000;
-  padding: 15px;
-}
-
-.popup-body {
-  margin: 20px 0;
-  padding: 15px;
-  text-align: start;
-}
-
 .popup-body div {
   margin-bottom: 15px;
 }
 
 .popup-content ul {
   list-style: initial;
+}
+
+.popup-footer {
+  border-top: 1px solid #000;
+  padding: 15px;
+  text-align: center;
+}
+
+.popup-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 @media (max-width: 1040px) {
@@ -348,14 +375,12 @@ ul {
     font-size: 0.8rem;
   }
 
-  .popup-footer {
-    font-size: 0.8rem;
+  .popup-footer ul {
+    gap: 5px;
   }
-}
 
-@media (max-width: 576px) {
-  .popup-footer {
-    font-size: 0.7rem;
+  .popup-footer li {
+    margin: 5px 0;
   }
 }
 
