@@ -361,7 +361,7 @@ ul {
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 640px) {
   .popup-header h2 {
     font-size: 1.2rem;
   }
@@ -381,6 +381,21 @@ ul {
 
   .popup-footer li {
     margin: 5px 0;
+  }
+}
+
+@media (max-width: 470px) {
+  .popup-header h2 {
+    font-size: 1rem;
+  }
+
+  .popup-content h3 {
+    font-size: 0.9rem;
+  }
+
+  .popup-content p,
+  .popup-content ul {
+    font-size: 0.8rem;
   }
 }
 

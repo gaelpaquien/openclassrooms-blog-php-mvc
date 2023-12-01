@@ -87,12 +87,6 @@ class MainController extends Controller
         return;
     }
 
-    public function termsOfUse(): void
-    {
-        // Render
-        $this->view('pages/global/termsOfUse.html.twig');
-    }
-
     public function legalNotice(): void
     {
         // Render
