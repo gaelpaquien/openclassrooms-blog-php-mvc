@@ -15,7 +15,7 @@ ul {
 }
 
 .page-section {
-  padding: 7rem 0;
+  padding: 80px 0;
 }
 
 .page-section .page-section-heading {
@@ -151,6 +151,12 @@ ul {
 }
 
 /* Navigation */
+#navigation-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
 .navigation {
   padding-bottom: 1rem;
   font-weight: 700;
@@ -223,7 +229,7 @@ ul {
 /* Header */
 
 .header {
-  padding-top: calc(1.5rem + 154px);
+  padding-top: 4rem;
   padding-bottom: 4rem;
   background-color: #d6ad60;
 }
@@ -254,7 +260,7 @@ ul {
 
 @media (min-width: 992px) {
   .header {
-    padding-top: calc(1.5rem + 154px);
+    padding-top: 5rem;
     padding-bottom: 5rem;
   }
 
@@ -270,7 +276,6 @@ ul {
 
 /* Popup */
 .popup {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -334,11 +339,26 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+}
+
+.popup-footer li {
+  margin: 0;
+}
+
+.popup-footer a,
+.popup-footer a:visited {
+    text-decoration: none;
+    color : #0000EE;
+}
+
+.popup-footer a:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 1040px) {
@@ -378,10 +398,6 @@ ul {
   .popup-footer ul {
     gap: 5px;
   }
-
-  .popup-footer li {
-    margin: 5px 0;
-  }
 }
 
 @media (max-width: 470px) {
@@ -407,6 +423,10 @@ ul {
 
 .recent-articles h2 {
   color: #d6ad60;
+}
+
+.recent-articles .btn {
+  margin-top: 50px;
 }
 
 .recent-articles .divider-custom .divider-custom-icon {
@@ -443,10 +463,6 @@ ul {
   background-color: #122620;
   color: #d6ad60;
   margin: 20px;
-}
-
-.recent-articles .all-articles {
-  padding-top: 80px;
 }
 
 .recent-articles .all-articles .btn {
@@ -641,11 +657,6 @@ ul {
 
 .articles h2,
 .article h2 {
-  padding-top: 80px;
-}
-
-.articles h2,
-.article h2 {
   color: #d6ad60;
 }
 
@@ -832,11 +843,6 @@ ul {
 
 .update-article h2,
 .create-article h2 {
-  padding-top: 80px;
-}
-
-.update-article h2,
-.create-article h2 {
   color: #d6ad60;
 }
 
@@ -938,17 +944,7 @@ ul {
 .legalNotice {
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
-}
-
-.termOfUse h2,
-.legalNotice h2 {
-  padding-top: 80px;
-}
-
-.termOfUse h2,
-.legalNotice h2 {
-  margin-bottom: 20px;
-  margin-top: 20px;
+  padding: 50px 0px;
 }
 
 .termOfUse h2,
