@@ -938,29 +938,24 @@ ul {
   color: #b68d40;
 }
 
-/* Term of use and Legal Notice */
+/* Legal Notice */
 
-.termOfUse,
 .legalNotice {
   background-color: #122620;
   border-bottom: 2px solid #d6ad60;
   padding: 50px 0px;
 }
 
-.termOfUse h2,
-.termOfUse h3,
 .legalNotice h2,
 .legalNotice h3 {
   color: #d6ad60;
 }
 
-.termOfUse h3,
 .legalNotice h3 {
   font-size: 1.5rem;
   margin-top: 40px;
 }
 
-.termOfUse p,
 .legalNotice p {
   margin-top: 10px;
   margin-bottom: 0px;
@@ -969,7 +964,6 @@ ul {
   font-weight: 100;
 }
 
-.termOfUse ul,
 .legalNotice ul {
   color: #d6ad60;
   font-size: 1.3rem;
@@ -977,12 +971,10 @@ ul {
   list-style: inside;
 }
 
-.termOfUse .divider-custom .divider-custom-icon,
 .legalNotice .divider-custom .divider-custom-icon {
   color: #d6ad60;
 }
 
-.termOfUse .divider-custom .divider-custom-line,
 .legalNotice .divider-custom .divider-custom-line {
   background-color: #d6ad60;
 }
