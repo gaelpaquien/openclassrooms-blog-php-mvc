@@ -144,6 +144,15 @@ ul {
   margin-bottom: 0;
 }
 
+.top-headband a {
+  color: #f4ebd0;
+  text-decoration: underline;
+}
+
+.top-headband a:hover {
+  color: #b68d40;
+}
+
 @media (max-width: 470px) {
   .top-headband {
     font-size: 0.6rem;
@@ -190,6 +199,19 @@ ul {
 
 .navigation .navbar-toggler:hover {
   opacity: 0.8;
+}
+
+.navbar-brand span,
+.navbar-brand a {
+  color: #f4ebd0;
+}
+
+.navbar-brand a:hover {
+  color: #b68d40;
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.1);
 }
 
 @media (min-width: 992px) {
@@ -254,8 +276,12 @@ ul {
   color: #122620;
 }
 
-.header .header-avatar {
+.header .header-logo {
   width: 15rem;
+}
+
+.header-logo:hover {
+  transform: scale(1.1);
 }
 
 @media (min-width: 992px) {
@@ -497,6 +523,16 @@ ul {
 .cv .btn {
   background-color: #122620;
   color: #d6ad60;
+}
+
+.cv-link {
+  color: #122620;
+  text-decoration: underline;
+}
+
+.cv-link:hover {
+  opacity: 0.8;
+  color: #122620;
 }
 
 /* Contact */
@@ -985,8 +1021,13 @@ ul {
   background-color: #d6ad60;
 }
 
-.copyright span {
+.copyright span,
+.copyright a {
   font-size: 1rem;
   color: #122620;
   font-weight: 600;
+}
+
+.copyright a:hover {
+  opacity: 0.8;
 }
