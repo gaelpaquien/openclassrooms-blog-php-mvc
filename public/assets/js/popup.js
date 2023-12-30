@@ -9,6 +9,8 @@ triggerButton.addEventListener('click', (e) => {
     e.preventDefault();
     popup.style.display = 'block';
     navigation.style.position = 'static';
+    navigation.style.display = 'none';
+    document.body.style.overflow = 'hidden';
 });
 
 // Event listener for the close button to hide the popup anc continue in the website
@@ -16,4 +18,6 @@ closeButton.addEventListener('click', (e) => {
     e.preventDefault();
     popup.style.display = 'none';
     navigation.style.position = 'sticky';
+    navigation.style.display = 'block';
+    document.body.style.overflow = 'auto';
 });
