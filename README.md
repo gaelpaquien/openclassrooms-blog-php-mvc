@@ -1,5 +1,9 @@
 # OpenClassrooms - Blog
 
+## Description
+Creating a PHP blog from scratch without using a framework.\
+This project was carried out as part of a training course. Below you will find the link to the initial repository containing all the training deliverables.
+
 ## Setting up
 
 ### Required
