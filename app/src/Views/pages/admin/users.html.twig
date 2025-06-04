@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blog PHP MVC - Administration des utilisateurs{% endblock %}
+
+{% block content %}
+    <section class="admin page-section mb-0" id="admin">
+        <div class="container">
+            <h2 class="page-section-heading text-center text-uppercase">Administration des utilisateurs</h2>
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div class="admin-comments">
+              {% if users != false %}
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center">Email</th>
+                      <th scope="col" class="text-center">Prénom Nom</th>
+                      <th scope="col" class="text-center">Créer le</th>
+                      <th scope="col" class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  {% for user in users %}
+                    <tbody>
+                      <tr>
+                        <td scope="col-2 row" class="text-center">{{ user.getEmail() }}</td>
+                        <td scope="col-4 row" class="text-center">{{ user.getFirstname() ~ ' ' ~ user.getLastname() }}</td>
+                        <td scope="col-2 row" class="text-center">{{ user.getCreated_at() | date('d/m/Y') }}</td>
+                        <td scope="col-4 row">
+                            <div class="td-btn text-center">
+                                <a class="btn" href="/utilisateur/{{ user.getId() }}/suppression">Supprimer</a>
+                            </div>
+                        </td>
+                      </tr>
+                    </tbody>    
+                  {% endfor %}
+                </table>
+                <nav>
+                  <ul class="pagination">
+                    {% if currentPage != 1 %}
+                    <li class="page-item">
+                      {% set previousPage = currentPage - 1 %}
+                      <a href="/administration/utilisateurs?p={{ previousPage }}" class="btn page-link">Précédent</a>
+                    </li>    
+                    {% endif %}
+                    {% if lastPage != true %}
+                      <li class="page-item">
+                        {% set nextPage = currentPage + 1 %}
+                        <a href="/administration/utilisateurs?p={{ nextPage }}" class="btn page-link">Suivant</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+              {% endif %}
+            </div>
+            <div class="admin-btn text-center">
+                <a class="btn" href="/administration">Retour</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
