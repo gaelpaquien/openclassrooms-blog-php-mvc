@@ -1,0 +1,102 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blog PHP MVC - {{ article.title }}{% endblock %}
+
+{% block content %}
+    <section class="page-section article" id="article">
+        <div class="container">
+            <h2 class="page-section-heading text-center text-uppercase mb-0">{{ article.getTitle() }}</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Article -->
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <img src="../../assets/img/articles/{{ article.getImage() }}" class="img-fluid rounded-start" alt="...">
+                        <h3 class="card-title text-center">{{ article.getTitle() }}</h3>
+                        <div class="card-body">
+                            <p class="card-text">{{ article.getCaption() }}</p>
+                            <p class="card-text">{{ article.getContent() }}</p>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    Publié le {{ article.getCreated_at() | date('d/m/Y') }} 
+                                    par {{ user.getFirstname() ~ ' ' ~ user.getLastname() }}
+                                </small><br>
+                                <small class="text-muted">
+                                    Dernière modification faite le {{ (article.getUpdated_at() ?: article.getCreated_at()) | date('d/m/Y') }}
+                                </small>
+                            </div>
+                            {% if isAuthor == true or isAdmin == true %}
+                                <div class="article-admin card-footer text-center">
+                                    <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/edition">Modifier l'article</a>
+                                    <a class="btn" href="/article/{{ article.getSlug() }}/{{ article.getId() }}/suppression">Supprimer l'article</a>
+                                </div>                   
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Comments -->
+            <div class="row comments" >
+                <div class="col-md-12">
+                    {% if commentSent == true %}
+                        <div class="success">
+                            Votre commentaire a bien été enregistré et doit maintenant être validé.
+                        </div>   
+                    {% endif %}
+                    {% if comments != false %}
+                        <h2>Commentaires :</h2>
+                        {% for comment in comments %}
+                            <div class="comment text-justify mt-2">
+                                <h3 class="comment-author">
+                                    {{ comment[1].getFirstname() ~ ' ' ~ comment[1].getLastname() }}
+                                </h3>
+                                <span>{{ comment[0].getCreated_at() | date('d/m/Y') }}</span>
+                                <br>
+                                <p>{{ comment[0].getContent() }}</p>
+                                {% if isAdmin == true %}
+                                    <a class="comment-delete-btn btn" href="/commentaire/{{ comment[0].getId() }}/suppression">Supprimer le commentaire</a>   
+                                {% endif %}
+                            </div>           
+                        {% endfor %}
+                        <nav>
+                            <ul class="pagination">
+                              {% if currentPage != 1 %}
+                              <li class="page-item">
+                                {% set previousPage = currentPage - 1 %}
+                                <a href="/article/{{ article.getSlug() }}/{{ article.getId() }}?p={{ previousPage }}" class="btn page-link">Précédent</a>
+                              </li>    
+                              {% endif %}
+                              {% if lastPage != true %}
+                                <li class="page-item">
+                                  {% set nextPage = currentPage + 1 %}
+                                  <a href="/article/{{ article.getSlug() }}/{{ article.getId() }}?p={{ nextPage }}" class="btn page-link">Suivant</a>
+                                </li>
+                              {% endif %}
+            
+                            </ul>
+                          </nav>
+                    {% endif %}
+                    {% if isLogged %}
+                        <form id="comment-form" class="comment-form" method="POST" action="/article/{{ article.getSlug() }}/{{ article.getId() }}/commentaire/enregistrement">
+                            <div class="mb-3">
+                                <label for="content">Ajouter un commentaire :</label>
+                                <textarea class="form-control" id="content" name="content" type="text" placeholder="Entrer le contenu de votre commentaire..." style="height: 6rem" required></textarea>
+                            </div>
+                            <div class="comment-btn">  
+                                <button class="btn" id="submit-btn" type="submit">
+                                    Envoyer votre commentaire
+                                </button>
+                            </div>
+                            <input type="hidden" name="token" value="{{ formToken }}">
+                        </form>
+                    {% endif %}
+                </div>
+            </div>    
+        </div>
+
+    </section>
+{% endblock %}
