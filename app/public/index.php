@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Load Dotenv (.env -> $_ENV)
-$dotenv = Dotenv\Dotenv::createImmutable(ROOT);
+$dotenv = Dotenv\Dotenv::createImmutable(ROOT, '.env.local');
 $dotenv->load();
 
 // Start Whoops to display errors during development
