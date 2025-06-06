@@ -14,6 +14,11 @@ composer install || exit 1
 
 source .env.local
 
+echo "DEBUG: DATABASE_HOST=${DATABASE_HOST}"
+echo "DEBUG: MYSQL_USER=${MYSQL_USER}"
+echo "DEBUG: MYSQL_DATABASE=${MYSQL_DATABASE}"
+echo "DEBUG: MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+
 echo "Waiting for MySQL to be ready..."
 until mysqladmin ping -h ${DATABASE_HOST} -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} --silent; do
   echo "MySQL not ready, waiting..."
