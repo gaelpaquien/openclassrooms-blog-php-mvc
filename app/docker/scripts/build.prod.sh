@@ -1,0 +1,30 @@
+#!/bin/bash
+
+cd /var/www
+
+echo "Starting building app..."
+
+if [ ! -f .env.local ]; then
+  echo "Creating .env.local from .env..."
+  cp .env .env.local || exit 1
+fi
+
+echo "Installing dependencies..."
+composer install || exit 1
+
+source .env.local
+
+echo "Waiting for MySQL to be ready..."
+until mysql -h ${DATABASE_HOST} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} -e "SELECT 1" &> /dev/null; do
+  echo "MySQL not ready, waiting..."
+  sleep 2
+done
+
+echo "Setting up database..."
+mysql -h ${DATABASE_HOST} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} \
+  -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};"
+mysql -h ${DATABASE_HOST} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE} < app/docker/scripts/init-db.sql
+
+echo "Building app completed successfully!"
+
+exec "$@"

@@ -14,8 +14,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 
 RUN addgroup -g 1000 appgroup && adduser -D -G appgroup -u 1000 appuser
 
-COPY /app/docker/scripts/build.sh /usr/local/bin/scripts/
-RUN chmod +x /usr/local/bin/scripts/build.sh
+COPY /app/docker/scripts/build.dev.sh /usr/local/bin/scripts/
+RUN chmod +x /usr/local/bin/scripts/build.dev.sh
 
 WORKDIR /var/www
 
@@ -24,6 +24,6 @@ RUN mkdir -p var/cache var/log && \
 
 USER appuser
 
-ENTRYPOINT ["/usr/local/bin/scripts/build.sh"]
+ENTRYPOINT ["/usr/local/bin/scripts/build.dev.sh"]
 
 CMD ["php-fpm"]

@@ -28,7 +28,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./mysql/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./app/docker/scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
     env_file:
       - ./app/.env.local
     restart: unless-stopped
