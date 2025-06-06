@@ -39,6 +39,10 @@ class MainController extends Controller
         $message = $this->superglobal->get_POST()['message'];
         $date = $this->date->getDateNow();
 
+        error_log("SMTP_HOST: " . $_ENV['SMTP_HOST']);
+        error_log("SMTP_PORT: " . $_ENV['SMTP_PORT']);
+        error_log("SMTP_USERNAME: " . $_ENV['SMTP_USERNAME']);
+
         // Mail configuration
         $mail = new PHPMailer();
         $mail->isSMTP();
@@ -58,6 +62,7 @@ class MainController extends Controller
 
         // If mail as not sent
         if (!$mail->send()) {
+            error_log("PHPMailer Error: " . $mail->ErrorInfo);
             $sentMail = "Votre mail n'a pas pu être envoyé.";
             $this->view('pages/global/home.html.twig', [
                 'articles' => $this->article->findRecentsArticles(3),
