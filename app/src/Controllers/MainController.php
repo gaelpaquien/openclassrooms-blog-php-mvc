@@ -53,7 +53,7 @@ class MainController extends Controller
         $mail->setFrom($_ENV['SMTP_USERNAME'], 'Contact - Blog Gaël Paquien');
         $mail->addReplyTo($email, $firstname . ' ' . $lastname);
         $mail->addAddress($_ENV['SMTP_MAIL_TO']);
-        $mail->Subject = $subject;
+        $mail->Subject = 'Blog PHP MVC - ' . $subject;
         $mail->Body =
             "Message envoyé depuis le formulaire de contact Blog PHP MVC par " . $firstname . " " . $lastname . " (" . $email . ")\r\n"
             . str_repeat('-', 80) . "\r\n"
