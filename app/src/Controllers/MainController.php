@@ -42,6 +42,8 @@ class MainController extends Controller
         // Mail configuration
         $mail = new PHPMailer();
         $mail->isSMTP();
+        $mail->CharSet = 'UTF-8';
+        $mail->Encoding = 'base64';
         $mail->Host = $_ENV['SMTP_HOST'];
         $mail->Port = $_ENV['SMTP_PORT'];
         $mail->SMTPAuth = true;
@@ -53,8 +55,8 @@ class MainController extends Controller
         $mail->addAddress($_ENV['SMTP_MAIL_TO']);
         $mail->Subject = $subject;
         $mail->Body =
-            "Message envoyé depuis le formulaire de contact par " . $firstname . " " . $lastname . " (" . $email . ")\r\n"
-            . "Email de réponse: " . $email . "\r\n"
+            "Message envoyé depuis le formulaire de contact Blog PHP MVC par " . $firstname . " " . $lastname . " (" . $email . ")\r\n"
+            . "Email de l'expéditeur : " . $email . "\r\n"
             . str_repeat('-', 130) . "\r\n"
             . $message;
 
