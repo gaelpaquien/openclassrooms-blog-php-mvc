@@ -31,7 +31,23 @@ echo "Initializing database with SQL script..."
 php -r "
 \$pdo = new PDO('mysql:host=${DATABASE_HOST};dbname=${MYSQL_DATABASE}', '${MYSQL_USER}', '${MYSQL_PASSWORD}');
 \$sql = file_get_contents('app/docker/scripts/init-db.sql');
-\$pdo->exec(\$sql);
+
+\$sql = preg_replace('/--.*$/m', '', \$sql);
+\$sql = preg_replace('/\/\*.*?\*\//s', '', \$sql);
+\$sql = preg_replace('/^\s*$/m', '', \$sql);
+
+\$queries = explode(';', \$sql);
+foreach (\$queries as \$query) {
+    \$query = trim(\$query);
+    if (!empty(\$query)) {
+        try {
+            \$pdo->exec(\$query);
+        } catch (Exception \$e) {
+            echo 'Query failed: ' . \$e->getMessage() . \"\n\";
+            echo 'Query: ' . \$query . \"\n\";
+        }
+    }
+}
 echo 'Database initialized successfully\n';
 "
 
