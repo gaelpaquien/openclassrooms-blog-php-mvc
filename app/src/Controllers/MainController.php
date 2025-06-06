@@ -56,8 +56,7 @@ class MainController extends Controller
         $mail->Subject = $subject;
         $mail->Body =
             "Message envoyé depuis le formulaire de contact Blog PHP MVC par " . $firstname . " " . $lastname . " (" . $email . ")\r\n"
-            . "Email de l'expéditeur : " . $email . "\r\n"
-            . str_repeat('-', 130) . "\r\n"
+            . str_repeat('-', 80) . "\r\n"
             . $message;
 
         // If mail as not sent
