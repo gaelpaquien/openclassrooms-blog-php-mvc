@@ -39,10 +39,6 @@ class MainController extends Controller
         $message = $this->superglobal->get_POST()['message'];
         $date = $this->date->getDateNow();
 
-        error_log("SMTP_HOST: " . $_ENV['SMTP_HOST']);
-        error_log("SMTP_PORT: " . $_ENV['SMTP_PORT']);
-        error_log("SMTP_USERNAME: " . $_ENV['SMTP_USERNAME']);
-
         // Mail configuration
         $mail = new PHPMailer();
         $mail->isSMTP();
@@ -52,13 +48,15 @@ class MainController extends Controller
         $mail->Username = $_ENV['SMTP_USERNAME'];
         $mail->Password = $_ENV['SMTP_PASSWORD'];
         $mail->SMTPSecure = 'tls';
-        $mail->setFrom($email, $firstname . ' ' . $lastname);
-        $mail->addAddress($this->superglobal->get_ENV()['SMTP_MAIL_TO']);
+        $mail->setFrom($_ENV['SMTP_USERNAME'], 'Contact - Blog Gaël Paquien');
+        $mail->addReplyTo($email, $firstname . ' ' . $lastname);
+        $mail->addAddress($_ENV['SMTP_MAIL_TO']);
         $mail->Subject = $subject;
         $mail->Body =
-        "Message envoyé depuis le formulaire de contact formation.blog.gaelpaquien.com par " . $firstname . " " . $lastname . " (" . $email . ")\r\n"
-        . str_repeat('-', 130) . "\r\n"
-        . $message;
+            "Message envoyé depuis le formulaire de contact par " . $firstname . " " . $lastname . " (" . $email . ")\r\n"
+            . "Email de réponse: " . $email . "\r\n"
+            . str_repeat('-', 130) . "\r\n"
+            . $message;
 
         // If mail as not sent
         if (!$mail->send()) {
