@@ -22,6 +22,13 @@ done
 
 echo "Setting up database..."
 php -r "
+\$pdo = new PDO('mysql:host=${DATABASE_HOST}', '${MYSQL_USER}', '${MYSQL_PASSWORD}');
+\$pdo->exec('CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`');
+echo 'Database created successfully\n';
+"
+
+echo "Initializing database with SQL script..."
+php -r "
 \$pdo = new PDO('mysql:host=${DATABASE_HOST};dbname=${MYSQL_DATABASE}', '${MYSQL_USER}', '${MYSQL_PASSWORD}');
 \$sql = file_get_contents('app/docker/scripts/init-db.sql');
 \$pdo->exec(\$sql);
