@@ -26,14 +26,22 @@ php -r "
 \$pdo->exec('CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`');
 "
 php -r "
+// Initialize the database with the provided SQL file
 \$pdo = new PDO('mysql:host=${DATABASE_HOST};dbname=${MYSQL_DATABASE}', '${MYSQL_USER}', '${MYSQL_PASSWORD}');
 \$sql = file_get_contents('./docker/scripts/init-db.sql');
 
+// Disable foreign key checks to avoid issues with existing tables
+\$pdo->exec('SET FOREIGN_KEY_CHECKS = 0;');
+
+// Remove comments and empty lines from SQL
 \$sql = preg_replace('/--.*$/m', '', \$sql);
 \$sql = preg_replace('/\/\*.*?\*\//s', '', \$sql);
 \$sql = preg_replace('/^\s*$/m', '', \$sql);
 
+// Split SQL into individual queries
 \$queries = explode(';', \$sql);
+
+// Execute each query
 foreach (\$queries as \$query) {
     \$query = trim(\$query);
     if (!empty(\$query)) {
@@ -45,6 +53,9 @@ foreach (\$queries as \$query) {
         }
     }
 }
+
+// Re-enable foreign key checks
+\$pdo->exec('SET FOREIGN_KEY_CHECKS = 1;');
 "
 echo "Database setup completed."
 
