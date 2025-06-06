@@ -42,9 +42,12 @@ class MainController extends Controller
         // Mail configuration
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = $this->superglobal->get_ENV()['SMTP_HOST'];
-        $mail->Port = $this->superglobal->get_ENV()['SMTP_PORT'];
-        $mail->SMTPAuth = false;
+        $mail->Host = $_ENV['SMTP_HOST'];
+        $mail->Port = $_ENV['SMTP_PORT'];
+        $mail->SMTPAuth = true;
+        $mail->Username = $_ENV['SMTP_USERNAME'];
+        $mail->Password = $_ENV['SMTP_PASSWORD'];
+        $mail->SMTPSecure = 'tls';
         $mail->setFrom($email, $firstname . ' ' . $lastname);
         $mail->addAddress($this->superglobal->get_ENV()['SMTP_MAIL_TO']);
         $mail->Subject = $subject;
