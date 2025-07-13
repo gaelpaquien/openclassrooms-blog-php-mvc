@@ -3,8 +3,7 @@ FROM php:8.0-fpm-alpine
 ENV COMPOSER_VERSION=2.8.0
 
 RUN apk add --no-cache \
-        zlib-dev icu-dev zip libzip-dev curl bash autoconf make gcc libc-dev \
-        mysql-client && \
+        zlib-dev icu-dev zip libzip-dev curl bash autoconf make gcc libc-dev && \
     docker-php-ext-install intl pdo pdo_mysql zip opcache && \
     apk del autoconf make gcc libc-dev
 

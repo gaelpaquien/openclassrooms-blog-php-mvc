@@ -14,14 +14,6 @@ if [[ -d "$UPLOADS_PATH" ]]; then
     log "OK: $DELETED_COUNT files deleted in $UPLOADS_PATH"
 fi
 
-ENV_FILE=".env.local"
-
-log "Database reset"
-if [[ -f "$ENV_FILE" ]]; then
-    source "$ENV_FILE"
-    mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -h mysql-shared --default-auth=mysql_native_password "$MYSQL_DATABASE" < /usr/local/bin/scripts/init-db.sql
-fi
-
 log "Cleaning cache"
 rm -rf tmp/cache/*
 
