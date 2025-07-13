@@ -14,7 +14,7 @@ if [[ -d "$UPLOADS_PATH" ]]; then
     log "OK: $DELETED_COUNT files deleted in $UPLOADS_PATH"
 fi
 
-ENV_FILE=".env"
+ENV_FILE=".env.local"
 
 log "Database reset"
 if [[ -f "$ENV_FILE" ]]; then
