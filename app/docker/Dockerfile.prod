@@ -17,12 +17,11 @@ RUN addgroup -g 1002 appgroup && adduser -D -G appgroup -u 1002 appuser
 
 WORKDIR /var/www
 
-COPY /app/docker/scripts/ ./docker/scripts/
-RUN chmod +x ./docker/scripts/* && \
-    chown -R appuser:appgroup ./docker/scripts/
+COPY /app/docker/scripts/* /usr/local/bin/scripts/
+RUN chmod +x /usr/local/bin/scripts/*
 
 USER appuser
 
-ENTRYPOINT ["./docker/scripts/build.prod.sh"]
+ENTRYPOINT ["/usr/local/bin/scripts/build.prod.sh"]
 
 CMD ["php-fpm"]
