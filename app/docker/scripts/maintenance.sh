@@ -19,8 +19,10 @@ ENV_FILE=".env"
 log "Database reset"
 if [[ -f "$ENV_FILE" ]]; then
     source "$ENV_FILE"
-    docker cp docker/scripts/init-db.sql mysql-shared:/tmp/init-db.sql
-    docker exec mysql-shared mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /tmp/init-db.sql
+    if ! command -v mysql &> /dev/null; then
+        apk add --no-cache mysql-client
+    fi
+    mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -h "$DATABASE_HOST" "$MYSQL_DATABASE" < /usr/local/bin/scripts/init-db.sql
 fi
 
 log "Cleaning cache"
