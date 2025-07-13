@@ -19,9 +19,6 @@ ENV_FILE=".env"
 log "Database reset"
 if [[ -f "$ENV_FILE" ]]; then
     source "$ENV_FILE"
-    if ! command -v mysql &> /dev/null; then
-        apk add --no-cache mysql-client
-    fi
     mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -h "$DATABASE_HOST" "$MYSQL_DATABASE" < /usr/local/bin/scripts/init-db.sql
 fi
 
