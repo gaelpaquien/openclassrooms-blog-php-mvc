@@ -20,4 +20,3 @@ docker-compose up --build
 ### Links
 [Website](https://blogphpmvc.gaelpaquien.com/) \
 [Old repository containing training deliverables](https://github.com/gaelpaquien/openclassrooms-archive/tree/main/php-symfony-application-developer/project-5)
-
